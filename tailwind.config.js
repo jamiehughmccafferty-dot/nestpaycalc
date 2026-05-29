@@ -35,8 +35,8 @@ module.exports = {
       '2xl':      ['clamp(1.45rem, 1.30rem + 0.70vw, 1.75rem)',  { lineHeight: '1.3',  letterSpacing: '-0.015em' }],
       '3xl':      ['clamp(1.80rem, 1.60rem + 1.00vw, 2.30rem)',  { lineHeight: '1.2',  letterSpacing: '-0.02em' }],
       '4xl':      ['clamp(2.25rem, 1.90rem + 1.60vw, 3.00rem)',  { lineHeight: '1.1',  letterSpacing: '-0.025em' }],
-      '5xl':      ['clamp(2.80rem, 2.30rem + 2.30vw, 3.90rem)',  { lineHeight: '1.05', letterSpacing: '-0.03em' }],
-      'display':  ['clamp(3.20rem, 2.50rem + 3.40vw, 5.20rem)',  { lineHeight: '1.0',  letterSpacing: '-0.035em' }]
+      '5xl':      ['clamp(2.50rem, 2.10rem + 1.80vw, 3.50rem)',  { lineHeight: '1.05', letterSpacing: '-0.03em' }],
+      'display':  ['clamp(2.60rem, 2.20rem + 2.00vw, 4.00rem)',  { lineHeight: '1.05', letterSpacing: '-0.03em' }]
     },
 
     /* ===== Colours bound to CSS vars (auto dark-mode) ===== */

@@ -91,11 +91,11 @@
   <div class="np-hero-blob top-40 -left-32 w-[380px] h-[380px] bg-accent/20" aria-hidden="true"></div>
   <div class="absolute inset-0 np-grid-bg opacity-30 pointer-events-none [mask-image:radial-gradient(closest-side,white,transparent)]" aria-hidden="true"></div>
 
-  <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-28 lg:py-30">
-    <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-      <!-- Left: copy -->
-      <div class="np-reveal">
-        <a href="#calculators" class="inline-flex items-center gap-2.5 bg-surface/70 backdrop-blur-sm border border-border rounded-full px-3.5 py-1.5 text-xs font-medium text-ink-soft mb-7 hover:border-brand/40 hover:text-ink transition-colors group">
+  <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-22 lg:py-24">
+    <div class="grid lg:grid-cols-5 gap-10 lg:gap-12 items-center">
+      <!-- Left: copy (3/5 width on desktop so the headline doesn't wrap awkwardly) -->
+      <div class="np-reveal lg:col-span-3">
+        <a href="#calculators" class="inline-flex items-center gap-2.5 bg-surface/70 backdrop-blur-sm border border-border rounded-full px-3.5 py-1.5 text-xs font-medium text-ink-soft mb-6 hover:border-brand/40 hover:text-ink transition-colors group">
           <span class="relative flex w-2 h-2">
             <span class="absolute inset-0 rounded-full bg-accent opacity-75 animate-ping"></span>
             <span class="relative rounded-full w-2 h-2 bg-accent"></span>
@@ -104,16 +104,16 @@
           <i data-lucide="arrow-right" class="w-3 h-3 transition-transform group-hover:translate-x-0.5"></i>
         </a>
 
-        <h1 class="font-display text-display font-extrabold text-ink leading-[1.02]">
+        <h1 class="font-display text-display font-extrabold text-ink leading-[1.05] text-balance">
           Free UK Financial Calculators —
           <span class="np-gradient-text">Accurate &amp; Easy to&nbsp;Use</span>
         </h1>
 
-        <p class="mt-7 text-lg text-ink-soft max-w-xl leading-relaxed">
+        <p class="mt-6 text-lg text-ink-soft max-w-xl leading-relaxed">
           Work out your take-home pay, mortgage repayments, ISA growth, pension forecast and more — built around real UK tax rules, allowances and thresholds.
         </p>
 
-        <div class="mt-9 flex flex-wrap gap-3">
+        <div class="mt-8 flex flex-wrap gap-3">
           <a href="calculators/salary.html" class="np-btn np-btn-primary">
             Salary / Take-Home Pay
             <i data-lucide="arrow-right" class="w-4 h-4"></i>
@@ -130,8 +130,8 @@
         </div>
       </div>
 
-      <!-- Right: live preview card -->
-      <div class="np-card np-card-accent p-5 sm:p-6 np-reveal relative max-w-md mx-auto lg:mx-0 lg:max-w-none" style="--reveal-delay:160ms" x-data="heroPreview()" x-init="calc()">
+      <!-- Right: live preview card (2/5 width on desktop) -->
+      <div class="np-card np-card-accent p-5 sm:p-6 np-reveal relative max-w-md mx-auto lg:mx-0 lg:max-w-none lg:col-span-2" style="--reveal-delay:160ms" x-data="heroPreview()" x-init="calc()">
         <div class="flex items-start justify-between mb-5">
           <div>
             <div class="text-[0.62rem] font-semibold text-ink-muted uppercase tracking-[0.08em] mb-0.5">Live preview</div>
