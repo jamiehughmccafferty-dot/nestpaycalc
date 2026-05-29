@@ -131,41 +131,41 @@
       </div>
 
       <!-- Right: live preview card -->
-      <div class="np-card np-card-accent p-6 sm:p-8 np-reveal relative" style="--reveal-delay:160ms" x-data="heroPreview()" x-init="calc()">
-        <div class="flex items-start justify-between mb-6">
+      <div class="np-card np-card-accent p-5 sm:p-6 np-reveal relative max-w-md mx-auto lg:mx-0 lg:max-w-none" style="--reveal-delay:160ms" x-data="heroPreview()" x-init="calc()">
+        <div class="flex items-start justify-between mb-5">
           <div>
-            <div class="text-[0.65rem] font-semibold text-ink-muted uppercase tracking-[0.08em] mb-1">Live preview</div>
-            <h2 class="font-bold text-xl text-ink tracking-tight">Salary take-home</h2>
+            <div class="text-[0.62rem] font-semibold text-ink-muted uppercase tracking-[0.08em] mb-0.5">Live preview</div>
+            <h2 class="font-bold text-base text-ink tracking-tight">Salary take-home</h2>
           </div>
-          <span class="text-[0.7rem] px-2 py-1 rounded-md bg-accent/15 text-accent-strong font-semibold tracking-wide">2026/27</span>
+          <span class="text-[0.65rem] px-1.5 py-0.5 rounded bg-accent/15 text-accent-strong font-semibold tracking-wide">2026/27</span>
         </div>
 
-        <label class="np-label" for="hero-salary">Gross annual salary</label>
+        <label class="np-label text-xs" for="hero-salary">Gross annual salary</label>
         <div class="relative">
-          <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-ink-muted font-medium pointer-events-none">£</span>
-          <input id="hero-salary" type="number" min="0" step="500" class="np-input pl-8 text-lg font-semibold" x-model.number="salary" @input="calc()">
+          <span class="absolute left-3 top-1/2 -translate-y-1/2 text-ink-muted font-medium pointer-events-none text-sm">£</span>
+          <input id="hero-salary" type="number" min="0" step="500" class="np-input pl-7 text-base font-semibold" x-model.number="salary" @input="calc()">
         </div>
-        <input type="range" min="10000" max="200000" step="500" class="np-slider mt-4" x-model.number="salary" @input="calc()">
-        <div class="flex justify-between text-[0.7rem] text-ink-muted mt-1.5">
+        <input type="range" min="10000" max="200000" step="500" class="np-slider mt-3" x-model.number="salary" @input="calc()">
+        <div class="flex justify-between text-[0.65rem] text-ink-muted mt-1">
           <span>£10k</span><span>£200k</span>
         </div>
 
-        <div class="grid grid-cols-3 gap-3 mt-6 pt-6 border-t border-border">
+        <div class="grid grid-cols-3 gap-2.5 mt-5 pt-5 border-t border-border">
           <div>
-            <div class="text-[0.7rem] text-ink-muted mb-1 uppercase tracking-wide">Monthly</div>
-            <div class="text-xl font-extrabold text-brand tabular" x-text="NPF.gbp(net/12)"></div>
+            <div class="text-[0.62rem] text-ink-muted mb-0.5 uppercase tracking-wide">Monthly</div>
+            <div class="text-base font-extrabold text-brand tabular" x-text="NPF.gbp(net/12)"></div>
           </div>
           <div>
-            <div class="text-[0.7rem] text-ink-muted mb-1 uppercase tracking-wide">Tax</div>
-            <div class="text-xl font-extrabold text-ink tabular" x-text="NPF.gbp(tax)"></div>
+            <div class="text-[0.62rem] text-ink-muted mb-0.5 uppercase tracking-wide">Tax</div>
+            <div class="text-base font-extrabold text-ink tabular" x-text="NPF.gbp(tax)"></div>
           </div>
           <div>
-            <div class="text-[0.7rem] text-ink-muted mb-1 uppercase tracking-wide">NI</div>
-            <div class="text-xl font-extrabold text-ink tabular" x-text="NPF.gbp(ni)"></div>
+            <div class="text-[0.62rem] text-ink-muted mb-0.5 uppercase tracking-wide">NI</div>
+            <div class="text-base font-extrabold text-ink tabular" x-text="NPF.gbp(ni)"></div>
           </div>
         </div>
 
-        <a href="calculators/salary.html" class="group inline-flex items-center justify-center w-full mt-6 py-2.5 text-sm font-semibold text-brand hover:text-brand-strong transition-colors">
+        <a href="calculators/salary.html" class="group inline-flex items-center justify-center w-full mt-5 py-2 text-sm font-semibold text-brand hover:text-brand-strong transition-colors">
           Open the full Salary Calculator
           <i data-lucide="arrow-right" class="ml-1.5 w-3.5 h-3.5 transition-transform group-hover:translate-x-1"></i>
         </a>
