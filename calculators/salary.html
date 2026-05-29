@@ -8,13 +8,23 @@
 <meta name="description" content="Free UK take-home pay calculator for 2026/27. Includes income tax, National Insurance, pension, student loans (Plan 1, 2, 4, 5, Postgrad) and Scottish tax rates.">
 <meta name="keywords" content="UK salary calculator, take home pay calculator, PAYE calculator, Scottish tax calculator, student loan calculator UK">
 <meta name="theme-color" content="#003087">
+<!-- ===== Social + favicon + manifest (managed by scripts/inject-meta.js) ===== -->
 <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
 <link rel="manifest" href="../site.webmanifest">
+<meta property="og:title" content="UK Salary & Take-Home Pay Calculator 2026/27">
+<meta property="og:description" content="See your UK take-home pay in seconds. Income tax, National Insurance, pension (3 types), student loans (Plans 1, 2, 4, 5, PG), Scottish bands. Built for 2026/27.">
+<meta property="og:url" content="https://nestpaycalc.com/calculators/salary">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_GB">
 <meta property="og:image" content="https://nestpaycalc.com/assets/og/site.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:url" content="https://nestpaycalc.com/calculators/salary.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="UK Salary & Take-Home Pay Calculator 2026/27">
+<meta name="twitter:description" content="See your UK take-home pay in seconds. Income tax, National Insurance, pension (3 types), student loans (Plans 1, 2, 4, 5, PG), Scottish bands. Built for 2026/27.">
 <meta name="twitter:image" content="https://nestpaycalc.com/assets/og/site.png">
+<!-- ===== end social block ===== -->
+
 
 <link rel="canonical" href="https://nestpaycalc.com/calculators/salary.html">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -23,15 +33,25 @@
 
 
 <link rel="stylesheet" href="../assets/css/styles.css">
-<script type="application/ld+json">
+<script type="application/ld+json" data-np-ld="howto">
 {
   "@context": "https://schema.org",
-  "@type": "WebApplication",
-  "name": "UK Salary / Take-Home Pay Calculator",
-  "applicationCategory": "FinanceApplication",
-  "operatingSystem": "Any",
-  "url": "https://nestpaycalc.com/calculators/salary.html",
-  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "GBP" }
+  "@type": "HowTo",
+  "name": "How to calculate your UK take-home pay for 2026/27",
+  "description": "Estimate the income tax, National Insurance, pension and student-loan deductions taken from your gross UK salary.",
+  "inLanguage": "en-GB",
+  "totalTime": "PT1M",
+  "tool": [
+    { "@type": "HowToTool", "name": "NestPayCalc Salary Calculator", "url": "https://nestpaycalc.com/calculators/salary" }
+  ],
+  "step": [
+    { "@type": "HowToStep", "position": 1, "name": "Enter your gross annual salary", "text": "Type your full salary before any deductions — the figure on your contract or P60. Add bonuses, overtime and any benefit-in-kind (BIK) value separately." },
+    { "@type": "HowToStep", "position": 2, "name": "Set your region", "text": "Pick England/Wales/NI or Scotland. Scotland has six income tax bands instead of three. National Insurance is the same across the UK." },
+    { "@type": "HowToStep", "position": 3, "name": "Enter your tax code", "text": "1257L is the standard code (£12,570 personal allowance). K codes add to your taxable income. Use whatever HMRC has issued you." },
+    { "@type": "HowToStep", "position": 4, "name": "Add pension contributions", "text": "Enter your contribution percentage and pick the scheme type (relief-at-source, net pay, or salary sacrifice). Salary sacrifice cuts both income tax AND NI." },
+    { "@type": "HowToStep", "position": 5, "name": "Tick any student loan plans", "text": "Tick Plan 1, 2, 4, 5 or Postgraduate if applicable. Multiple plans can stack." },
+    { "@type": "HowToStep", "position": 6, "name": "Read your result", "text": "The calculator shows yearly, monthly and weekly take-home pay, with the tax and NI breakdown by band." }
+  ]
 }
 </script>
 <script type="application/ld+json" data-np-ld="breadcrumb">
@@ -375,6 +395,41 @@
           <li><strong>Pension type</strong> — salary sacrifice can cut both your income tax and NI bill. A <span x-html="NPAffiliates.inlineLink('sipp', 'low-fee SIPP')"></span> lets you top up pension contributions outside your employer's scheme.</li>
         </ul>
         <p class="text-sm">Sources: <a href="https://www.gov.uk/income-tax-rates" target="_blank" rel="noopener">gov.uk/income-tax-rates</a>, <a href="https://www.gov.uk/national-insurance-rates-letters" target="_blank" rel="noopener">National Insurance rates</a>, <a href="https://www.gov.uk/repaying-your-student-loan/what-you-pay" target="_blank" rel="noopener">student loan thresholds</a>.</p>
+      </div>
+
+      <!-- Related guides — drives readers from calc to long-form content -->
+      <div class="np-card p-5 sm:p-6">
+        <div class="flex items-center gap-2 text-xs font-semibold text-ink-muted uppercase tracking-wider mb-4">
+          <i data-lucide="book-open" class="w-3.5 h-3.5"></i> Read more
+        </div>
+        <div class="space-y-3">
+          <a href="../blog/how-uk-income-tax-works.html" class="block group">
+            <div class="flex items-start gap-3">
+              <div class="w-9 h-9 rounded-lg bg-brand/10 text-brand flex items-center justify-center flex-shrink-0">
+                <i data-lucide="receipt" class="w-4 h-4"></i>
+              </div>
+              <div class="flex-1 min-w-0">
+                <div class="font-semibold text-ink group-hover:text-brand transition-colors leading-snug">How UK income tax works in 2026/27</div>
+                <div class="text-sm text-ink-soft mt-0.5">Bands, the £100k tax trap, Scotland, NI, and tax codes — plain English.</div>
+                <div class="text-xs text-ink-muted mt-1">8 min read</div>
+              </div>
+              <i data-lucide="arrow-right" class="w-4 h-4 text-ink-muted group-hover:text-brand group-hover:translate-x-0.5 transition-all flex-shrink-0 mt-1"></i>
+            </div>
+          </a>
+          <div class="border-t border-border"></div>
+          <a href="../blog/" class="block group">
+            <div class="flex items-start gap-3">
+              <div class="w-9 h-9 rounded-lg bg-accent/10 text-accent flex items-center justify-center flex-shrink-0">
+                <i data-lucide="folder-open" class="w-4 h-4"></i>
+              </div>
+              <div class="flex-1 min-w-0">
+                <div class="font-semibold text-ink group-hover:text-brand transition-colors leading-snug">All resources &amp; guides</div>
+                <div class="text-sm text-ink-soft mt-0.5">Long-form articles on UK tax, pensions, ISAs, mortgages and more.</div>
+              </div>
+              <i data-lucide="arrow-right" class="w-4 h-4 text-ink-muted group-hover:text-brand group-hover:translate-x-0.5 transition-all flex-shrink-0 mt-1"></i>
+            </div>
+          </a>
+        </div>
       </div>
     </section>
   </div>

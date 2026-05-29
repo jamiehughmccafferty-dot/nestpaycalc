@@ -5,74 +5,164 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="view-transition" content="same-origin">
 <title>UK Personal Finance Blog &amp; Guides – NestPayCalc</title>
-<meta name="description" content="Plain-English UK personal-finance guides on tax, ISAs, pensions, mortgages and budgeting.">
+<meta name="description" content="Plain-English UK personal-finance guides on income tax, ISAs, pensions, mortgages, debt and budgeting — all referenced against current HMRC rules.">
 <link rel="canonical" href="https://nestpaycalc.com/blog/">
 <meta name="theme-color" content="#003087">
+<!-- ===== Social + favicon + manifest (managed by scripts/inject-meta.js) ===== -->
 <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
 <link rel="manifest" href="../site.webmanifest">
+<meta property="og:title" content="UK personal finance blog & guides — NestPayCalc">
+<meta property="og:description" content="Plain-English UK money guides — income tax, ISAs, pensions, mortgages, debt and budgeting. Every figure cross-referenced against HMRC.">
+<meta property="og:url" content="https://nestpaycalc.com/blog/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_GB">
 <meta property="og:image" content="https://nestpaycalc.com/assets/og/site.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:url" content="https://nestpaycalc.com/blog/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="UK personal finance blog & guides — NestPayCalc">
+<meta name="twitter:description" content="Plain-English UK money guides — income tax, ISAs, pensions, mortgages, debt and budgeting. Every figure cross-referenced against HMRC.">
 <meta name="twitter:image" content="https://nestpaycalc.com/assets/og/site.png">
+<!-- ===== end social block ===== -->
 
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-
 <link rel="stylesheet" href="../assets/css/styles.css">
 </head>
 <body class="font-sans">
 <a href="#main" class="np-skip-link">Skip to content</a>
 <div id="np-top-banner-slot"></div>
 <div id="np-header"></div>
-<main id="main" class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-  <h1 class="text-3xl sm:text-4xl font-extrabold mb-2">Resources &amp; guides</h1>
-  <p class="text-slate-600 dark:text-slate-300 mb-8">In-depth, jargon-free guides on UK personal finance.</p>
 
-  <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-    <a href="#" class="np-card p-5 hover:shadow-lg transition">
-      <div class="text-xs font-semibold text-brand mb-2">SALARY</div>
-      <h3 class="font-bold text-lg leading-snug">How UK income tax bands really work in 2026/27</h3>
-      <p class="text-sm text-slate-600 dark:text-slate-400 mt-2">A quick guide to the personal allowance, tapering and higher-rate thresholds.</p>
-      <span class="text-xs text-slate-400 mt-3 block">5 min read</span>
-    </a>
-    <a href="#" class="np-card p-5 hover:shadow-lg transition">
-      <div class="text-xs font-semibold text-brand mb-2">PENSION</div>
-      <h3 class="font-bold text-lg leading-snug">Salary sacrifice: when is it actually worth it?</h3>
-      <p class="text-sm text-slate-600 dark:text-slate-400 mt-2">How sacrificing salary can boost your pension and cut your NI bill.</p>
-      <span class="text-xs text-slate-400 mt-3 block">7 min read</span>
-    </a>
-    <a href="#" class="np-card p-5 hover:shadow-lg transition">
-      <div class="text-xs font-semibold text-brand mb-2">SAVINGS</div>
-      <h3 class="font-bold text-lg leading-snug">Cash ISA vs Stocks &amp; Shares ISA — which to pick?</h3>
-      <p class="text-sm text-slate-600 dark:text-slate-400 mt-2">Trade-offs, risk and how to use your £20,000 allowance.</p>
-      <span class="text-xs text-slate-400 mt-3 block">6 min read</span>
-    </a>
-    <a href="#" class="np-card p-5 hover:shadow-lg transition">
-      <div class="text-xs font-semibold text-brand mb-2">MORTGAGE</div>
-      <h3 class="font-bold text-lg leading-snug">Stamp duty in 2026/27 — the full guide for England, Scotland &amp; Wales</h3>
-      <p class="text-sm text-slate-600 dark:text-slate-400 mt-2">Bands, FTB relief, additional surcharges and worked examples.</p>
-      <span class="text-xs text-slate-400 mt-3 block">8 min read</span>
-    </a>
-    <a href="#" class="np-card p-5 hover:shadow-lg transition">
-      <div class="text-xs font-semibold text-brand mb-2">DEBT</div>
-      <h3 class="font-bold text-lg leading-snug">Snowball vs avalanche: which UK debt strategy is for you?</h3>
-      <p class="text-sm text-slate-600 dark:text-slate-400 mt-2">A psychological win vs the lowest cost — choose what suits you.</p>
-      <span class="text-xs text-slate-400 mt-3 block">5 min read</span>
-    </a>
-    <a href="#" class="np-card p-5 hover:shadow-lg transition">
-      <div class="text-xs font-semibold text-brand mb-2">BUDGET</div>
-      <h3 class="font-bold text-lg leading-snug">A UK take on the 50/30/20 budget rule</h3>
-      <p class="text-sm text-slate-600 dark:text-slate-400 mt-2">Why Council Tax and energy bills throw the maths off, and how to fix it.</p>
-      <span class="text-xs text-slate-400 mt-3 block">4 min read</span>
-    </a>
+<main id="main" class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-16">
+
+  <header class="mb-12 max-w-2xl np-reveal">
+    <div class="inline-flex items-center gap-2 bg-surface border border-border rounded-full px-3 py-1 text-xs font-medium text-ink-soft mb-4">
+      <span class="w-1.5 h-1.5 rounded-full bg-accent"></span>
+      Resources &amp; guides
+    </div>
+    <h1 class="text-4xl sm:text-5xl font-extrabold text-ink tracking-tight">UK money, explained in plain English.</h1>
+    <p class="mt-4 text-lg text-ink-soft leading-relaxed">
+      In-depth, accurate guides on UK personal finance — every figure cross-referenced against HMRC, gov.uk and the Scottish Government for the current tax year.
+    </p>
+  </header>
+
+  <!-- Featured article -->
+  <a href="how-uk-income-tax-works.html" class="np-card np-card-interactive np-card-accent p-6 sm:p-8 block group np-reveal mb-12">
+    <div class="grid sm:grid-cols-5 gap-6 items-center">
+      <div class="sm:col-span-3">
+        <div class="inline-flex items-center gap-2 text-xs font-semibold text-brand uppercase tracking-wider mb-3">
+          <i data-lucide="star" class="w-3.5 h-3.5"></i>
+          Featured · Salary &amp; Tax
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-bold text-ink tracking-tight group-hover:text-brand transition-colors leading-snug">
+          How UK income tax works in 2026/27 — a plain-English guide
+        </h2>
+        <p class="mt-3 text-ink-soft leading-relaxed">
+          Bands, the personal allowance, the £100k tax trap, Scotland's six-band system, National Insurance, tax codes and how to legally pay less — everything in one place, with worked examples.
+        </p>
+        <div class="mt-4 flex items-center gap-3 text-xs text-ink-muted">
+          <span>8 min read</span>
+          <span class="w-1 h-1 rounded-full bg-ink-muted"></span>
+          <span>Updated 15 April 2026</span>
+        </div>
+        <span class="inline-flex items-center gap-1.5 mt-4 text-sm font-semibold text-brand">
+          Read article <i data-lucide="arrow-right" class="w-3.5 h-3.5 transition-transform group-hover:translate-x-1"></i>
+        </span>
+      </div>
+      <div class="sm:col-span-2 hidden sm:block">
+        <div class="aspect-[4/3] rounded-xl bg-gradient-to-br from-brand to-brand-strong flex items-center justify-center relative overflow-hidden">
+          <div class="absolute -top-10 -right-10 w-32 h-32 rounded-full bg-accent/30 blur-2xl"></div>
+          <div class="relative text-white text-center px-6">
+            <div class="font-mono text-xs opacity-70 mb-2">2026/27</div>
+            <div class="font-extrabold text-2xl">£12,570</div>
+            <div class="text-xs opacity-70 mt-1">Personal allowance</div>
+            <div class="mt-4 grid grid-cols-3 gap-1 text-[0.6rem]">
+              <span class="bg-white/10 rounded py-1">20%</span>
+              <span class="bg-white/10 rounded py-1">40%</span>
+              <span class="bg-white/10 rounded py-1">45%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </a>
+
+  <!-- Coming soon — articles in the pipeline -->
+  <div class="mb-6 flex items-center justify-between np-reveal">
+    <h2 class="text-xl font-bold text-ink">In the pipeline</h2>
+    <span class="text-xs text-ink-muted">Coming over the next few weeks</span>
   </div>
 
-  <p class="text-xs text-slate-500 mt-8">Article placeholders — full articles coming soon.</p>
+  <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+    <div class="np-card p-5 opacity-70 np-reveal" style="--reveal-delay:40ms">
+      <div class="flex items-center justify-between mb-2">
+        <div class="text-xs font-semibold text-brand uppercase tracking-wider">Pension</div>
+        <span class="text-[0.65rem] font-semibold text-ink-muted bg-surface-3 px-2 py-0.5 rounded uppercase tracking-wide">Coming soon</span>
+      </div>
+      <h3 class="font-bold text-lg leading-snug text-ink">Salary sacrifice — when it's actually worth it</h3>
+      <p class="text-sm text-ink-soft mt-2 leading-relaxed">How sacrificing salary for pension boosts your pot AND cuts your NI bill — with the maths.</p>
+    </div>
+
+    <div class="np-card p-5 opacity-70 np-reveal" style="--reveal-delay:80ms">
+      <div class="flex items-center justify-between mb-2">
+        <div class="text-xs font-semibold text-brand uppercase tracking-wider">Savings</div>
+        <span class="text-[0.65rem] font-semibold text-ink-muted bg-surface-3 px-2 py-0.5 rounded uppercase tracking-wide">Coming soon</span>
+      </div>
+      <h3 class="font-bold text-lg leading-snug text-ink">Cash ISA vs Stocks &amp; Shares ISA</h3>
+      <p class="text-sm text-ink-soft mt-2 leading-relaxed">Trade-offs, risk, expected returns and how to split a £20,000 allowance sensibly.</p>
+    </div>
+
+    <div class="np-card p-5 opacity-70 np-reveal" style="--reveal-delay:120ms">
+      <div class="flex items-center justify-between mb-2">
+        <div class="text-xs font-semibold text-brand uppercase tracking-wider">Mortgage</div>
+        <span class="text-[0.65rem] font-semibold text-ink-muted bg-surface-3 px-2 py-0.5 rounded uppercase tracking-wide">Coming soon</span>
+      </div>
+      <h3 class="font-bold text-lg leading-snug text-ink">UK stamp duty in 2026/27 — full guide</h3>
+      <p class="text-sm text-ink-soft mt-2 leading-relaxed">SDLT, LBTT, LTT, first-time buyer relief and the second-home surcharge, with worked examples.</p>
+    </div>
+
+    <div class="np-card p-5 opacity-70 np-reveal" style="--reveal-delay:160ms">
+      <div class="flex items-center justify-between mb-2">
+        <div class="text-xs font-semibold text-brand uppercase tracking-wider">Debt</div>
+        <span class="text-[0.65rem] font-semibold text-ink-muted bg-surface-3 px-2 py-0.5 rounded uppercase tracking-wide">Coming soon</span>
+      </div>
+      <h3 class="font-bold text-lg leading-snug text-ink">Snowball vs avalanche — which UK debt strategy?</h3>
+      <p class="text-sm text-ink-soft mt-2 leading-relaxed">Psychology vs maths — and why a 0% balance transfer often beats both.</p>
+    </div>
+
+    <div class="np-card p-5 opacity-70 np-reveal" style="--reveal-delay:200ms">
+      <div class="flex items-center justify-between mb-2">
+        <div class="text-xs font-semibold text-brand uppercase tracking-wider">Budget</div>
+        <span class="text-[0.65rem] font-semibold text-ink-muted bg-surface-3 px-2 py-0.5 rounded uppercase tracking-wide">Coming soon</span>
+      </div>
+      <h3 class="font-bold text-lg leading-snug text-ink">A UK take on the 50/30/20 budget rule</h3>
+      <p class="text-sm text-ink-soft mt-2 leading-relaxed">Why Council Tax, energy and transport throw the standard maths off — and how to fix it.</p>
+    </div>
+
+    <div class="np-card p-5 opacity-70 np-reveal" style="--reveal-delay:240ms">
+      <div class="flex items-center justify-between mb-2">
+        <div class="text-xs font-semibold text-brand uppercase tracking-wider">Pension</div>
+        <span class="text-[0.65rem] font-semibold text-ink-muted bg-surface-3 px-2 py-0.5 rounded uppercase tracking-wide">Coming soon</span>
+      </div>
+      <h3 class="font-bold text-lg leading-snug text-ink">Pension drawdown vs annuity in 2026</h3>
+      <p class="text-sm text-ink-soft mt-2 leading-relaxed">The 4% rule, sequence-of-returns risk and what annuity rates actually look like right now.</p>
+    </div>
+  </div>
+
+  <div class="mt-12 pt-8 border-t border-border text-sm text-ink-muted text-center">
+    Got a topic you'd like covered? <a href="../contact.html" class="text-brand font-medium hover:underline">Suggest one</a>.
+  </div>
+
 </main>
+
 <div id="np-footer"></div>
+
 <script src="../assets/js/uk-rates.js"></script>
 <script src="../assets/js/format.js"></script>
 <script src="../assets/js/common.js"></script>
+<script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </body>
 </html>
