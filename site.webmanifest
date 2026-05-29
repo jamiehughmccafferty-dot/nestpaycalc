@@ -1,0 +1,21 @@
+{
+  "name": "NestPayCalc — Free UK Financial Calculators",
+  "short_name": "NestPayCalc",
+  "description": "Free, accurate UK financial calculators — salary, mortgage, savings, pension, debt and budget.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "minimal-ui",
+  "background_color": "#f7f8fa",
+  "theme_color": "#003087",
+  "categories": ["finance", "utilities", "productivity"],
+  "lang": "en-GB",
+  "icons": [
+    { "src": "/assets/favicon.svg", "type": "image/svg+xml", "sizes": "any", "purpose": "any" }
+  ],
+  "shortcuts": [
+    { "name": "Salary calculator",  "url": "/calculators/salary.html" },
+    { "name": "Mortgage calculator","url": "/calculators/mortgage.html" },
+    { "name": "Pension calculator", "url": "/calculators/pension.html" },
+    { "name": "Saved calculations", "url": "/saved.html" }
+  ]
+}

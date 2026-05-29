@@ -1,0 +1,25 @@
+# Cloudflare Pages — redirects
+# Format: source destination [statusCode]
+# Docs: https://developers.cloudflare.com/pages/configuration/redirects/
+
+# ─── Clean URLs — let people drop the .html ─────────────────────────
+/calculators/salary    /calculators/salary.html    301
+/calculators/mortgage  /calculators/mortgage.html  301
+/calculators/savings   /calculators/savings.html   301
+/calculators/pension   /calculators/pension.html   301
+/calculators/debt      /calculators/debt.html      301
+/calculators/budget    /calculators/budget.html    301
+/about    /about.html    301
+/contact  /contact.html  301
+/faq      /faq.html      301
+/glossary /glossary.html 301
+/deals    /deals.html    301
+/saved    /saved.html    301
+/blog     /blog/         301
+
+# ─── Legacy URL aliases (handy if you rename / restructure later) ────
+# /salary-calculator      /calculators/salary.html    301
+# /mortgage-calculator    /calculators/mortgage.html  301
+
+# ─── Fallback for unknown paths ─────────────────────────────────────
+/*  /404.html  404

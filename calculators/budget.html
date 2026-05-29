@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="view-transition" content="same-origin">
+<title>UK Budget Planner (50/30/20) – NestPayCalc</title>
+<meta name="description" content="Free UK monthly budget planner. Track council tax, energy, transport and more. Compare against the 50/30/20 rule.">
+<link rel="canonical" href="https://nestpaycalc.com/calculators/budget.html">
+<meta name="theme-color" content="#003087">
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="manifest" href="../site.webmanifest">
+<meta property="og:image" content="https://nestpaycalc.com/assets/og/site.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://nestpaycalc.com/calculators/budget.html">
+<meta name="twitter:image" content="https://nestpaycalc.com/assets/og/site.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+
+<link rel="stylesheet" href="../assets/css/styles.css">
+<script type="application/ld+json" data-np-ld="breadcrumb">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://nestpaycalc.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Calculators",
+      "item": "https://nestpaycalc.com/#calculators"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Budget Planner",
+      "item": "https://nestpaycalc.com/calculators/budget.html"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json" data-np-ld="webapp">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "UK Budget Planner",
+  "description": "Build a UK monthly budget with the 50/30/20 rule across realistic categories: rent, council tax, energy and more.",
+  "keywords": "budget calculator, 50/30/20, UK household",
+  "url": "https://nestpaycalc.com/calculators/budget.html",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Any",
+  "browserRequirements": "Requires JavaScript. Requires HTML5.",
+  "inLanguage": "en-GB",
+  "isAccessibleForFree": true,
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "GBP"
+  },
+  "publisher": {
+    "@id": "https://nestpaycalc.com#organization"
+  },
+  "image": "https://nestpaycalc.com/assets/og/site.png"
+}
+</script>
+</head>
+<body class="font-sans">
+<a href="#main" class="np-skip-link">Skip to content</a>
+<div id="np-top-banner-slot"></div>
+<div id="np-header"></div>
+
+<main id="main" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12" x-data="budgetApp()" x-init="init()">
+  <nav class="text-sm text-slate-500 mb-4"><a href="../index.html" class="hover:text-brand">Home</a> / <span>Budget Planner</span></nav>
+  <header class="mb-8">
+    <h1 class="text-3xl sm:text-4xl font-extrabold">UK Budget Planner</h1>
+    <p class="mt-2 text-slate-600 dark:text-slate-300 max-w-3xl">A monthly budget built around UK realities — council tax, energy, transport — with the 50/30/20 rule for comparison.</p>
+  </header>
+
+  <div class="grid lg:grid-cols-5 gap-6">
+    <section class="lg:col-span-3 space-y-5 np-no-print">
+      <div x-show="isExample" x-cloak class="np-example-banner">
+        <svg class="np-example-banner-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+        <span class="np-example-banner-text"><strong>Showing example figures.</strong> Edit any line with your own.</span>
+      </div>
+      <div class="np-card p-5 sm:p-6">
+        <h2 class="font-semibold text-lg mb-4">Income (monthly, after tax)</h2>
+        <div class="space-y-3">
+          <template x-for="(it, i) in income" :key="'i'+i">
+            <div class="flex items-center gap-2">
+              <input type="text" class="np-input flex-1" x-model="it.name">
+              <div class="relative w-40"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500">£</span>
+              <input type="number" min="0" step="10" class="np-input pl-7" x-model.number="it.amount"></div>
+              <button class="text-rose-600 text-sm" @click="income.splice(i,1)" type="button">×</button>
+            </div>
+          </template>
+          <button class="np-btn np-btn-ghost text-sm" @click="income.push({name:'Other', amount:0})">+ Add income</button>
+        </div>
+      </div>
+
+      <template x-for="(group, gi) in groups" :key="group.key">
+        <div class="np-card p-5 sm:p-6">
+          <div class="flex items-center justify-between mb-4">
+            <h2 class="font-semibold text-lg flex items-center gap-2"><span x-text="group.icon"></span><span x-text="group.label"></span></h2>
+            <span class="text-sm text-slate-500" x-text="NPF.gbp(groupTotal(group))"></span>
+          </div>
+          <div class="space-y-2">
+            <template x-for="(item, i) in group.items" :key="i">
+              <div class="flex items-center gap-2">
+                <input type="text" class="np-input flex-1" x-model="item.name">
+                <div class="relative w-40"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500">£</span>
+                <input type="number" min="0" step="5" class="np-input pl-7" x-model.number="item.amount"></div>
+                <button class="text-rose-600 text-sm" @click="group.items.splice(i,1)" type="button">×</button>
+              </div>
+            </template>
+            <button class="np-btn np-btn-ghost text-xs" @click="group.items.push({name:'New item', amount:0})">+ Add</button>
+          </div>
+        </div>
+      </template>
+    </section>
+
+    <section class="lg:col-span-2 space-y-5">
+      <div class="np-card p-5 sm:p-6 sticky top-20">
+        <h2 class="font-semibold text-lg mb-4">Summary</h2>
+        <div class="space-y-2 text-sm">
+          <div class="flex justify-between"><span>Income</span><strong x-text="NPF.gbp(totalIncome)"></strong></div>
+          <div class="flex justify-between text-rose-700 dark:text-rose-300"><span>Total spending</span><strong x-text="'-' + NPF.gbp(totalSpending)"></strong></div>
+          <div class="border-t border-slate-200 dark:border-slate-700 pt-2 flex justify-between font-bold"><span>Left over</span><strong :class="leftOver >= 0 ? 'text-emerald-700 dark:text-emerald-300' : 'text-rose-700'" x-text="NPF.gbp(leftOver)"></strong></div>
+        </div>
+        <div class="mt-5">
+          <h3 class="font-semibold text-sm mb-2">50/30/20 rule</h3>
+          <p class="text-xs text-slate-500 mb-3">Needs 50% · Wants 30% · Savings 20%</p>
+          <template x-for="r in rule503020" :key="r.label">
+            <div class="mb-2">
+              <div class="flex justify-between text-xs"><span x-text="r.label"></span><span><strong x-text="NPF.pct(r.actualPct,0)"></strong> <span class="text-slate-400">(target <span x-text="r.targetPct + '%'"></span>)</span></span></div>
+              <div class="w-full bg-slate-100 dark:bg-slate-800 rounded-full h-2 mt-1 overflow-hidden">
+                <div class="h-full" :class="r.actualPct > r.targetPct ? 'bg-rose-500' : 'bg-emerald-500'" :style="`width:${Math.min(100, r.actualPct)}%`"></div>
+              </div>
+            </div>
+          </template>
+        </div>
+        <div class="h-44 mt-6"><canvas id="budgetChart"></canvas></div>
+        <div class="grid grid-cols-2 gap-2 mt-4">
+          <button class="np-btn np-btn-primary text-sm" @click="save()">
+            <i data-lucide="bookmark" class="w-4 h-4"></i> Save
+          </button>
+          <button class="np-btn np-btn-ghost text-sm" @click="share()">
+            <i data-lucide="share-2" class="w-4 h-4"></i> Share
+          </button>
+          <button class="np-btn np-btn-ghost text-sm" @click="loadUKAverages()">
+            <i data-lucide="bar-chart-3" class="w-4 h-4"></i> UK averages
+          </button>
+          <button class="np-btn np-btn-ghost text-sm" @click="window.print()">
+            <i data-lucide="printer" class="w-4 h-4"></i> Print
+          </button>
+          <button class="np-btn np-btn-ghost text-sm col-span-2" @click="reset()">
+            <i data-lucide="rotate-ccw" class="w-4 h-4"></i> Clear all
+          </button>
+        </div>
+
+        <!-- ZONE 1: Personalised post-result prompt (in summary card, peak intent) -->
+        <div class="mt-4" x-html="resultPromptHTML"></div>
+      </div>
+
+      <!-- ZONE 2: Comparison table -->
+      <div x-html="comparisonHTML"></div>
+
+      <!-- ZONE 3: Trust strip -->
+      <div x-html="trustHTML"></div>
+
+      <div id="np-disclaimer"></div>
+    </section>
+  </div>
+</main>
+<div id="np-footer"></div>
+
+<script src="../assets/js/uk-rates.js"></script>
+<script src="../assets/js/format.js"></script>
+<script src="../assets/js/share.js"></script>
+<script src="../assets/js/affiliates.js"></script>
+<script src="../assets/js/storage.js"></script>
+<script src="../assets/js/save-share.js"></script>
+<script src="../assets/js/common.js"></script>
+<script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+<script>
+function budgetApp() {
+  // UK averages — typical monthly outgoings for an ~£2.4k/month take-home household.
+  // Sources: ONS Family Spending Survey, Ofcom (broadband), GOV.UK (council tax band D).
+  const UK_AVERAGES = {
+    income: [{ name: 'Take-home pay', amount: 2400 }],
+    groups: [
+      { key: 'needs', label: 'Needs (housing & essentials)', icon: '🏠', items: [
+        { name: 'Rent / mortgage', amount: 900 },
+        { name: 'Council Tax', amount: 160 },
+        { name: 'Energy (gas + electric)', amount: 130 },
+        { name: 'Water', amount: 35 },
+        { name: 'Broadband + mobile', amount: 45 },
+        { name: 'Groceries', amount: 280 },
+        { name: 'Insurance', amount: 50 }
+      ] },
+      { key: 'transport', label: 'Transport', icon: '🚗', items: [
+        { name: 'Fuel / public transport', amount: 150 },
+        { name: 'Car insurance', amount: 60 },
+        { name: 'Tax / MOT (monthly avg)', amount: 25 }
+      ] },
+      { key: 'wants', label: 'Wants (lifestyle)', icon: '🎉', items: [
+        { name: 'Eating out / takeaways', amount: 100 },
+        { name: 'Subscriptions (Netflix, gym, etc.)', amount: 40 },
+        { name: 'Hobbies / shopping', amount: 75 }
+      ] },
+      { key: 'savings', label: 'Savings & debt', icon: '💰', items: [
+        { name: 'ISA / savings', amount: 200 },
+        { name: 'Extra debt repayment', amount: 0 },
+        { name: 'Pension (extra)', amount: 0 }
+      ] }
+    ]
+  };
+  const cloneAvg = () => JSON.parse(JSON.stringify(UK_AVERAGES));
+  const fresh = cloneAvg();
+  return {
+    income: fresh.income,
+    groups: fresh.groups,
+    UK_AVERAGES, cloneAvg,
+    isExample: true,
+    chart: null,
+    resultPromptHTML: '', comparisonHTML: '', trustHTML: '',
+
+    init() {
+      // Restore from share/save URL — income+groups encoded as base64-JSON in `b`
+      const s = window.NPShare.readState(['b']);
+      const hasParams = Object.keys(s).length > 0;
+      if (s.b) {
+        try {
+          const decoded = JSON.parse(decodeURIComponent(escape(atob(s.b))));
+          if (Array.isArray(decoded?.income)) this.income = decoded.income;
+          if (Array.isArray(decoded?.groups)) this.groups = decoded.groups;
+        } catch (e) { console.warn('budget restore failed', e); }
+      }
+      if (hasParams) this.isExample = false;
+      this.calc();
+      this.$watch('income', () => { this.isExample = false; });
+      this.$watch('groups', () => { this.isExample = false; });
+    },
+
+    getSnapshot() {
+      const left = this.leftOver;
+      const surplusLabel = left >= 0 ? 'Monthly surplus' : 'Monthly shortfall';
+      const blob = btoa(unescape(encodeURIComponent(JSON.stringify({ income: this.income, groups: this.groups }))));
+      const ruleHit = this.rule503020;
+      return {
+        type: 'budget',
+        inputs: { income: this.income, groups: this.groups },
+        shareParams: { b: blob },
+        summary: {
+          calcLabel: 'Budget Planner',
+          icon: 'pie-chart',
+          headline: window.NPF.gbp(Math.abs(left)),
+          headlineLabel: surplusLabel,
+          secondary: window.NPF.gbp(this.totalIncome),
+          secondaryLabel: 'Monthly income',
+          meta: this.groups.reduce((s, g) => s + g.items.length, 0) + ' line items tracked',
+          rows: ruleHit.map(r => ({ label: r.label, value: window.NPF.pct(r.actualPct, 0) }))
+        }
+      };
+    },
+
+    save()  { window.NPSaveShare.openSave(this.getSnapshot()); },
+    share() { window.NPSaveShare.openShare(this.getSnapshot()); },
+
+    loadUKAverages() {
+      const avg = this.cloneAvg();
+      this.income = avg.income;
+      this.groups = avg.groups;
+      this.calc();
+      this.$nextTick(() => { this.isExample = true; });
+    },
+    groupTotal(g) { return g.items.reduce((s, i) => s + (+i.amount || 0), 0); },
+    get totalIncome() { return this.income.reduce((s,i)=>s+(+i.amount||0),0); },
+    get totalSpending() { return this.groups.reduce((s,g)=>s+this.groupTotal(g),0); },
+    get leftOver() { return this.totalIncome - this.totalSpending; },
+    get rule503020() {
+      const inc = this.totalIncome || 1;
+      const needs = this.groupTotal(this.groups.find(g => g.key === 'needs')) + this.groupTotal(this.groups.find(g => g.key === 'transport'));
+      const wants = this.groupTotal(this.groups.find(g => g.key === 'wants'));
+      const savings = this.groupTotal(this.groups.find(g => g.key === 'savings'));
+      return [
+        { label: 'Needs', actualPct: (needs/inc)*100, targetPct: 50 },
+        { label: 'Wants', actualPct: (wants/inc)*100, targetPct: 30 },
+        { label: 'Savings', actualPct: (savings/inc)*100, targetPct: 20 }
+      ];
+    },
+    calc() { this.renderAffiliates(); this.$nextTick(() => this.draw()); },
+
+    renderAffiliates() {
+      const A = window.NPAffiliates; if (!A) return;
+      const left = this.leftOver;
+      const inc = this.totalIncome;
+      const ccDebt = false; // budget doesn't track this directly
+
+      let prompt;
+      if (left > 200) {
+        prompt = {
+          icon: '✅',
+          title: `${window.NPF.gbp(left)} surplus per month — ${window.NPF.gbp(left * 12)} a year. Make it work.`,
+          sub: 'Top easy-access Cash ISAs pay 4.85% tax-free',
+          cta: 'Compare ISAs',
+          href: '../deals.html#isa'
+        };
+        this.comparisonHTML = A.renderComparisonTable({
+          category: 'isa',
+          title: 'Top Cash ISAs for your monthly surplus',
+          subtitle: 'Tax-free interest · FSCS protected',
+          limit: 3
+        });
+      } else if (left < -50) {
+        prompt = {
+          icon: '🤝',
+          title: `Spending ${window.NPF.gbp(-left)} more than income — free debt advice can help.`,
+          sub: 'StepChange offers no-fee, FCA-regulated guidance',
+          cta: 'Get free help',
+          href: 'https://www.stepchange.org/'
+        };
+        this.comparisonHTML = '';
+      } else {
+        prompt = {
+          icon: '💡',
+          title: `Tight budget? Even ${window.NPF.gbp(50)}/month into an ISA earns tax-free interest.`,
+          sub: 'Cash ISAs from £1 minimum',
+          cta: 'See ISAs',
+          href: '../deals.html#isa'
+        };
+        this.comparisonHTML = A.renderComparisonTable({
+          category: 'isa',
+          title: 'Top low-minimum Cash ISAs',
+          subtitle: 'Start small · withdraw any time',
+          limit: 2
+        });
+      }
+      this.resultPromptHTML = A.renderResultPrompt(prompt);
+      this.trustHTML = A.renderTrustStrip();
+    },
+    async draw() {
+      await window.NPLoad.chart();
+      const el = document.getElementById('budgetChart'); if (!el) return;
+      const data = {
+        labels: this.groups.map(g => g.label.split(' (')[0]),
+        datasets: [{ data: this.groups.map(g => this.groupTotal(g)), backgroundColor: ['#003087','#0ea5e9','#f59e0b','#00875a'], borderWidth: 0 }]
+      };
+      if (this.chart) { this.chart.data = data; this.chart.update('none'); }
+      else this.chart = new Chart(el, { type: 'doughnut', data, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, padding: 8, font: { size: 11 } } }, tooltip: { callbacks: { label: c => c.label + ': ' + window.NPF.gbp(c.parsed) } } } } });
+    },
+    reset() {
+      // Reset = clear all amounts to zero so user can build their own from scratch
+      this.income = [{ name: 'Take-home pay', amount: 0 }];
+      this.groups.forEach(g => g.items.forEach(i => i.amount = 0));
+      this.calc();
+      // not example mode — user is starting fresh, not browsing a sample
+      this.$nextTick(() => { this.isExample = false; });
+    }
+  };
+}
+// Auto-redraw whenever any input changes
+document.addEventListener('input', () => { const a = document.querySelector('[x-data]'); if (a && a._x_dataStack) a._x_dataStack[0].calc?.(); });
+</script>
+</body>
+</html>

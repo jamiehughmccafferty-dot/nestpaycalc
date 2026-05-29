@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<title>NestPayCalc — OG image generator</title>
+<style>
+  /* This is a one-shot generator: open in a browser, screenshot the card,
+     save as assets/og/site.png. Tweak the `data-` variables on body for
+     per-calculator variants. */
+  body { margin: 0; padding: 40px; background: #f1f5f9; font-family: 'Inter', system-ui, sans-serif; }
+  .card {
+    width: 1200px; height: 630px;
+    background: linear-gradient(135deg, #003087 0%, #001f5e 100%);
+    color: #fff; padding: 56px 64px; box-sizing: border-box;
+    position: relative; overflow: hidden;
+    display: flex; flex-direction: column; justify-content: space-between;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.15); border-radius: 12px;
+  }
+  .blob1 { position: absolute; top: -220px; right: -220px; width: 560px; height: 560px; border-radius: 50%; background: radial-gradient(closest-side, rgba(0,135,90,0.45), transparent); pointer-events: none; }
+  .blob2 { position: absolute; bottom: -180px; left: -120px; width: 420px; height: 420px; border-radius: 50%; background: radial-gradient(closest-side, rgba(255,255,255,0.06), transparent); pointer-events: none; }
+  .top { display: flex; align-items: center; justify-content: space-between; position: relative; z-index: 1; }
+  .brand { display: flex; align-items: center; gap: 14px; font-weight: 800; font-size: 26px; letter-spacing: -0.5px; }
+  .tag { font-size: 13px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; padding: 8px 16px; border-radius: 999px; background: rgba(255,255,255,0.14); border: 1px solid rgba(255,255,255,0.22); }
+  .mid { position: relative; z-index: 1; }
+  .eyebrow { font-size: 16px; font-weight: 600; opacity: 0.7; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 18px; }
+  .h1 { font-size: 76px; font-weight: 800; letter-spacing: -2px; line-height: 1.04; }
+  .h1 span { background: linear-gradient(135deg, #ffffff 0%, #86efac 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .stats { display: flex; gap: 48px; margin-top: 36px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.2); }
+  .stat { display: flex; flex-direction: column; gap: 4px; }
+  .stat-label { font-size: 13px; opacity: 0.65; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; }
+  .stat-value { font-size: 22px; font-weight: 700; }
+  .foot { display: flex; align-items: center; gap: 10px; position: relative; z-index: 1; padding-top: 22px; border-top: 1px solid rgba(255,255,255,0.18); font-size: 16px; font-weight: 700; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: #34d399; }
+  .help { max-width: 1200px; margin: 24px auto 0; font-size: 13px; color: #475569; line-height: 1.5; }
+</style>
+</head>
+<body>
+
+<div class="card" id="card">
+  <div class="blob1"></div>
+  <div class="blob2"></div>
+
+  <div class="top">
+    <div class="brand">
+      <svg width="44" height="44" viewBox="0 0 32 32" fill="none">
+        <path d="M4 22c0-6 5.5-10 12-10s12 4 12 10v2H4v-2z" fill="#fff"/>
+        <text x="16" y="21.5" text-anchor="middle" font-size="11" font-weight="800" fill="#003087" font-family="Inter,sans-serif">£</text>
+      </svg>
+      NestPayCalc
+    </div>
+    <div class="tag">UK · Tax year 2026/27</div>
+  </div>
+
+  <div class="mid">
+    <div class="eyebrow">Free UK financial calculators</div>
+    <div class="h1">Accurate &amp; easy to use<br><span>— right down to the penny.</span></div>
+    <div class="stats">
+      <div class="stat"><div class="stat-label">Salary</div><div class="stat-value">Take-home pay</div></div>
+      <div class="stat"><div class="stat-label">Mortgage</div><div class="stat-value">SDLT · LBTT · LTT</div></div>
+      <div class="stat"><div class="stat-label">Pension</div><div class="stat-value">Drawdown forecast</div></div>
+      <div class="stat"><div class="stat-label">+ more</div><div class="stat-value">Savings · Debt · Budget</div></div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <span class="dot"></span> nestpaycalc.com
+  </div>
+</div>
+
+<div class="help">
+  <strong>How to use this template:</strong> Open this file in Chrome at 100% zoom on a screen ≥ 1280px wide,
+  right-click the card → <em>Capture node screenshot</em> (DevTools → Elements → 3-dot menu).
+  Save the resulting image as <code>assets/og/site.png</code>. That's it.
+  <br><br>
+  Or use the included Puppeteer script: <code>node scripts/build-og.js</code> (requires <code>npm i -D puppeteer</code>).
+</div>
+
+</body>
+</html>

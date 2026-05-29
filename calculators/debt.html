@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="view-transition" content="same-origin">
+<title>UK Debt Payoff Calculator (Snowball vs Avalanche) – NestPayCalc</title>
+<meta name="description" content="Free UK debt payoff calculator. Compare snowball vs avalanche strategies for credit cards, loans and overdrafts.">
+<link rel="canonical" href="https://nestpaycalc.com/calculators/debt.html">
+<meta name="theme-color" content="#003087">
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="manifest" href="../site.webmanifest">
+<meta property="og:image" content="https://nestpaycalc.com/assets/og/site.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://nestpaycalc.com/calculators/debt.html">
+<meta name="twitter:image" content="https://nestpaycalc.com/assets/og/site.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+
+<link rel="stylesheet" href="../assets/css/styles.css">
+<script type="application/ld+json" data-np-ld="breadcrumb">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://nestpaycalc.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Calculators",
+      "item": "https://nestpaycalc.com/#calculators"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Debt Calculator",
+      "item": "https://nestpaycalc.com/calculators/debt.html"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json" data-np-ld="webapp">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "UK Debt Payoff Calculator",
+  "description": "Compare snowball vs avalanche strategies to pay off UK credit cards, loans and overdrafts faster.",
+  "keywords": "debt calculator, snowball, avalanche, UK",
+  "url": "https://nestpaycalc.com/calculators/debt.html",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Any",
+  "browserRequirements": "Requires JavaScript. Requires HTML5.",
+  "inLanguage": "en-GB",
+  "isAccessibleForFree": true,
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "GBP"
+  },
+  "publisher": {
+    "@id": "https://nestpaycalc.com#organization"
+  },
+  "image": "https://nestpaycalc.com/assets/og/site.png"
+}
+</script>
+</head>
+<body class="font-sans">
+<a href="#main" class="np-skip-link">Skip to content</a>
+<div id="np-top-banner-slot"></div>
+<div id="np-header"></div>
+
+<main id="main" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12" x-data="debtApp()" x-init="init()">
+  <nav class="text-sm text-slate-500 mb-4"><a href="../index.html" class="hover:text-brand">Home</a> / <span>Debt Payoff</span></nav>
+  <header class="mb-8">
+    <h1 class="text-3xl sm:text-4xl font-extrabold">UK Debt Payoff Calculator</h1>
+    <p class="mt-2 text-slate-600 dark:text-slate-300 max-w-3xl">Add your credit cards, loans and overdrafts. Compare the snowball (smallest balance first) vs avalanche (highest interest first) strategy.</p>
+  </header>
+
+  <div class="grid lg:grid-cols-5 gap-6">
+    <section class="lg:col-span-2 space-y-5 np-no-print">
+      <div x-show="isExample" x-cloak class="np-example-banner">
+        <svg class="np-example-banner-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+        <span class="np-example-banner-text"><strong>Showing example figures.</strong> Edit any field with your own.</span>
+      </div>
+      <div class="np-card p-5 sm:p-6">
+        <h2 class="font-semibold text-lg mb-4">Your debts</h2>
+        <div class="space-y-3">
+          <template x-for="(d, i) in inp.debts" :key="i">
+            <div class="border border-slate-200 dark:border-slate-700 rounded-lg p-3 space-y-2">
+              <div class="flex items-center justify-between">
+                <input type="text" class="np-input text-sm flex-1 mr-2" placeholder="Name (e.g. Credit Card)" x-model="d.name" @input="calc()">
+                <button class="text-rose-600 text-sm hover:underline" @click="removeDebt(i)" type="button">Remove</button>
+              </div>
+              <div class="grid grid-cols-3 gap-2 text-sm">
+                <div>
+                  <label class="text-xs text-slate-500">Balance</label>
+                  <div class="relative"><span class="absolute left-2 top-1/2 -translate-y-1/2 text-slate-500 text-xs">£</span>
+                  <input type="number" min="0" step="10" class="np-input pl-5 text-sm" x-model.number="d.balance" @input="calc()"></div>
+                </div>
+                <div>
+                  <label class="text-xs text-slate-500">APR</label>
+                  <div class="relative"><input type="number" min="0" max="100" step="0.1" class="np-input pr-5 text-sm" x-model.number="d.aprPct" @input="calc()"><span class="absolute right-2 top-1/2 -translate-y-1/2 text-slate-500 text-xs">%</span></div>
+                </div>
+                <div>
+                  <label class="text-xs text-slate-500">Min/mo</label>
+                  <div class="relative"><span class="absolute left-2 top-1/2 -translate-y-1/2 text-slate-500 text-xs">£</span>
+                  <input type="number" min="0" step="5" class="np-input pl-5 text-sm" x-model.number="d.minPayment" @input="calc()"></div>
+                </div>
+              </div>
+            </div>
+          </template>
+          <button class="np-btn np-btn-ghost w-full" @click="addDebt()" type="button">+ Add another debt</button>
+        </div>
+      </div>
+
+      <div class="np-card p-5 sm:p-6">
+        <h2 class="font-semibold text-lg mb-2">Extra monthly payment</h2>
+        <p class="text-sm text-slate-500 dark:text-slate-400 mb-3">On top of all minimum payments — directs to your strategy's top target.</p>
+        <div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500">£</span>
+        <input type="number" min="0" step="10" class="np-input pl-7" x-model.number="inp.extra" @input="calc()"></div>
+        <input type="range" min="0" max="1000" step="25" class="np-slider mt-2" x-model.number="inp.extra" @input="calc()">
+      </div>
+
+      <div class="flex flex-wrap gap-2">
+        <button class="np-btn np-btn-primary" @click="save()">
+          <i data-lucide="bookmark" class="w-4 h-4"></i> Save
+        </button>
+        <button class="np-btn np-btn-ghost" @click="share()">
+          <i data-lucide="share-2" class="w-4 h-4"></i> Share
+        </button>
+        <button class="np-btn np-btn-ghost" @click="window.print()">
+          <i data-lucide="printer" class="w-4 h-4"></i> Print
+        </button>
+        <button class="np-btn np-btn-ghost" @click="loadUKAverages()">
+          <i data-lucide="bar-chart-3" class="w-4 h-4"></i> Try UK averages
+        </button>
+        <button class="np-btn np-btn-ghost" @click="reset()">
+          <i data-lucide="rotate-ccw" class="w-4 h-4"></i> Reset
+        </button>
+      </div>
+    </section>
+
+    <section class="lg:col-span-3 space-y-5">
+      <div class="np-card p-5 sm:p-6">
+        <h2 class="font-semibold text-lg mb-4">Strategy comparison</h2>
+        <div class="grid grid-cols-2 gap-3">
+          <div class="p-4 rounded-lg bg-blue-50 dark:bg-blue-900/30">
+            <div class="text-sm font-semibold text-brand dark:text-blue-300">❄️ Snowball</div>
+            <div class="text-xs text-slate-500 dark:text-slate-400 mb-2">Smallest balance first — quick wins</div>
+            <div class="text-sm">Debt-free in <strong x-text="formatMonths(result.snowball.monthsToFree)"></strong></div>
+            <div class="text-sm">Total interest: <strong x-text="NPF.gbp(result.snowball.totalInterest)"></strong></div>
+          </div>
+          <div class="p-4 rounded-lg bg-emerald-50 dark:bg-emerald-900/30">
+            <div class="text-sm font-semibold text-emerald-700 dark:text-emerald-300">🏔️ Avalanche</div>
+            <div class="text-xs text-slate-500 dark:text-slate-400 mb-2">Highest APR first — saves the most</div>
+            <div class="text-sm">Debt-free in <strong x-text="formatMonths(result.avalanche.monthsToFree)"></strong></div>
+            <div class="text-sm">Total interest: <strong x-text="NPF.gbp(result.avalanche.totalInterest)"></strong></div>
+          </div>
+        </div>
+        <p class="text-sm mt-4">Avalanche saves you <strong class="text-emerald-700 dark:text-emerald-300" x-text="NPF.gbp(Math.max(0, result.snowball.totalInterest - result.avalanche.totalInterest))"></strong> in interest.</p>
+      </div>
+
+      <div class="np-card p-5 sm:p-6">
+        <h3 class="font-semibold mb-3">Total balance over time</h3>
+        <div class="h-64"><canvas id="debtChart"></canvas></div>
+      </div>
+
+      <!-- ZONE 1: Personalised post-result prompt -->
+      <div x-html="resultPromptHTML"></div>
+
+      <!-- Free help — non-affiliate, ethical priority placement -->
+      <div class="np-card p-5 sm:p-6 border-l-4 border-emerald-500">
+        <h3 class="font-bold text-base">Struggling? Free, confidential UK debt advice</h3>
+        <p class="text-sm text-slate-600 dark:text-slate-400 mt-1">Charities like <a class="underline font-medium" href="https://www.stepchange.org/" target="_blank" rel="noopener nofollow">StepChange</a> and <a class="underline font-medium" href="https://www.nationaldebtline.org/" target="_blank" rel="noopener nofollow">National Debtline</a> offer free, impartial advice. <strong>You should never pay for debt advice.</strong></p>
+      </div>
+
+      <!-- ZONE 2: Comparison table — only for users not in crisis -->
+      <div x-html="comparisonHTML"></div>
+
+      <!-- ZONE 3: Trust strip -->
+      <div x-html="trustHTML"></div>
+
+      <div id="np-disclaimer"></div>
+
+      <div class="np-card p-5 sm:p-6 text-sm text-slate-700 dark:text-slate-300">
+        <p><strong>Typical UK APRs (2025):</strong> credit cards 24–35%, store cards up to 40%, personal loans 6–25%, authorised overdrafts ~40% EAR.</p>
+        <p class="mt-2">Many UK lenders offer 0% balance transfer cards — used carefully these can speed up payoff dramatically. Beware fees and end-of-promo rates.</p>
+      </div>
+    </section>
+  </div>
+</main>
+<div id="np-footer"></div>
+
+<script src="../assets/js/uk-rates.js"></script>
+<script src="../assets/js/format.js"></script>
+<script src="../assets/js/share.js"></script>
+<script src="../assets/js/debt.js"></script>
+<script src="../assets/js/affiliates.js"></script>
+<script src="../assets/js/storage.js"></script>
+<script src="../assets/js/save-share.js"></script>
+<script src="../assets/js/common.js"></script>
+<script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+<script>
+function debtApp() {
+  // UK averages: typical UK household debt mix — TheMoneyCharity stats:
+  // average credit card balance ~£2.5k at typical APR 24.9%, plus a small
+  // store/second card and a personal loan around the median £8k.
+  const UK_AVERAGES = {
+    debts: [
+      { name: 'Credit card 1', balance: 3500, aprPct: 24.9, minPayment: 90 },
+      { name: 'Credit card 2', balance: 1200, aprPct: 21.9, minPayment: 35 },
+      { name: 'Personal loan',  balance: 5000, aprPct: 9.9,  minPayment: 150 }
+    ],
+    extra: 100
+  };
+  // Deep-clone helper so the preset isn't mutated when user edits debts
+  const cloneAvg = () => ({ debts: UK_AVERAGES.debts.map(d => ({ ...d })), extra: UK_AVERAGES.extra });
+  return {
+    inp: cloneAvg(),
+    UK_AVERAGES, cloneAvg,
+    isExample: true,
+    result: { snowball: { monthsToFree: 0, totalInterest: 0, monthly: [] }, avalanche: { monthsToFree: 0, totalInterest: 0, monthly: [] } },
+    chart: null,
+    resultPromptHTML: '', comparisonHTML: '', trustHTML: '',
+
+    init() {
+      // Restore from share/save URL — debts encoded as base64-JSON in `d`
+      const s = window.NPShare.readState(['d', 'x']);
+      const hasParams = Object.keys(s).length > 0;
+      if (s.d) {
+        try {
+          const decoded = JSON.parse(decodeURIComponent(escape(atob(s.d))));
+          if (Array.isArray(decoded?.debts)) this.inp.debts = decoded.debts;
+          if (typeof decoded?.extra === 'number') this.inp.extra = decoded.extra;
+        } catch (e) { console.warn('debt restore failed', e); }
+      }
+      if (hasParams) this.isExample = false;
+      this.calc();
+      this.$watch('inp', () => { this.isExample = false; });
+    },
+
+    getSnapshot() {
+      const totalBalance = this.inp.debts.reduce((s, d) => s + (+d.balance || 0), 0);
+      const interestSaved = Math.max(0, this.result.snowball.totalInterest - this.result.avalanche.totalInterest);
+      const monthsAv = this.result.avalanche.monthsToFree;
+      const yrs = Math.floor(monthsAv / 12), mos = monthsAv % 12;
+      const timeStr = (yrs ? yrs + 'y ' : '') + mos + 'm';
+      // Encode the debts list as a single base64 URL param so the link works for any number of debts
+      const blob = btoa(unescape(encodeURIComponent(JSON.stringify({ debts: this.inp.debts, extra: this.inp.extra }))));
+      return {
+        type: 'debt',
+        inputs: { ...this.inp },
+        shareParams: { d: blob },
+        summary: {
+          calcLabel: 'Debt Payoff',
+          icon: 'credit-card',
+          headline: timeStr,
+          headlineLabel: 'Debt-free with avalanche',
+          secondary: window.NPF.gbp(this.result.avalanche.totalInterest),
+          secondaryLabel: 'Total interest',
+          meta: this.inp.debts.length + ' debt' + (this.inp.debts.length === 1 ? '' : 's') + ' · £' + this.inp.extra + '/mo extra',
+          rows: [
+            { label: 'Total balance',  value: window.NPF.gbp(totalBalance) },
+            { label: 'Avalanche saves', value: window.NPF.gbp(interestSaved) },
+            { label: 'Snowball months', value: this.result.snowball.monthsToFree + 'm' }
+          ]
+        }
+      };
+    },
+
+    save()  { window.NPSaveShare.openSave(this.getSnapshot()); },
+    share() { window.NPSaveShare.openShare(this.getSnapshot()); },
+
+    loadUKAverages() {
+      this.inp = this.cloneAvg();
+      this.calc();
+      this.$nextTick(() => { this.isExample = true; });
+    },
+    addDebt() { this.inp.debts.push({ name: 'New debt', balance: 1000, aprPct: 19.9, minPayment: 25 }); this.calc(); },
+    removeDebt(i) { this.inp.debts.splice(i, 1); this.calc(); },
+    formatMonths(m) { const y = Math.floor(m/12); const mo = m % 12; return (y? y+'y ' : '') + mo + 'm'; },
+
+    calc() {
+      this.result = window.NPDebt.compare(this.inp.debts, this.inp.extra);
+      this.renderAffiliates();
+      this.$nextTick(() => this.draw());
+    },
+
+    renderAffiliates() {
+      const A = window.NPAffiliates; if (!A) return;
+      const totalDebt = this.inp.debts.reduce((s,d)=>s+(+d.balance||0), 0);
+      const ccDebt = this.inp.debts.filter(d => (d.aprPct||0) > 15).reduce((s,d)=>s+(+d.balance||0), 0);
+      const interestSaved = Math.max(0, this.result.snowball.totalInterest - this.result.avalanche.totalInterest);
+      const inCrisis = totalDebt > 0 && this.inp.extra === 0 && this.inp.debts.some(d => d.balance > d.minPayment * 50);
+
+      // If user appears to be in crisis (very high debt-to-min ratio, no extra payments) — lead with charity, NO affiliate
+      if (inCrisis) {
+        this.resultPromptHTML = A.renderResultPrompt({
+          icon: '🤝',
+          title: 'It looks like a free, no-obligation debt plan could help you most right now.',
+          sub: 'StepChange is a registered UK charity — they do not charge ever',
+          cta: 'Get free help',
+          href: 'https://www.stepchange.org/'
+        });
+        this.comparisonHTML = '';
+        this.trustHTML = '';
+        return;
+      }
+
+      // Otherwise: show 0% balance transfer cards (genuinely useful for high-APR cards)
+      this.resultPromptHTML = A.renderResultPrompt({
+        icon: '💳',
+        title: ccDebt > 1000
+          ? `You have ${window.NPF.gbp(ccDebt)} on high-APR cards. A 0% balance transfer could save thousands.`
+          : `Avalanche saves ${window.NPF.gbp(interestSaved)} over snowball. A 0% BT card could save more.`,
+        sub: 'Top UK 0% BT cards offer up to 30 months interest-free',
+        cta: 'Compare BT cards',
+        href: '../deals.html#cards'
+      });
+      this.comparisonHTML = A.renderComparisonTable({
+        category: 'debt',
+        title: 'Top UK 0% balance transfer cards',
+        subtitle: 'Eligibility checker available · soft search',
+        limit: 3
+      });
+      this.trustHTML = A.renderTrustStrip();
+    },
+
+    async draw() {
+      await window.NPLoad.chart();
+      const el = document.getElementById('debtChart'); if (!el) return;
+      const max = Math.max(this.result.snowball.monthly.length, this.result.avalanche.monthly.length);
+      const labels = Array.from({ length: max }, (_,i) => 'M' + (i+1));
+      const data = {
+        labels,
+        datasets: [
+          { label: 'Snowball', data: this.result.snowball.monthly, borderColor: '#003087', backgroundColor: 'rgba(0,48,135,0.1)', tension: 0.3, pointRadius: 0 },
+          { label: 'Avalanche', data: this.result.avalanche.monthly, borderColor: '#00875a', backgroundColor: 'rgba(0,135,90,0.1)', tension: 0.3, pointRadius: 0 }
+        ]
+      };
+      const opts = { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' }, tooltip: { callbacks: { label: c => c.dataset.label + ': ' + window.NPF.gbp(c.parsed.y) } } }, scales: { y: { ticks: { callback: v => window.NPF.gbp(v) } } } };
+      if (this.chart) { this.chart.data = data; this.chart.update('none'); }
+      else this.chart = new Chart(el, { type: 'line', data, options: opts });
+    },
+
+    reset() {
+      this.inp = this.cloneAvg();
+      this.calc();
+      this.$nextTick(() => { this.isExample = true; });
+    }
+  };
+}
+</script>
+</body>
+</html>

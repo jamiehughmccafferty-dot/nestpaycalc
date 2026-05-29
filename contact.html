@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="view-transition" content="same-origin">
+<title>Contact – NestPayCalc</title>
+<meta name="description" content="Contact NestPayCalc – send corrections, suggestions or partnership enquiries.">
+<link rel="canonical" href="https://nestpaycalc.com/contact.html">
+<meta name="theme-color" content="#003087">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="manifest" href="site.webmanifest">
+<meta property="og:image" content="https://nestpaycalc.com/assets/og/site.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://nestpaycalc.com/contact.html">
+<meta name="twitter:image" content="https://nestpaycalc.com/assets/og/site.png">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+
+<link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body class="font-sans">
+<a href="#main" class="np-skip-link">Skip to content</a>
+<div id="np-top-banner-slot"></div>
+<div id="np-header"></div>
+<main id="main" class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+  <h1 class="text-3xl font-extrabold mb-2 text-ink">Get in touch</h1>
+  <p class="text-ink-soft mb-2">Found a tax-rate that needs updating? A bug? An idea for a new calculator? We'd love to hear from you.</p>
+  <p class="text-sm text-ink-muted mb-8">Email us directly at <a href="mailto:hello@crofthughdigital.co.uk" class="text-brand font-medium hover:underline">hello@crofthughdigital.co.uk</a> or use the form below.</p>
+
+  <form class="np-card p-6 space-y-4" onsubmit="event.preventDefault(); sendMail(this);">
+    <div>
+      <label class="np-label" for="name">Name</label>
+      <input id="name" name="name" type="text" class="np-input" required>
+    </div>
+    <div>
+      <label class="np-label" for="email">Email</label>
+      <input id="email" name="email" type="email" class="np-input" required>
+    </div>
+    <div>
+      <label class="np-label" for="topic">Topic</label>
+      <select id="topic" name="topic" class="np-select">
+        <option>Correction / rate update</option>
+        <option>Bug report</option>
+        <option>Calculator request</option>
+        <option>Affiliate partnership</option>
+        <option>Other</option>
+      </select>
+    </div>
+    <div>
+      <label class="np-label" for="message">Message</label>
+      <textarea id="message" name="message" rows="6" class="np-input" required></textarea>
+    </div>
+    <button type="submit" class="np-btn np-btn-primary w-full">Send message</button>
+    <p class="text-xs text-slate-500">This form opens your email client. We don't store anything server-side.</p>
+  </form>
+</main>
+<div id="np-footer"></div>
+<script src="assets/js/uk-rates.js"></script>
+<script src="assets/js/format.js"></script>
+<script src="assets/js/common.js"></script>
+<script>
+function sendMail(f) {
+  const to = 'hello@crofthughdigital.co.uk';
+  const subject = encodeURIComponent('[' + f.topic.value + '] from ' + f.name.value);
+  const body = encodeURIComponent(f.message.value + '\n\n— ' + f.name.value + ' (' + f.email.value + ')');
+  window.location.href = 'mailto:' + to + '?subject=' + subject + '&body=' + body;
+}
+</script>
+</body>
+</html>

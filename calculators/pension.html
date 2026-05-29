@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="view-transition" content="same-origin">
+<title>UK Pension &amp; Retirement Calculator – NestPayCalc</title>
+<meta name="description" content="Free UK pension calculator. Forecast your pension pot, retirement income, State Pension and 4% drawdown rule.">
+<link rel="canonical" href="https://nestpaycalc.com/calculators/pension.html">
+<meta name="theme-color" content="#003087">
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="manifest" href="../site.webmanifest">
+<meta property="og:image" content="https://nestpaycalc.com/assets/og/site.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://nestpaycalc.com/calculators/pension.html">
+<meta name="twitter:image" content="https://nestpaycalc.com/assets/og/site.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+
+<link rel="stylesheet" href="../assets/css/styles.css">
+<script type="application/ld+json" data-np-ld="breadcrumb">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://nestpaycalc.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Calculators",
+      "item": "https://nestpaycalc.com/#calculators"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Pension Calculator",
+      "item": "https://nestpaycalc.com/calculators/pension.html"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json" data-np-ld="webapp">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "UK Pension & Retirement Calculator",
+  "description": "Forecast your UK pension pot, retirement income, State Pension and drawdown vs annuity options.",
+  "keywords": "pension calculator, retirement, SIPP, UK, State Pension",
+  "url": "https://nestpaycalc.com/calculators/pension.html",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Any",
+  "browserRequirements": "Requires JavaScript. Requires HTML5.",
+  "inLanguage": "en-GB",
+  "isAccessibleForFree": true,
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "GBP"
+  },
+  "publisher": {
+    "@id": "https://nestpaycalc.com#organization"
+  },
+  "image": "https://nestpaycalc.com/assets/og/site.png"
+}
+</script>
+</head>
+<body class="font-sans">
+<a href="#main" class="np-skip-link">Skip to content</a>
+<div id="np-top-banner-slot"></div>
+<div id="np-header"></div>
+
+<main id="main" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12" x-data="pensionApp()" x-init="init()">
+  <nav class="text-sm text-slate-500 mb-4"><a href="../index.html" class="hover:text-brand">Home</a> / <span>Pension</span></nav>
+  <header class="mb-8">
+    <h1 class="text-3xl sm:text-4xl font-extrabold">UK Pension &amp; Retirement Calculator</h1>
+    <p class="mt-2 text-slate-600 dark:text-slate-300 max-w-3xl">Forecast your retirement pot, see how the State Pension and your private pension combine, and compare drawdown vs annuity options.</p>
+  </header>
+
+  <div class="grid lg:grid-cols-5 gap-6">
+    <section class="lg:col-span-2 space-y-5 np-no-print">
+      <div x-show="isExample" x-cloak class="np-example-banner">
+        <svg class="np-example-banner-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+        <span class="np-example-banner-text"><strong>Showing example figures.</strong> Edit any field with your own.</span>
+      </div>
+      <div class="np-card p-5 sm:p-6">
+        <h2 class="font-semibold text-lg mb-4">About you</h2>
+        <div class="space-y-4">
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="np-label" for="age">Current age</label>
+              <input id="age" type="number" min="16" max="80" class="np-input" x-model.number="inp.currentAge" @input="calc()">
+            </div>
+            <div>
+              <label class="np-label" for="retire">Retirement age</label>
+              <input id="retire" type="number" min="50" max="80" class="np-input" x-model.number="inp.retireAge" @input="calc()">
+            </div>
+          </div>
+          <div>
+            <label class="np-label" for="salary">Current annual salary</label>
+            <div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500">£</span>
+              <input id="salary" type="number" min="0" step="500" class="np-input pl-7" x-model.number="inp.salary" @input="updateContribs()"></div>
+          </div>
+          <div>
+            <label class="np-label" for="pot">Current pension pot</label>
+            <div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500">£</span>
+              <input id="pot" type="number" min="0" step="500" class="np-input pl-7" x-model.number="inp.currentPot" @input="calc()"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="np-card p-5 sm:p-6">
+        <h2 class="font-semibold text-lg mb-4">Contributions</h2>
+        <div class="space-y-4">
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="np-label">You (% of salary)</label>
+              <div class="relative"><input type="number" min="0" max="100" step="0.5" class="np-input pr-8" x-model.number="inp.employeePct" @input="updateContribs()"><span class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500">%</span></div>
+            </div>
+            <div>
+              <label class="np-label">Employer (% of salary)</label>
+              <div class="relative"><input type="number" min="0" max="100" step="0.5" class="np-input pr-8" x-model.number="inp.employerPct" @input="updateContribs()"><span class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500">%</span></div>
+            </div>
+          </div>
+          <p class="text-xs text-slate-500 dark:text-slate-400">Total monthly contribution: <strong x-text="NPF.gbp(monthlyTotal)"></strong></p>
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="np-label">Investment growth</label>
+              <div class="relative"><input type="number" min="0" max="20" step="0.1" class="np-input pr-8" x-model.number="inp.growthPct" @input="calc()"><span class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500">%</span></div>
+            </div>
+            <div>
+              <label class="np-label">Salary growth</label>
+              <div class="relative"><input type="number" min="0" max="20" step="0.1" class="np-input pr-8" x-model.number="inp.salaryGrowthPct" @input="calc()"><span class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500">%</span></div>
+            </div>
+          </div>
+          <label class="flex items-center gap-2 text-sm"><input type="checkbox" x-model="inp.includeStatePension" @change="calc()"> Include full State Pension (<span x-text="NPF.gbp(UK_RATES.statePension.annualFull)"></span>/year)</label>
+        </div>
+      </div>
+
+      <div class="flex flex-wrap gap-2">
+        <button class="np-btn np-btn-primary" @click="save()">
+          <i data-lucide="bookmark" class="w-4 h-4"></i> Save
+        </button>
+        <button class="np-btn np-btn-ghost" @click="share()">
+          <i data-lucide="share-2" class="w-4 h-4"></i> Share
+        </button>
+        <button class="np-btn np-btn-ghost" @click="window.print()">
+          <i data-lucide="printer" class="w-4 h-4"></i> Print
+        </button>
+        <button class="np-btn np-btn-ghost" @click="loadUKAverages()">
+          <i data-lucide="bar-chart-3" class="w-4 h-4"></i> Try UK averages
+        </button>
+        <button class="np-btn np-btn-ghost" @click="reset()">
+          <i data-lucide="rotate-ccw" class="w-4 h-4"></i> Reset
+        </button>
+      </div>
+
+      <!-- ZONE: Sticky sidebar offer -->
+      <div x-html="stickyOfferHTML"></div>
+    </section>
+
+    <section class="lg:col-span-3 space-y-5">
+      <div class="np-card p-5 sm:p-6">
+        <h2 class="font-semibold text-lg mb-4">Your retirement forecast</h2>
+        <div class="grid grid-cols-2 gap-3 text-center">
+          <div class="p-4 rounded-lg bg-blue-50 dark:bg-blue-900/30">
+            <div class="text-xs text-slate-600 dark:text-slate-300">Pot at age <span x-text="inp.retireAge"></span></div>
+            <div class="text-2xl font-extrabold text-brand dark:text-blue-300" x-text="NPF.gbp(result.finalPot)"></div>
+          </div>
+          <div class="p-4 rounded-lg bg-blue-50 dark:bg-blue-900/30">
+            <div class="text-xs text-slate-600 dark:text-slate-300">Total monthly income</div>
+            <div class="text-2xl font-extrabold text-emerald-700 dark:text-emerald-300" x-text="NPF.gbp(income.totalMonthly)"></div>
+          </div>
+        </div>
+        <div class="mt-5 space-y-2 text-sm">
+          <div class="flex justify-between"><span>Drawdown @ 4% rule (annual)</span><strong x-text="NPF.gbp(income.drawdownAnnual)"></strong></div>
+          <div class="flex justify-between" x-show="inp.includeStatePension"><span>State Pension (annual)</span><strong x-text="NPF.gbp(income.statePensionAnnual)"></strong></div>
+          <div class="flex justify-between"><span>Annuity (level, ~5.5%)</span><strong x-text="NPF.gbp(annuity.annual)"></strong></div>
+          <div class="flex justify-between border-t border-slate-200 dark:border-slate-700 pt-2"><span>Total annual income (drawdown + State)</span><strong class="text-emerald-700 dark:text-emerald-300" x-text="NPF.gbp(income.totalAnnual)"></strong></div>
+        </div>
+
+        <!-- ZONE 1: Personalised post-result prompt -->
+        <div class="mt-4" x-html="resultPromptHTML"></div>
+      </div>
+
+      <div class="np-card p-5 sm:p-6">
+        <h3 class="font-semibold mb-3">Pot growth</h3>
+        <div class="h-64"><canvas id="pensionChart"></canvas></div>
+      </div>
+
+      <div class="np-card p-5 sm:p-6 overflow-x-auto">
+        <h3 class="font-semibold mb-3">Year-by-year</h3>
+        <table class="np-table">
+          <thead><tr><th>Year</th><th>Age</th><th>Contributions</th><th>Pot</th></tr></thead>
+          <tbody>
+            <template x-for="r in result.yearlyRows" :key="r.year">
+              <tr><td x-text="r.year"></td><td x-text="r.age"></td><td x-text="NPF.gbp(r.contributedThisYear)"></td><td><strong x-text="NPF.gbp(r.balance)"></strong></td></tr>
+            </template>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- ZONE 2: Comparison table -->
+      <div x-html="comparisonHTML"></div>
+
+      <!-- ZONE 3: Trust strip -->
+      <div x-html="trustHTML"></div>
+
+      <div id="np-disclaimer"></div>
+    </section>
+  </div>
+</main>
+<div id="np-footer"></div>
+
+<script src="../assets/js/uk-rates.js"></script>
+<script src="../assets/js/format.js"></script>
+<script src="../assets/js/share.js"></script>
+<script src="../assets/js/pension.js"></script>
+<script src="../assets/js/affiliates.js"></script>
+<script src="../assets/js/storage.js"></script>
+<script src="../assets/js/save-share.js"></script>
+<script src="../assets/js/common.js"></script>
+<script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+<script>
+function pensionApp() {
+  // UK averages: median age, State Pension age (67 for those retiring after 2028),
+  // ONS median earnings, ABI average UK pension pot at age 35 (~£25k),
+  // auto-enrol minimum 5%/3%, long-run real equity return ~5.5%.
+  const UK_AVERAGES = { currentAge: 35, retireAge: 67, salary: 37430, currentPot: 25000, employeePct: 5, employerPct: 3, growthPct: 5.5, salaryGrowthPct: 2.5, includeStatePension: true,
+                        monthlyContribEmployee: 0, monthlyContribEmployer: 0 };
+  return {
+    inp: { ...UK_AVERAGES },
+    UK_AVERAGES,
+    isExample: true,
+    result: { finalPot: 0, yearlyRows: [] },
+    income: { drawdownAnnual:0, drawdownMonthly:0, statePensionAnnual:0, statePensionMonthly:0, totalAnnual:0, totalMonthly:0 },
+    annuity: { annual: 0, monthly: 0 },
+    chart: null,
+    resultPromptHTML: '', comparisonHTML: '', stickyOfferHTML: '', trustHTML: '',
+    UK_RATES: window.UK_RATES,
+    get monthlyTotal() { return this.inp.monthlyContribEmployee + this.inp.monthlyContribEmployer; },
+
+    init() {
+      const s = window.NPShare.readState(['ca','ra','sal','pot','ep','erp','g','sg','sp']);
+      const hasParams = Object.keys(s).length > 0;
+      if (s.ca) this.inp.currentAge = +s.ca;
+      if (s.ra) this.inp.retireAge = +s.ra;
+      if (s.sal) this.inp.salary = +s.sal;
+      if (s.pot) this.inp.currentPot = +s.pot;
+      if (s.ep) this.inp.employeePct = +s.ep;
+      if (s.erp) this.inp.employerPct = +s.erp;
+      if (s.g) this.inp.growthPct = +s.g;
+      if (s.sg) this.inp.salaryGrowthPct = +s.sg;
+      if (s.sp) this.inp.includeStatePension = s.sp === '1';
+      this.isExample = !hasParams;
+      this.updateContribs();
+      this.$watch('inp', () => { this.isExample = false; });
+    },
+
+    loadUKAverages() {
+      this.inp = { ...this.UK_AVERAGES };
+      this.updateContribs();
+      this.$nextTick(() => { this.isExample = true; });
+    },
+
+    updateContribs() {
+      this.inp.monthlyContribEmployee = (this.inp.salary * this.inp.employeePct / 100) / 12;
+      this.inp.monthlyContribEmployer = (this.inp.salary * this.inp.employerPct / 100) / 12;
+      this.calc();
+    },
+
+    calc() {
+      this.result = window.NPPension.projectPot(this.inp);
+      this.income = window.NPPension.retirementIncome({ pot: this.result.finalPot, includeStatePension: this.inp.includeStatePension });
+      this.annuity = window.NPPension.annuityIncome(this.result.finalPot);
+      this.renderAffiliates();
+      this.$nextTick(() => this.draw());
+    },
+
+    renderAffiliates() {
+      const A = window.NPAffiliates; if (!A) return;
+      const yearsLeft = this.inp.retireAge - this.inp.currentAge;
+      const lowContribs = (this.inp.employeePct || 0) < 8;
+      const shortfall = this.income.totalAnnual < this.inp.salary * 0.6;
+
+      let prompt;
+      if (shortfall && yearsLeft > 10) {
+        prompt = {
+          icon: '⚠️',
+          title: `Your projected income (${window.NPF.gbp(this.income.totalAnnual)}/yr) is below 60% of today's salary.`,
+          sub: 'A SIPP top-up earns 20-40% tax relief — every £80 becomes £100',
+          cta: 'Compare SIPPs',
+          href: '../deals.html#sipp'
+        };
+      } else if (lowContribs) {
+        prompt = {
+          icon: '📈',
+          title: `At ${this.inp.employeePct}% you may be missing free money. Many employers match more.`,
+          sub: 'A self-invested pension lets you boost beyond the workplace minimum',
+          cta: 'See SIPPs',
+          href: '../deals.html#sipp'
+        };
+      } else {
+        prompt = {
+          icon: '💷',
+          title: `Pot at ${this.inp.retireAge}: ${window.NPF.gbp(this.result.finalPot)}. Are platform fees eating into it?`,
+          sub: 'Top UK SIPPs charge 0-0.25% — fees compound just like growth',
+          cta: 'Compare SIPP fees',
+          href: '../deals.html#sipp'
+        };
+      }
+      this.resultPromptHTML = A.renderResultPrompt(prompt);
+      this.comparisonHTML = A.renderComparisonTable({
+        category: 'sipp',
+        title: 'Top low-fee UK SIPPs',
+        subtitle: 'Tax relief auto-applied · widest investment choice',
+        limit: 3
+      });
+      this.stickyOfferHTML = A.renderStickyOffer({
+        category: 'sipp',
+        eyebrow: 'SIPP · Featured',
+        headline: 'Self-invested pensions from £5/mo',
+        body: 'Boost retirement savings with up to 40% tax relief.',
+        cta: 'Compare'
+      });
+      this.trustHTML = A.renderTrustStrip();
+    },
+
+    async draw() {
+      await window.NPLoad.chart();
+      const el = document.getElementById('pensionChart'); if (!el) return;
+      const labels = this.result.yearlyRows.map(r => 'Age ' + r.age);
+      const balances = this.result.yearlyRows.map(r => r.balance);
+      const data = { labels, datasets: [{ label: 'Pot', data: balances, borderColor: '#003087', backgroundColor: 'rgba(0,135,90,0.15)', fill: true, tension: 0.3, pointRadius: 0 }] };
+      if (this.chart) { this.chart.data = data; this.chart.update('none'); }
+      else this.chart = new Chart(el, { type: 'line', data, options: { responsive:true, maintainAspectRatio:false, plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => window.NPF.gbp(c.parsed.y) } } }, scales: { y: { ticks: { callback: v => window.NPF.gbp(v) } } } } });
+    },
+
+    getSnapshot() {
+      const r = this.result;
+      return {
+        type: 'pension',
+        inputs: { ...this.inp },
+        shareParams: {
+          ca: this.inp.currentAge, ra: this.inp.retireAge, sal: this.inp.salary,
+          pot: this.inp.currentPot, ep: this.inp.employeePct, erp: this.inp.employerPct,
+          g: this.inp.growthPct, sg: this.inp.salaryGrowthPct,
+          sp: this.inp.includeStatePension ? 1 : 0
+        },
+        summary: {
+          calcLabel: 'Pension Calculator',
+          icon: 'circle-dollar-sign',
+          headline: window.NPF.gbp(r.finalPot),
+          headlineLabel: 'Pot at age ' + this.inp.retireAge,
+          secondary: window.NPF.gbp(this.income.totalAnnual),
+          secondaryLabel: 'Total annual income',
+          meta: this.inp.employeePct + '% / ' + this.inp.employerPct + '% contribs · ' + this.inp.growthPct + '% growth',
+          rows: [
+            { label: 'Drawdown @ 4%',   value: window.NPF.gbp(this.income.drawdownAnnual) },
+            { label: 'State Pension',   value: window.NPF.gbp(this.income.statePensionAnnual) },
+            { label: 'Annuity (level)', value: window.NPF.gbp(this.annuity.annual) }
+          ]
+        }
+      };
+    },
+
+    save()  { window.NPSaveShare.openSave(this.getSnapshot()); },
+    share() { window.NPSaveShare.openShare(this.getSnapshot()); },
+    reset() { this.inp = { ...this.UK_AVERAGES }; this.updateContribs(); this.$nextTick(() => { this.isExample = true; }); }
+  };
+}
+</script>
+</body>
+</html>

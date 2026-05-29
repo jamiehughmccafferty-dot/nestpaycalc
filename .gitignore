@@ -1,0 +1,21 @@
+# Dependencies
+node_modules/
+
+# Build artefacts are checked in (so the site works without `npm install`),
+# but you can uncomment to exclude them if you'd rather Vercel rebuild on each deploy:
+# assets/css/styles.css
+
+# Vercel + IDE noise
+.vercel/
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.log
+
+# Local test files
+_test-*.js
+
+# Generated OG image — uncomment if you'd rather not commit binary assets:
+# assets/og/site.png

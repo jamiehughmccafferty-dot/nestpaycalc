@@ -1,0 +1,18 @@
+# NestPayCalc — robots.txt
+# Free UK financial calculators. All public pages are indexable.
+
+User-agent: *
+Allow: /
+
+# Don't index the user's local "Saved" page or 404 — they're user-specific / negative SERP candidates.
+Disallow: /saved.html
+Disallow: /404.html
+
+# Block obvious noise
+Disallow: /node_modules/
+Disallow: /assets/css/styles.src.css
+
+# Be respectful to the polite crawlers
+Crawl-delay: 1
+
+Sitemap: https://nestpaycalc.com/sitemap.xml
