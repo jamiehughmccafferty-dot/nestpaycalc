@@ -14,108 +14,155 @@
  * Always include rel="nofollow sponsored" on outbound links.
  * ============================================================ */
 (function () {
+  /* ============================================================
+   * OFFER REGISTRY — currently PLACEHOLDER DATA only.
+   *
+   * Every entry below is a generic, non-branded slot reserved for a
+   * real affiliate partner. Rates are market-illustrative (top of the
+   * current UK market for the product category) — NOT specific to any
+   * provider, so there's no ASA / brand-impersonation risk.
+   *
+   * ── How to swap in a real partner ──────────────────────────────
+   *   When an affiliate sign-up is approved, replace these fields:
+   *
+   *     provider:   "Provider's real public name"
+   *     short:      "BR"          (2–4 char abbreviation for the logo block)
+   *     logoColor:  "#xxxxxx"     (their brand colour, or keep brand)
+   *     rate:       "x.xx%"       (verified from their landing page)
+   *     features:   [ "…", "…" ]  (3 highlights — check spec)
+   *     url:        "https://partner.com/?...&utm_source=nestpaycalc"
+   *
+   *   Leave `product` and `meta` mostly untouched — they describe the
+   *   product type, not the partner.
+   *
+   *   Once swapped, remove `placeholder: true` so QA / future audits
+   *   know it's live.
+   * ============================================================ */
   const OFFERS = {
     /* ---------- Cash ISAs ---------- */
     'isa-easy-access-1': {
-      provider: 'Trading 212', short: 'T212',
-      logoColor: '#000000',
+      provider: 'Top easy-access Cash ISA',
+      short: 'ISA',
+      logoColor: '#003087',
       product: 'Cash ISA', meta: 'Easy access · FSCS protected',
-      rate: '4.85%', rateLabel: 'AER variable',
-      features: ['No min deposit', 'Instant withdrawals', 'Daily interest'],
-      url: 'https://www.trading212.com/?utm_source=nestpaycalc'
+      rate: 'Up to 4.85%', rateLabel: 'AER variable',
+      features: ['No minimum deposit', 'Withdraw any time', 'Daily interest'],
+      url: '/deals#isa',
+      placeholder: true
     },
     'isa-easy-access-2': {
-      provider: 'Chip', short: 'CHIP',
-      logoColor: '#9b6cff',
+      provider: 'Mobile-first Cash ISA',
+      short: 'ISA',
+      logoColor: '#0a4dc7',
       product: 'Cash ISA', meta: 'Easy access · FSCS protected',
-      rate: '4.74%', rateLabel: 'AER variable',
-      features: ['£1 minimum', 'Mobile-first', 'Apple/Google Pay'],
-      url: 'https://getchip.uk/?utm_source=nestpaycalc'
+      rate: 'Up to 4.70%', rateLabel: 'AER variable',
+      features: ['Low minimum', 'In-app management', 'Apple / Google Pay'],
+      url: '/deals#isa',
+      placeholder: true
     },
     'isa-fixed-1y': {
-      provider: 'Hampshire Trust Bank', short: 'HTB',
-      logoColor: '#0d4d8c',
+      provider: '1-year fixed Cash ISA',
+      short: 'ISA',
+      logoColor: '#001f5e',
       product: 'Cash ISA', meta: '1-year fixed · FSCS protected',
-      rate: '5.00%', rateLabel: 'AER fixed',
-      features: ['£1,000 min', 'No early access', 'Transfer in allowed'],
-      url: '#'
+      rate: 'Up to 5.00%', rateLabel: 'AER fixed',
+      features: ['£1,000 minimum', 'Lock in higher rate', 'Transfer in allowed'],
+      url: '/deals#isa',
+      placeholder: true
     },
 
     /* ---------- LISA ---------- */
     'lisa-1': {
-      provider: 'Moneybox', short: 'MB',
-      logoColor: '#0066ff',
+      provider: 'Lifetime ISA partner',
+      short: 'LISA',
+      logoColor: '#00875a',
       product: 'Lifetime ISA', meta: 'Cash + Stocks options',
-      rate: '4.40%', rateLabel: 'AER · plus 25% govt bonus',
-      features: ['£1 minimum', 'First home or 60+', 'In-app management'],
-      url: '#'
+      rate: 'Up to 4.40%', rateLabel: 'AER · plus 25% govt bonus',
+      features: ['£1 minimum to start', 'First home or 60+', 'Govt £1,000/yr bonus'],
+      url: '/deals#isa',
+      placeholder: true
     },
 
     /* ---------- SIPPs / Pensions ---------- */
     'sipp-1': {
-      provider: 'InvestEngine', short: 'IE',
-      logoColor: '#1f2937',
-      product: 'SIPP', meta: '0% platform fee on DIY ETFs',
-      rate: '0.00%', rateLabel: 'platform fee',
-      features: ['600+ ETFs', 'No dealing fees', 'Tax relief automatic'],
-      url: '#'
+      provider: 'Low-fee SIPP partner',
+      short: 'SIPP',
+      logoColor: '#003087',
+      product: 'SIPP', meta: 'DIY ETF investing',
+      rate: 'From 0.00%', rateLabel: 'platform fee',
+      features: ['Wide ETF choice', 'No dealing fees on regular investing', 'Tax relief automatic'],
+      url: '/deals#sipp',
+      placeholder: true
     },
     'sipp-2': {
-      provider: 'AJ Bell', short: 'AJB',
-      logoColor: '#003087',
+      provider: 'Established SIPP platform',
+      short: 'SIPP',
+      logoColor: '#0a4dc7',
       product: 'SIPP', meta: 'Established UK platform',
-      rate: '0.25%', rateLabel: 'platform fee',
-      features: ['£25 minimum', 'Wide fund choice', 'Drawdown ready'],
-      url: '#'
+      rate: 'From 0.25%', rateLabel: 'platform fee',
+      features: ['Low minimum', 'Wide fund choice', 'Drawdown-ready'],
+      url: '/deals#sipp',
+      placeholder: true
     },
     'sipp-3': {
-      provider: 'Vanguard', short: 'VG',
-      logoColor: '#a8201f',
+      provider: 'Index-tracker SIPP',
+      short: 'SIPP',
+      logoColor: '#001f5e',
       product: 'SIPP', meta: 'Index-tracker specialist',
-      rate: '0.15%', rateLabel: 'platform fee · capped',
-      features: ['Low ongoing charges', 'LifeStrategy funds', 'No exit fee'],
-      url: '#'
+      rate: 'From 0.15%', rateLabel: 'platform fee · capped',
+      features: ['Low ongoing charges', 'Multi-asset funds available', 'No exit fee'],
+      url: '/deals#sipp',
+      placeholder: true
     },
 
     /* ---------- Mortgages ---------- */
     'mortgage-broker-1': {
-      provider: 'L&C Mortgages', short: 'L&C',
-      logoColor: '#e30613',
-      product: 'Whole-of-market broker', meta: 'Free advice · FCA regulated',
+      provider: 'Whole-of-market broker',
+      short: 'MOR',
+      logoColor: '#003087',
+      product: 'Mortgage broker', meta: 'Free advice · FCA regulated',
       rate: 'Free', rateLabel: 'no broker fee',
-      features: ['Whole-of-market', 'Online or phone', 'Up to 6 months ahead'],
-      url: '#'
+      features: ['Whole-of-market access', 'Online or phone', 'Up to 6 months ahead'],
+      url: '/deals#mortgage',
+      placeholder: true
     },
     'mortgage-broker-2': {
-      provider: 'Habito', short: 'H',
-      logoColor: '#ff5b5b',
-      product: 'Online broker', meta: 'Digital-first · 90+ lenders',
+      provider: 'Online mortgage broker',
+      short: 'MOR',
+      logoColor: '#0a4dc7',
+      product: 'Mortgage broker', meta: 'Digital-first · multiple lenders',
       rate: 'Free', rateLabel: 'broker fees may apply',
-      features: ['Quick decision', 'Buy-to-let too', 'Track via app'],
-      url: '#'
+      features: ['Quick decision', 'Buy-to-let supported', 'Track via app'],
+      url: '/deals#mortgage',
+      placeholder: true
     },
 
     /* ---------- 0% balance transfer ---------- */
     'bt-card-1': {
-      provider: 'Barclaycard', short: 'BC',
-      logoColor: '#00aeef',
-      product: 'Platinum 0% BT', meta: 'Up to 30 months 0% interest',
+      provider: '0% balance transfer card',
+      short: 'BT',
+      logoColor: '#003087',
+      product: 'Credit card', meta: 'Up to 30 months 0% on transfers',
       rate: '30 mo', rateLabel: '0% balance transfer',
-      features: ['3.45% transfer fee', 'No annual fee', 'Eligibility check'],
-      url: '#'
+      features: ['Up to 30 months 0%', 'Transfer fee applies', 'Eligibility checker'],
+      url: '/deals#cards',
+      placeholder: true
     },
     'bt-card-2': {
-      provider: 'Tesco Bank', short: 'TB',
-      logoColor: '#005eb8',
-      product: 'Clubcard Plus BT', meta: 'Up to 28 months 0%',
+      provider: 'Long 0% BT card',
+      short: 'BT',
+      logoColor: '#001f5e',
+      product: 'Credit card', meta: 'Long 0% interest period',
       rate: '28 mo', rateLabel: '0% balance transfer',
-      features: ['2.99% transfer fee', 'Earns Clubcard points', 'Soft search'],
-      url: '#'
+      features: ['Up to 28 months 0%', 'Lower transfer fee option', 'Soft search'],
+      url: '/deals#cards',
+      placeholder: true
     },
 
-    /* ---------- Free debt advice (not affiliate, ethical signal) ---------- */
+    /* ---------- Free debt advice (charity, not affiliate — keep visible) ---------- */
     'stepchange': {
-      provider: 'StepChange', short: 'SC',
+      provider: 'StepChange',
+      short: 'SC',
       logoColor: '#e87722',
       product: 'Free debt charity', meta: 'FCA-regulated · always free',
       rate: 'Free', rateLabel: 'always',
@@ -185,7 +232,7 @@
         </header>
         ${rows}
         <footer class="np-compare-footer">
-          Featured partners. Rates correct at last update — verify on the provider's site. NestPayCalc may earn a commission. This is not regulated financial advice.
+          Illustrative top-of-market rates for the product category. Always verify on the provider's own site before applying. Partner links may earn NestPayCalc a commission. Not regulated financial advice.
         </footer>
       </section>`;
   }
