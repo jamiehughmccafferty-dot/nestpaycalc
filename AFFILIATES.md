@@ -12,7 +12,7 @@ Running log of networks the site is registered with. Update each row as approval
 |---|---|---|---|---|
 | **FlexOffers** | Pending approval | 2026-05-31 | ✅ meta `fo-verify` on homepage | Big US-headquartered network. Manual approval, usually 1–3 days. |
 | **Awin** | Pending approval | 2026-05-31 | (verify on approval — usually DNS TXT or Mastertag JS snippet) | Strong UK fintech roster (Barclaycard, Skipton, Habito, Plum, etc.). After approval expect a request to embed the **Awin Mastertag** — a one-line JS snippet for conversion tracking. |
-| _Impact_ | _not yet_ | — | — | Premium platforms (Wise, Trading 212 often here). |
+| **Impact.com** | Pending approval | 2026-05-31 | ✅ meta `impact-site-verification` on homepage | Hosts Trading 212, Wise, Plum, eToro. Stricter review (3–7 days) but unlocks the most relevant UK retail-investing partners. |
 | _Tradedoubler_ | _not yet_ | — | — | UK-focused, decent for ISA / banking advertisers. |
 | _Direct programs_ | _not yet_ | — | — | Some big UK fintechs (Moneybox, Plum, Chase) run direct affiliate programs — best rates if approved. |
 
