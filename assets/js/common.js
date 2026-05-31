@@ -41,11 +41,20 @@
 <header data-vt="header" class="np-no-print sticky top-0 z-40 bg-surface/85 backdrop-blur-md border-b border-border">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="header-inner flex items-center justify-between">
-      <a href="${ROOT}index.html" class="flex items-center gap-2 font-bold text-lg text-brand tracking-tight">
-        <svg width="28" height="28" viewBox="0 0 32 32" fill="none" aria-hidden="true">
-          <path d="M4 22c0-6 5.5-10 12-10s12 4 12 10v2H4v-2z" fill="currentColor"/>
-          <path d="M4 22c0-6 5.5-10 12-10s12 4 12 10" stroke="rgb(var(--accent))" stroke-width="2" fill="none"/>
-          <text x="16" y="21" text-anchor="middle" font-size="11" font-weight="700" fill="#fff">£</text>
+      <a href="${ROOT}index.html" class="flex items-center gap-2.5 font-bold text-lg text-brand tracking-tight">
+        <svg width="30" height="30" viewBox="0 0 32 32" fill="none" aria-hidden="true" class="shrink-0">
+          <defs>
+            <linearGradient id="np-logo-grad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="currentColor"/>
+              <stop offset="100%" stop-color="rgb(var(--brand-strong))"/>
+            </linearGradient>
+          </defs>
+          <!-- Nest bowl -->
+          <path d="M3 23c0-6.5 5.8-11 13-11s13 4.5 13 11v1.5a1.5 1.5 0 0 1-1.5 1.5h-23A1.5 1.5 0 0 1 3 24.5V23z" fill="url(#np-logo-grad)"/>
+          <!-- Accent leaf rim -->
+          <path d="M3 23c0-6.5 5.8-11 13-11s13 4.5 13 11" stroke="rgb(var(--accent))" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+          <!-- £ glyph -->
+          <text x="16" y="22.3" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="10.5" font-weight="800" fill="#fff">£</text>
         </svg>
         NestPayCalc
       </a>
@@ -161,6 +170,8 @@
     function toggle() {
       const isDark = document.documentElement.classList.toggle('dark');
       localStorage.setItem('np-theme', isDark ? 'dark' : 'light');
+      // Broadcast so chart-bearing pages can re-theme without us hunting them down.
+      window.dispatchEvent(new CustomEvent('np:themechange', { detail: { isDark } }));
     }
     document.getElementById('np-darkmode')?.addEventListener('click', toggle);
     document.getElementById('np-darkmode-mobile')?.addEventListener('click', toggle);

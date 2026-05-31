@@ -252,13 +252,21 @@
 
   /* Inline £ / % adornments are positioned outside the input via wrappers; nothing to do here */
 
-  /* ===== Range slider — refined thumb + track ===== */
+  /* ===== Range slider — refined thumb + live brand-fill track ===== */
   .np-slider {
     -webkit-appearance: none; appearance: none;
     width: 100%; height: 6px; border-radius: 3px;
-    background: linear-gradient(90deg, rgb(var(--brand) / 0.5) 0%, rgb(var(--border)) 0%);
+    /* --fill is set by motion.js whenever the slider is changed, from 0% to 100% */
+    background: linear-gradient(
+      to right,
+      rgb(var(--brand))      0%,
+      rgb(var(--brand))      var(--fill, 0%),
+      rgb(var(--border))     var(--fill, 0%),
+      rgb(var(--border))     100%
+    );
     outline: none;
     cursor: pointer;
+    transition: background-color .15s var(--ease-out);
   }
   .np-slider::-webkit-slider-thumb {
     -webkit-appearance: none; appearance: none;
@@ -740,6 +748,49 @@
   .prose-np table thead { background: rgb(var(--surface-3)); }
   .prose-np table thead th { padding: .75rem .9rem; font-weight: 600; }
   .prose-np table tbody td { padding: .65rem .9rem; }
+
+  /* ============================================================
+   * READING PROGRESS BAR + STICKY TOC (used on article pages)
+   * ============================================================ */
+  .np-reading-progress {
+    position: fixed; top: 0; left: 0; right: 0;
+    height: 3px; z-index: 60;
+    background: transparent;
+    pointer-events: none;
+  }
+  .np-reading-progress::after {
+    content: '';
+    display: block; height: 100%;
+    width: var(--progress, 0%);
+    background: linear-gradient(90deg, rgb(var(--brand)), rgb(var(--accent)));
+    transition: width 60ms linear;
+  }
+
+  .np-toc {
+    position: sticky; top: 6rem;
+    padding: 1.1rem 1.25rem;
+    border-left: 1px solid rgb(var(--border));
+    font-size: .85rem;
+  }
+  .np-toc-title {
+    font-size: .7rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: .08em; color: rgb(var(--ink-muted));
+    margin-bottom: .9rem;
+  }
+  .np-toc-list { display: flex; flex-direction: column; gap: .45rem; }
+  .np-toc-link {
+    display: block; padding: .25rem .6rem; margin-left: -.6rem;
+    color: rgb(var(--ink-soft));
+    border-radius: 6px;
+    line-height: 1.4;
+    transition: color .15s var(--ease-out), background .15s var(--ease-out);
+  }
+  .np-toc-link:hover { color: rgb(var(--ink)); background: rgb(var(--surface-3)); }
+  .np-toc-link[data-active="true"] {
+    color: rgb(var(--brand));
+    font-weight: 600;
+    background: rgb(var(--brand) / 0.05);
+  }
 
   /* Skeleton shimmer — for any loading state. Drop on a div with width/height set. */
   .np-skeleton {

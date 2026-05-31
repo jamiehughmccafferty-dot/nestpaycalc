@@ -164,12 +164,175 @@
     }, { passive: true, capture: true });
   }
 
-  /* ---------- 5. Boot ---------- */
+  /* ---------- 5. Tween-on-change number directive ----------
+     `x-num.gbp="result.takeHome"`  → animates between values with NPF.gbp().
+     Modifiers: .gbp .gbp2 .pct .num   (fallback: rounded integer) */
+  function registerNumDirective() {
+    if (!window.Alpine) return;
+    if (window.Alpine.__numRegistered) return;
+    window.Alpine.__numRegistered = true;
+    window.Alpine.directive('num', (el, { expression, modifiers }, { evaluateLater, effect }) => {
+      const NPF = window.NPF || {};
+      let fmt = (n) => String(Math.round(n));
+      if (modifiers.includes('gbp'))  fmt = (n) => NPF.gbp(n);
+      if (modifiers.includes('gbp2')) fmt = (n) => NPF.gbp2(n);
+      if (modifiers.includes('pct'))  fmt = (n) => NPF.pct(n, 1);
+      if (modifiers.includes('num'))  fmt = (n) => NPF.num(n, 0);
+
+      const duration = prefersReduced ? 0 : 360;
+      const ease = (t) => 1 - Math.pow(1 - t, 3);
+      let raf = null;
+      let currentVal = 0;
+      let firstRun = true;
+
+      const getValue = evaluateLater(expression);
+
+      effect(() => {
+        getValue(target => {
+          target = +target;
+          if (!Number.isFinite(target)) return;
+          if (firstRun || duration === 0) {
+            currentVal = target;
+            el.textContent = fmt(target);
+            firstRun = false;
+            return;
+          }
+          if (raf) cancelAnimationFrame(raf);
+          const startTime = performance.now();
+          const startVal = currentVal;
+          const tick = (now) => {
+            const t = Math.min(1, (now - startTime) / duration);
+            currentVal = startVal + (target - startVal) * ease(t);
+            el.textContent = fmt(currentVal);
+            if (t < 1) raf = requestAnimationFrame(tick);
+            else { currentVal = target; el.textContent = fmt(target); raf = null; }
+          };
+          raf = requestAnimationFrame(tick);
+        });
+      });
+    });
+  }
+
+  /* ---------- 6. Range slider live brand-fill ----------
+     Sets --fill: NN% on every range input on change/load. CSS does the rest. */
+  function updateSliderFill(slider) {
+    const min = +slider.min || 0;
+    const max = +slider.max || 100;
+    const val = +slider.value;
+    const pct = Math.max(0, Math.min(100, ((val - min) / (max - min)) * 100));
+    slider.style.setProperty('--fill', pct + '%');
+  }
+  function setupSliderFill() {
+    document.querySelectorAll('input[type="range"]').forEach(updateSliderFill);
+    document.addEventListener('input', (e) => {
+      if (e.target && e.target.tagName === 'INPUT' && e.target.type === 'range') {
+        updateSliderFill(e.target);
+      }
+    }, { passive: true });
+    // After Alpine renders, sliders bound via x-model may need a re-scan
+    document.addEventListener('alpine:initialized', () => {
+      requestAnimationFrame(() => document.querySelectorAll('input[type="range"]').forEach(updateSliderFill));
+    });
+  }
+
+  /* ---------- 7. Theme-aware chart colours ----------
+     getChartColors() returns a palette that adapts to dark / light mode.
+     Calc pages call this when creating their chart's dataset colors,
+     and listen for `np:themechange` to redraw with fresh colours. */
+  function getChartColors() {
+    const isDark = document.documentElement.classList.contains('dark');
+    return {
+      isDark,
+      brand:    isDark ? '#60a5fa' : '#003087',
+      brandFill:isDark ? 'rgba(96,165,250,0.18)' : 'rgba(0,48,135,0.08)',
+      accent:   isDark ? '#34d399' : '#00875a',
+      accentFill: isDark ? 'rgba(52,211,153,0.18)' : 'rgba(0,135,90,0.10)',
+      rose:     isDark ? '#fb7185' : '#dc2626',
+      amber:    isDark ? '#fbbf24' : '#f59e0b',
+      violet:   isDark ? '#c4b5fd' : '#7c3aed',
+      sky:      isDark ? '#7dd3fc' : '#0ea5e9',
+      ink:      isDark ? 'rgba(232,236,245,0.85)' : 'rgba(11,18,38,0.85)',
+      grid:     isDark ? 'rgba(255,255,255,0.06)' : 'rgba(15,23,42,0.06)'
+    };
+  }
+
+  /* ---------- 8. Reading progress bar + Table of Contents ---------- */
+  function setupReadingProgress() {
+    const article = document.querySelector('article');
+    if (!article) return;
+    if (document.getElementById('np-reading-progress')) return;
+
+    const bar = document.createElement('div');
+    bar.id = 'np-reading-progress';
+    bar.className = 'np-reading-progress np-no-print';
+    bar.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(bar);
+
+    let raf = null;
+    const update = () => {
+      const rect = article.getBoundingClientRect();
+      const top = rect.top + window.scrollY;
+      const total = article.offsetHeight - window.innerHeight;
+      const scrolled = Math.max(0, window.scrollY - top);
+      const pct = total > 0 ? Math.min(100, (scrolled / total) * 100) : 0;
+      bar.style.setProperty('--progress', pct + '%');
+      raf = null;
+    };
+    window.addEventListener('scroll', () => {
+      if (!raf) raf = requestAnimationFrame(update);
+    }, { passive: true });
+    update();
+  }
+
+  function setupTOC() {
+    const slot = document.getElementById('np-toc');
+    const article = document.querySelector('article');
+    if (!slot || !article) return;
+
+    const h2s = Array.from(article.querySelectorAll('h2'));
+    if (h2s.length < 3) { slot.remove(); return; }   // not worth a ToC
+
+    const slug = (s) => s.toLowerCase().replace(/[^\w\s-]/g, '').trim().replace(/\s+/g, '-').slice(0, 60);
+
+    const links = h2s.map(h2 => {
+      if (!h2.id) h2.id = slug(h2.textContent);
+      const a = document.createElement('a');
+      a.href = '#' + h2.id;
+      a.className = 'np-toc-link';
+      a.textContent = h2.textContent;
+      return { h2, a };
+    });
+
+    slot.innerHTML = '<div class="np-toc-title">On this page</div>';
+    const list = document.createElement('nav');
+    list.className = 'np-toc-list';
+    list.setAttribute('aria-label', 'Table of contents');
+    links.forEach(({ a }) => list.appendChild(a));
+    slot.appendChild(list);
+
+    // Active section highlight via IntersectionObserver
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          links.forEach(({ a }) => a.removeAttribute('data-active'));
+          const match = links.find(l => l.h2 === e.target);
+          if (match) match.a.setAttribute('data-active', 'true');
+        }
+      });
+    }, { rootMargin: '-30% 0px -60% 0px' });
+    links.forEach(({ h2 }) => io.observe(h2));
+  }
+
+  /* ---------- 9. Boot ---------- */
   function init() {
     setupReveal();
     watchForChart();
     setupPrefetch();
+    setupSliderFill();
+    setupReadingProgress();
+    setupTOC();
   }
+  document.addEventListener('alpine:init', registerNumDirective);
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
@@ -185,5 +348,5 @@
   });
 
   /* Public */
-  window.NPMotion = { setupReveal, applyChartTheme };
+  window.NPMotion = { setupReveal, applyChartTheme, getChartColors, updateSliderFill };
 })();

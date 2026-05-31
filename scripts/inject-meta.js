@@ -121,6 +121,20 @@ const FILES = [
     ogTitle: 'How UK income tax works in 2026/27 — plain-English guide',
     ogDescription: 'Bands, the personal allowance, the £100k tax trap, Scotland\'s six bands, NI, tax codes — with worked examples. Updated for 2026/27.',
     ogType: 'article'
+  },
+  {
+    file: 'blog/uk-stamp-duty-explained.html',
+    ogUrl: `${SITE}/blog/uk-stamp-duty-explained`,
+    ogTitle: 'UK stamp duty 2026/27 — SDLT, LBTT & LTT explained',
+    ogDescription: 'Plain-English guide to UK stamp duty for 2026/27 — bands for England/NI (SDLT), Scotland (LBTT) and Wales (LTT), first-time buyer relief, second-home surcharge, with a live calculator.',
+    ogType: 'article'
+  },
+  {
+    file: 'blog/cash-isa-vs-stocks-and-shares-isa.html',
+    ogUrl: `${SITE}/blog/cash-isa-vs-stocks-and-shares-isa`,
+    ogTitle: 'Cash ISA vs Stocks & Shares ISA in 2026/27 — which one?',
+    ogDescription: 'A clear comparison for UK savers — returns, risk, time horizons, splitting your £20,000 allowance, with a live side-by-side projection.',
+    ogType: 'article'
   }
 ];
 
