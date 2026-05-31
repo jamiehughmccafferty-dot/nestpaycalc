@@ -48,43 +48,77 @@
     </p>
   </header>
 
-  <!-- Featured article -->
-  <a href="how-uk-income-tax-works.html" class="np-card np-card-interactive np-card-accent p-6 sm:p-8 block group np-reveal mb-12">
-    <div class="grid sm:grid-cols-5 gap-6 items-center">
-      <div class="sm:col-span-3">
-        <div class="inline-flex items-center gap-2 text-xs font-semibold text-brand uppercase tracking-wider mb-3">
-          <i data-lucide="star" class="w-3.5 h-3.5"></i>
-          Featured · Salary &amp; Tax
-        </div>
-        <h2 class="text-2xl sm:text-3xl font-bold text-ink tracking-tight group-hover:text-brand transition-colors leading-snug">
-          How UK income tax works in 2026/27 — a plain-English guide
-        </h2>
-        <p class="mt-3 text-ink-soft leading-relaxed">
-          Bands, the personal allowance, the £100k tax trap, Scotland's six-band system, National Insurance, tax codes and how to legally pay less — everything in one place, with worked examples.
-        </p>
-        <div class="mt-4 flex items-center gap-3 text-xs text-ink-muted">
-          <span>8 min read</span>
-          <span class="w-1 h-1 rounded-full bg-ink-muted"></span>
-          <span>Updated 15 April 2026</span>
-        </div>
-        <span class="inline-flex items-center gap-1.5 mt-4 text-sm font-semibold text-brand">
-          Read article <i data-lucide="arrow-right" class="w-3.5 h-3.5 transition-transform group-hover:translate-x-1"></i>
-        </span>
-      </div>
-      <div class="sm:col-span-2 hidden sm:block">
-        <div class="aspect-[4/3] rounded-xl bg-gradient-to-br from-brand to-brand-strong flex items-center justify-center relative overflow-hidden">
-          <div class="absolute -top-10 -right-10 w-32 h-32 rounded-full bg-accent/30 blur-2xl"></div>
-          <div class="relative text-white text-center px-6">
-            <div class="font-mono text-xs opacity-70 mb-2">2026/27</div>
-            <div class="font-extrabold text-2xl">£12,570</div>
-            <div class="text-xs opacity-70 mt-1">Personal allowance</div>
-            <div class="mt-4 grid grid-cols-3 gap-1 text-[0.6rem]">
-              <span class="bg-white/10 rounded py-1">20%</span>
-              <span class="bg-white/10 rounded py-1">40%</span>
-              <span class="bg-white/10 rounded py-1">45%</span>
+  <!-- Featured article — full-bleed editorial card with data-graphic right panel -->
+  <a href="how-uk-income-tax-works.html" class="block group np-reveal mb-14 isolate">
+    <div class="relative overflow-hidden rounded-2xl border border-border bg-gradient-to-br from-surface to-surface-2 shadow-md hover:shadow-xl transition-shadow duration-300">
+
+      <!-- Right-side data graphic — hidden on mobile so headline gets full width -->
+      <div class="absolute inset-y-0 right-0 hidden md:block md:w-[45%] lg:w-[42%]">
+        <!-- Layered gradient + blobs for depth -->
+        <div class="absolute inset-0 bg-gradient-to-br from-brand via-brand-strong to-[#001434]"></div>
+        <div class="absolute -top-20 -right-20 w-72 h-72 rounded-full bg-accent/30 blur-3xl"></div>
+        <div class="absolute -bottom-32 -left-8 w-56 h-56 rounded-full bg-sky-400/20 blur-3xl"></div>
+        <!-- Dot-grid overlay — that "fintech app" texture -->
+        <div class="absolute inset-0 opacity-25" style="background-image: radial-gradient(circle, rgba(255,255,255,0.18) 1px, transparent 1px); background-size: 16px 16px;"></div>
+
+        <div class="relative h-full flex flex-col justify-between p-7 lg:p-8 text-white">
+          <!-- Top: live pulse + tax year pill -->
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <span class="relative flex w-2 h-2">
+                <span class="absolute inset-0 rounded-full bg-emerald-400 opacity-75 animate-ping"></span>
+                <span class="relative rounded-full w-2 h-2 bg-emerald-400"></span>
+              </span>
+              <span class="text-[0.65rem] font-semibold uppercase tracking-[0.12em] opacity-80">UK Income Tax</span>
+            </div>
+            <span class="text-[0.65rem] px-2.5 py-1 rounded-full bg-white/10 border border-white/15 font-mono">2026/27</span>
+          </div>
+
+          <!-- Centre: hero stat -->
+          <div>
+            <div class="text-[0.65rem] uppercase tracking-[0.12em] opacity-65 mb-2 font-semibold">Personal allowance</div>
+            <div class="font-extrabold text-4xl lg:text-5xl tabular tracking-tight leading-none">£12,570</div>
+            <div class="text-sm opacity-65 mt-2">tax-free per year</div>
+          </div>
+
+          <!-- Bottom: proportional tax bands -->
+          <div>
+            <div class="text-[0.6rem] uppercase tracking-[0.1em] opacity-60 font-semibold mb-2">Tax bands · England</div>
+            <div class="flex gap-[3px] rounded-full overflow-hidden h-2 mb-2 ring-1 ring-white/10">
+              <div class="bg-emerald-400/90" style="width: 10%"  title="Personal allowance — 0%"></div>
+              <div class="bg-sky-400/90"     style="width: 30%"  title="Basic rate — 20%"></div>
+              <div class="bg-amber-400/90"   style="width: 45%"  title="Higher rate — 40%"></div>
+              <div class="bg-rose-400/90"    style="width: 15%"  title="Additional rate — 45%"></div>
+            </div>
+            <div class="flex justify-between text-[0.6rem] opacity-75 font-mono tabular">
+              <span>0%</span><span>20%</span><span>40%</span><span>45%</span>
             </div>
           </div>
         </div>
+      </div>
+
+      <!-- Text content — reserves the right ~45% for the graphic on desktop -->
+      <div class="relative p-7 sm:p-9 md:pr-[48%] lg:pr-[46%] md:py-12">
+        <div class="inline-flex items-center gap-2 text-xs font-semibold text-brand uppercase tracking-wider mb-4">
+          <span class="inline-flex items-center justify-center w-5 h-5 rounded-md bg-brand/10">
+            <i data-lucide="star" class="w-3 h-3"></i>
+          </span>
+          Featured · Salary &amp; Tax
+        </div>
+        <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-ink tracking-tight group-hover:text-brand transition-colors leading-tight max-w-md">
+          How UK income tax works in 2026/27
+        </h2>
+        <p class="mt-4 text-ink-soft leading-relaxed max-w-md">
+          Bands, the personal allowance, the £100k tax trap, Scotland's six-band system, NI, tax codes and how to legally pay less — with worked examples for every salary level.
+        </p>
+        <div class="mt-5 flex items-center gap-3 text-xs text-ink-muted">
+          <span>8 min read</span>
+          <span class="w-1 h-1 rounded-full bg-ink-muted"></span>
+          <span>Updated April 2026</span>
+        </div>
+        <span class="inline-flex items-center gap-1.5 mt-5 text-sm font-semibold text-brand">
+          Read article <i data-lucide="arrow-right" class="w-3.5 h-3.5 transition-transform group-hover:translate-x-1"></i>
+        </span>
       </div>
     </div>
   </a>
