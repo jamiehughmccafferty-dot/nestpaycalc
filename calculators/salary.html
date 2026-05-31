@@ -79,6 +79,62 @@
   ]
 }
 </script>
+<script type="application/ld+json" data-np-ld="faq">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Why is my take-home pay lower than my colleague's on the same salary?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The most common reasons are: a different tax code (1257L is standard but K-codes, BR, D0 all change the calc), a Scottish vs rest-of-UK residency, pension scheme type (salary sacrifice cuts both income tax AND NI; relief-at-source only cuts tax via your provider's top-up), student loan plans, and benefit-in-kind values (company car, private medical) which add to your taxable income via PAYE."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the 60% tax trap and how does it work?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Between £100,000 and £125,140 your personal allowance tapers away at £1 for every £2 earned. That means every extra £1 of salary in that band is taxed at the 40% higher rate AND triggers an extra 40p of tax on previously-tax-free income, plus 2% NI above the upper earnings limit — an effective marginal rate of about 62%. Pension contributions or salary sacrifice are the main way to dodge it: reducing your taxable income back below £100,000 restores the personal allowance."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does Scottish income tax differ from the rest of the UK?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Scotland has six income tax bands (starter, basic, intermediate, higher, advanced, top) ranging from 19% to 48%, all set by the Scottish Government. The personal allowance (£12,570) and National Insurance rates are the same UK-wide because they are reserved to Westminster. So a Scottish higher-rate taxpayer pays more income tax than a rest-of-UK one on the same gross, but the same NI."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does salary sacrifice always save me money?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It saves income tax AND National Insurance (unlike relief-at-source, which only refunds income tax). For a basic-rate worker that's 28% relief; higher-rate is 42%; in the £100k-£125k trap it can hit 62%; additional-rate is 47%. But it reduces your gross salary on paper, which lenders use for mortgage affordability and which some workplace benefits (statutory sick/maternity, life cover) are calculated against. It also can't take you below the National Minimum Wage."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What does my tax code mean?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Most workers are on 1257L, which gives the standard £12,570 personal allowance. The number is your allowance divided by 10. K-codes (e.g. K500) work the other way — they ADD £5,000 to your taxable income, typically because of unpaid tax or large benefits-in-kind. Special codes: BR (everything taxed at basic rate), D0 (everything at higher rate), D1 (everything at additional rate), NT (no tax), 0T (no personal allowance). If you have a code you don't understand, HMRC's personal tax account explains the breakdown."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How much should I be saving from my take-home pay?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The 50/30/20 rule is a common starting point: 50% of take-home on needs (rent, bills, food), 30% on wants (eating out, hobbies), 20% on savings and debt repayment. UK financial guidance generally recommends building an emergency fund of 3-6 months of essential outgoings first, then targeting at least 15% of gross income into pensions (workplace contributions count toward this). Use the budget planner on this site to track yours line-by-line."
+      }
+    }
+  ]
+}
+</script>
 <script type="application/ld+json" data-np-ld="webapp">
 {
   "@context": "https://schema.org",
@@ -139,13 +195,30 @@
           <div>
             <label class="np-label flex items-center" for="gross">
               Gross annual salary
-              <span class="np-tooltip"><span class="np-tooltip-icon">?</span><span class="np-tooltip-text">Your full salary before any deductions, as shown on your contract or payslip.</span></span>
+              <span class="np-tooltip"><span class="np-tooltip-icon" tabindex="0" role="button" aria-describedby="np-tip-gross" aria-label="More info about gross annual salary">?</span><span class="np-tooltip-text" role="tooltip" id="np-tip-gross">Your full salary before any deductions, as shown on your contract or payslip.</span></span>
             </label>
             <div class="relative">
               <span class="absolute left-3 top-1/2 -translate-y-1/2 text-ink-muted">£</span>
               <input id="gross" type="number" min="0" step="100" class="np-input pl-7" x-model.number="inp.grossSalary" @input="calc()">
             </div>
-            <input type="range" min="10000" max="250000" step="500" class="np-slider mt-3" x-model.number="inp.grossSalary" @input="calc()">
+            <input type="range"
+                   :min="sliderMin"
+                   :max="sliderMax"
+                   :step="sliderStep"
+                   :aria-valuemin="sliderMin"
+                   :aria-valuemax="sliderMax"
+                   :aria-valuenow="inp.grossSalary"
+                   aria-label="Adjust gross annual salary"
+                   list="np-salary-bands"
+                   class="np-slider mt-3"
+                   x-model.number="inp.grossSalary"
+                   @input="calc()">
+            <datalist id="np-salary-bands">
+              <option value="12570" label="Personal allowance"></option>
+              <option value="50270" label="Higher rate"></option>
+              <option value="100000" label="60% trap starts"></option>
+              <option value="125140" label="Additional rate"></option>
+            </datalist>
           </div>
 
           <div class="grid grid-cols-2 gap-3">
@@ -164,11 +237,15 @@
               </div>
             </div>
           </div>
+          <p x-show="bonusMarginalRate !== null" x-cloak class="text-xs text-ink-soft flex items-start gap-1.5">
+            <i data-lucide="info" class="w-3.5 h-3.5 flex-shrink-0 mt-0.5" aria-hidden="true"></i>
+            <span>Your <strong x-text="NPF.gbp(inp.bonus)"></strong> bonus is taxed at your marginal rate — currently <strong :class="marginalRateColor(bonusMarginalRate || 0)" x-text="NPF.pct((bonusMarginalRate || 0) * 100, 0)"></strong>. Net cash from the bonus: <strong x-text="NPF.gbp(((inp.bonus || 0) * (1 - (bonusMarginalRate || 0))))"></strong>.</span>
+          </p>
 
           <div>
             <label class="np-label flex items-center" for="bik">
               Benefit-in-kind (BIK)
-              <span class="np-tooltip"><span class="np-tooltip-icon">?</span><span class="np-tooltip-text">Taxable value of company car, private medical insurance or other benefits (from your P11D).</span></span>
+              <span class="np-tooltip"><span class="np-tooltip-icon" tabindex="0" role="button" aria-describedby="np-tip-bik" aria-label="More info about benefit in kind">?</span><span class="np-tooltip-text" role="tooltip" id="np-tip-bik">Taxable value of company car, private medical insurance or other benefits (from your P11D).</span></span>
             </label>
             <div class="relative">
               <span class="absolute left-3 top-1/2 -translate-y-1/2 text-ink-muted">£</span>
@@ -184,7 +261,7 @@
           <div>
             <label class="np-label flex items-center" for="region">
               Region
-              <span class="np-tooltip"><span class="np-tooltip-icon">?</span><span class="np-tooltip-text">Scottish residents pay different income tax rates set by the Scottish Government. National Insurance is the same across the UK.</span></span>
+              <span class="np-tooltip"><span class="np-tooltip-icon" tabindex="0" role="button" aria-describedby="np-tip-region" aria-label="More info about region">?</span><span class="np-tooltip-text" role="tooltip" id="np-tip-region">Scottish residents pay different income tax rates set by the Scottish Government. National Insurance is the same across the UK.</span></span>
             </label>
             <select id="region" class="np-select" x-model="inp.region" @change="calc()">
               <option value="rUK">England, Wales or Northern Ireland</option>
@@ -194,9 +271,19 @@
           <div>
             <label class="np-label flex items-center" for="taxcode">
               Tax code
-              <span class="np-tooltip"><span class="np-tooltip-icon">?</span><span class="np-tooltip-text">The default 1257L gives the standard £12,570 personal allowance. K codes add to taxable income (e.g. K500 adds £5,000).</span></span>
+              <span class="np-tooltip"><span class="np-tooltip-icon" tabindex="0" role="button" aria-describedby="np-tip-taxcode" aria-label="More info about tax code">?</span><span class="np-tooltip-text" role="tooltip" id="np-tip-taxcode">The default 1257L gives the standard £12,570 personal allowance. K codes add to taxable income (e.g. K500 adds £5,000). Special codes BR, D0, D1, NT and 0T are also supported.</span></span>
             </label>
-            <input id="taxcode" type="text" class="np-input" x-model="inp.taxCode" @input="calc()" placeholder="1257L">
+            <input id="taxcode" type="text" class="np-input" x-model="inp.taxCode" @input="calc()" placeholder="1257L"
+                   :aria-invalid="taxCodeStatus?.tone === 'error'"
+                   aria-describedby="taxcode-status">
+            <p id="taxcode-status" x-show="taxCodeStatus" x-cloak class="text-xs mt-1.5 flex items-start gap-1.5"
+               :class="{
+                 'text-rose-700 dark:text-rose-300': taxCodeStatus?.tone === 'error',
+                 'text-ink-soft': taxCodeStatus?.tone === 'info' || taxCodeStatus?.tone === 'ok'
+               }">
+              <i :data-lucide="taxCodeStatus?.tone === 'error' ? 'alert-circle' : taxCodeStatus?.tone === 'info' ? 'info' : 'check-circle-2'" class="w-3.5 h-3.5 flex-shrink-0 mt-0.5" aria-hidden="true"></i>
+              <span x-text="taxCodeStatus?.text"></span>
+            </p>
           </div>
         </div>
       </div>
@@ -208,22 +295,26 @@
             <div>
               <label class="np-label" for="pen">Your contribution</label>
               <div class="relative">
-                <input id="pen" type="number" min="0" max="100" step="0.5" class="np-input pr-8" x-model.number="inp.pensionPercent" @input="calc()">
+                <input id="pen" type="number" min="0" max="60" step="0.5" class="np-input pr-8" x-model.number="inp.pensionPercent" @input="calc()">
                 <span class="absolute right-3 top-1/2 -translate-y-1/2 text-ink-muted">%</span>
               </div>
             </div>
             <div>
               <label class="np-label" for="empen">Employer match</label>
               <div class="relative">
-                <input id="empen" type="number" min="0" max="100" step="0.5" class="np-input pr-8" x-model.number="inp.employerPensionPercent" @input="calc()">
+                <input id="empen" type="number" min="0" max="60" step="0.5" class="np-input pr-8" x-model.number="inp.employerPensionPercent" @input="calc()">
                 <span class="absolute right-3 top-1/2 -translate-y-1/2 text-ink-muted">%</span>
               </div>
             </div>
           </div>
+          <p x-show="(inp.pensionPercent || 0) > 30 && inp.pensionType === 'salary-sacrifice'" x-cloak class="text-xs text-amber-700 dark:text-amber-300 flex items-start gap-1.5">
+            <i data-lucide="alert-triangle" class="w-3.5 h-3.5 flex-shrink-0 mt-0.5" aria-hidden="true"></i>
+            <span>Salary sacrifice can't take you below the National Minimum Wage — your employer will refuse a contribution that would. The 30%+ ceiling is a soft warning.</span>
+          </p>
           <div>
             <label class="np-label flex items-center" for="pentype">
               Pension type
-              <span class="np-tooltip"><span class="np-tooltip-icon">?</span><span class="np-tooltip-text"><strong>Relief at source</strong>: paid from take-home, HMRC adds 25% basic-rate top-up. <strong>Net pay</strong>: deducted before tax. <strong>Salary sacrifice</strong>: deducted before tax AND NI.</span></span>
+              <span class="np-tooltip"><span class="np-tooltip-icon" tabindex="0" role="button" aria-describedby="np-tip-pensiontype" aria-label="More info about pension type">?</span><span class="np-tooltip-text" role="tooltip" id="np-tip-pensiontype"><strong>Relief at source</strong>: paid from take-home, HMRC adds 25% basic-rate top-up. <strong>Net pay</strong>: deducted before tax. <strong>Salary sacrifice</strong>: deducted before tax AND NI.</span></span>
             </label>
             <select id="pentype" class="np-select" x-model="inp.pensionType" @change="calc()">
               <option value="relief-at-source">Relief at source (most personal/SIPP)</option>
@@ -305,11 +396,56 @@
         <div class="mt-4" x-html="resultPromptHTML"></div>
       </div>
 
+      <!-- Marginal-rate card — what the user's next pound actually costs.
+           This is the headline differentiator no UK competitor ships:
+           visualises the 60% trap, basic / higher / additional bands and
+           student loan stacking in one trail. -->
+      <div class="np-card p-5 sm:p-6">
+        <div class="flex items-center justify-between mb-3">
+          <h3 class="font-semibold">Your marginal tax rate</h3>
+          <span x-show="result.marginalRate >= 0.55" x-cloak class="text-xs px-2 py-1 rounded bg-rose-100 dark:bg-rose-900/30 text-rose-700 dark:text-rose-300 font-semibold flex items-center gap-1">
+            <i data-lucide="alert-triangle" class="w-3 h-3" aria-hidden="true"></i>
+            <span>60% trap</span>
+          </span>
+        </div>
+        <div class="flex items-baseline gap-3 mb-2">
+          <div class="text-4xl sm:text-5xl font-extrabold tabular tracking-tight" :class="marginalRateColor(result.marginalRate)" x-text="NPF.pct(result.marginalRate * 100, 0)"></div>
+          <div class="text-sm text-ink-soft">on your next <strong class="text-ink">£1</strong></div>
+        </div>
+        <p class="text-sm text-ink-soft mb-4" x-text="marginalBreakdown(result.marginalRate)"></p>
+
+        <!-- Horizontal band trail across £0 → £150k (or higher) -->
+        <div class="space-y-2">
+          <div class="np-mrate-trail" role="img" :aria-label="'Marginal-rate trail showing your position at ' + NPF.gbp(inp.grossSalary)">
+            <template x-for="seg in marginalTrail.segments" :key="seg.from + '-' + seg.to">
+              <div :class="marginalBandClass(seg.rate)" class="np-mrate-seg" :style="`width: ${seg.widthPct}%`" :title="NPF.gbp(seg.from) + '–' + (seg.to === Infinity ? '+' : NPF.gbp(seg.to)) + ' · ' + Math.round(seg.rate * 100) + '% (' + seg.label + ')'"></div>
+            </template>
+            <div class="np-mrate-marker" :style="`left: ${marginalTrail.markerPct}%`" aria-hidden="true"></div>
+          </div>
+          <div class="flex justify-between text-xs text-ink-muted tabular">
+            <span>£0</span>
+            <span>£50k</span>
+            <span>£100k</span>
+            <span x-text="'£' + Math.round(marginalTrail.maxIncome / 1000) + 'k'"></span>
+          </div>
+        </div>
+
+        <!-- Per-band legend with marginal rate breakdown -->
+        <div class="grid sm:grid-cols-2 gap-1.5 mt-4">
+          <template x-for="seg in marginalTrail.segments.filter(s => s.to !== Infinity)" :key="seg.from">
+            <div class="np-band text-xs" :class="marginalBandClass(seg.rate) + (marginalTrail.userIn === seg ? ' is-current ring-2 ring-ink/40' : '')">
+              <span class="font-semibold flex-1 tabular" x-text="NPF.gbp(seg.from) + '–' + NPF.gbp(seg.to)"></span>
+              <strong x-text="Math.round(seg.rate * 100) + '%'"></strong>
+            </div>
+          </template>
+        </div>
+      </div>
+
       <!-- Bands chart -->
       <div class="np-card p-5 sm:p-6">
         <h3 class="font-semibold mb-4">Where your salary goes</h3>
         <div class="grid sm:grid-cols-2 gap-6">
-          <div><canvas id="breakdownChart" height="200"></canvas></div>
+          <div class="relative w-full" style="aspect-ratio: 1 / 1; max-height: 280px;"><canvas id="breakdownChart"></canvas></div>
           <div>
             <h4 class="font-semibold text-sm mb-2">Income tax bands hit</h4>
             <div class="space-y-1.5">
@@ -396,13 +532,75 @@
         <p class="text-sm">Sources: <a href="https://www.gov.uk/income-tax-rates" target="_blank" rel="noopener">gov.uk/income-tax-rates</a>, <a href="https://www.gov.uk/national-insurance-rates-letters" target="_blank" rel="noopener">National Insurance rates</a>, <a href="https://www.gov.uk/repaying-your-student-loan/what-you-pay" target="_blank" rel="noopener">student loan thresholds</a>.</p>
       </div>
 
+      <!-- FAQ — paired with FAQPage JSON-LD in <head>. Targets featured snippets
+           on long-tail questions ("60% tax trap", "tax code", "Scottish tax"). -->
+      <div class="np-card p-5 sm:p-6">
+        <h3 class="font-semibold text-lg !mb-4">Frequently asked questions</h3>
+        <div class="space-y-2">
+          <details class="group border-b border-border last:border-b-0 pb-2">
+            <summary class="cursor-pointer font-semibold text-ink py-2 flex items-center justify-between gap-2 hover:text-brand transition-colors">
+              <span>Why is my take-home pay lower than my colleague's on the same salary?</span>
+              <i data-lucide="chevron-down" class="w-4 h-4 flex-shrink-0 group-open:rotate-180 transition-transform" aria-hidden="true"></i>
+            </summary>
+            <div class="text-sm text-ink-soft leading-relaxed pb-3 pt-1">
+              The most common reasons are: a different tax code (1257L is standard but K-codes, BR, D0 all change the calc), a Scottish vs rest-of-UK residency, pension scheme type (salary sacrifice cuts both income tax AND NI; relief-at-source only cuts tax via your provider's top-up), student loan plans, and benefit-in-kind values (company car, private medical) which add to your taxable income via PAYE.
+            </div>
+          </details>
+          <details class="group border-b border-border last:border-b-0 pb-2">
+            <summary class="cursor-pointer font-semibold text-ink py-2 flex items-center justify-between gap-2 hover:text-brand transition-colors">
+              <span>What is the 60% tax trap and how does it work?</span>
+              <i data-lucide="chevron-down" class="w-4 h-4 flex-shrink-0 group-open:rotate-180 transition-transform" aria-hidden="true"></i>
+            </summary>
+            <div class="text-sm text-ink-soft leading-relaxed pb-3 pt-1">
+              Between £100,000 and £125,140 your personal allowance tapers away at £1 for every £2 earned. That means every extra £1 of salary in that band is taxed at the 40% higher rate <em>and</em> triggers an extra 40p of tax on previously-tax-free income, plus 2% NI above the upper earnings limit — an effective marginal rate of about 62%. Pension contributions or <a class="underline" href="/blog/when-is-salary-sacrifice-worth-it">salary sacrifice</a> are the main way to dodge it: reducing your taxable income back below £100,000 restores the personal allowance.
+            </div>
+          </details>
+          <details class="group border-b border-border last:border-b-0 pb-2">
+            <summary class="cursor-pointer font-semibold text-ink py-2 flex items-center justify-between gap-2 hover:text-brand transition-colors">
+              <span>How does Scottish income tax differ from the rest of the UK?</span>
+              <i data-lucide="chevron-down" class="w-4 h-4 flex-shrink-0 group-open:rotate-180 transition-transform" aria-hidden="true"></i>
+            </summary>
+            <div class="text-sm text-ink-soft leading-relaxed pb-3 pt-1">
+              Scotland has six income tax bands (starter, basic, intermediate, higher, advanced, top) ranging from 19% to 48%, all set by the Scottish Government. The personal allowance (£12,570) and National Insurance rates are the same UK-wide because they're reserved to Westminster. So a Scottish higher-rate taxpayer pays more income tax than a rest-of-UK one on the same gross, but the same NI.
+            </div>
+          </details>
+          <details class="group border-b border-border last:border-b-0 pb-2">
+            <summary class="cursor-pointer font-semibold text-ink py-2 flex items-center justify-between gap-2 hover:text-brand transition-colors">
+              <span>Does salary sacrifice always save me money?</span>
+              <i data-lucide="chevron-down" class="w-4 h-4 flex-shrink-0 group-open:rotate-180 transition-transform" aria-hidden="true"></i>
+            </summary>
+            <div class="text-sm text-ink-soft leading-relaxed pb-3 pt-1">
+              It saves income tax <em>and</em> National Insurance (unlike relief-at-source, which only refunds income tax). For a basic-rate worker that's 28% relief; higher-rate is 42%; in the £100k-£125k trap it can hit 62%; additional-rate is 47%. But it reduces your gross salary on paper, which lenders use for mortgage affordability and which some workplace benefits (statutory sick/maternity, life cover) are calculated against. It also can't take you below the National Minimum Wage. <a class="underline" href="/blog/when-is-salary-sacrifice-worth-it">Full guide with the four catches →</a>
+            </div>
+          </details>
+          <details class="group border-b border-border last:border-b-0 pb-2">
+            <summary class="cursor-pointer font-semibold text-ink py-2 flex items-center justify-between gap-2 hover:text-brand transition-colors">
+              <span>What does my tax code mean?</span>
+              <i data-lucide="chevron-down" class="w-4 h-4 flex-shrink-0 group-open:rotate-180 transition-transform" aria-hidden="true"></i>
+            </summary>
+            <div class="text-sm text-ink-soft leading-relaxed pb-3 pt-1">
+              Most workers are on <strong>1257L</strong>, which gives the standard £12,570 personal allowance (number × 10). K-codes (e.g. K500) work the other way — they <em>add</em> £5,000 to your taxable income, typically because of unpaid tax or large benefits-in-kind. Special codes: <strong>BR</strong> (everything taxed at basic rate, often a second job), <strong>D0</strong> (everything at higher rate), <strong>D1</strong> (everything at additional rate), <strong>NT</strong> (no tax), <strong>0T</strong> (no personal allowance). If yours is unfamiliar, HMRC's personal tax account explains the breakdown.
+            </div>
+          </details>
+          <details class="group border-b border-border last:border-b-0 pb-2">
+            <summary class="cursor-pointer font-semibold text-ink py-2 flex items-center justify-between gap-2 hover:text-brand transition-colors">
+              <span>How much should I be saving from my take-home pay?</span>
+              <i data-lucide="chevron-down" class="w-4 h-4 flex-shrink-0 group-open:rotate-180 transition-transform" aria-hidden="true"></i>
+            </summary>
+            <div class="text-sm text-ink-soft leading-relaxed pb-3 pt-1">
+              The 50/30/20 rule is a common starting point: 50% of take-home on needs (rent, bills, food), 30% on wants, 20% on savings and debt repayment. UK financial guidance generally recommends building an emergency fund of 3-6 months of essential outgoings first, then targeting at least 15% of gross income into pensions (workplace contributions count toward this). The <a class="underline" href="/calculators/budget">budget planner</a> on this site tracks yours line-by-line.
+            </div>
+          </details>
+        </div>
+      </div>
+
       <!-- Related guides — drives readers from calc to long-form content -->
       <div class="np-card p-5 sm:p-6">
         <div class="flex items-center gap-2 text-xs font-semibold text-ink-muted uppercase tracking-wider mb-4">
           <i data-lucide="book-open" class="w-3.5 h-3.5"></i> Read more
         </div>
         <div class="space-y-3">
-          <a href="../blog/how-uk-income-tax-works.html" class="block group">
+          <a href="/blog/how-uk-income-tax-works" class="block group">
             <div class="flex items-start gap-3">
               <div class="w-9 h-9 rounded-lg bg-brand/10 text-brand flex items-center justify-center flex-shrink-0">
                 <i data-lucide="receipt" class="w-4 h-4"></i>
@@ -416,7 +614,35 @@
             </div>
           </a>
           <div class="border-t border-border"></div>
-          <a href="../blog/" class="block group">
+          <a href="/blog/when-is-salary-sacrifice-worth-it" class="block group">
+            <div class="flex items-start gap-3">
+              <div class="w-9 h-9 rounded-lg bg-emerald-500/10 text-emerald-600 dark:text-emerald-300 flex items-center justify-center flex-shrink-0">
+                <i data-lucide="arrow-down-up" class="w-4 h-4"></i>
+              </div>
+              <div class="flex-1 min-w-0">
+                <div class="font-semibold text-ink group-hover:text-brand transition-colors leading-snug">Salary sacrifice: is it worth it? 2026/27</div>
+                <div class="text-sm text-ink-soft mt-0.5">How sacrificing salary into your pension cuts income tax <em>and</em> NI — up to 62% relief in the £100k trap.</div>
+                <div class="text-xs text-ink-muted mt-1">9 min read</div>
+              </div>
+              <i data-lucide="arrow-right" class="w-4 h-4 text-ink-muted group-hover:text-brand group-hover:translate-x-0.5 transition-all flex-shrink-0 mt-1"></i>
+            </div>
+          </a>
+          <div class="border-t border-border"></div>
+          <a href="/blog/cash-isa-vs-stocks-and-shares-isa" class="block group">
+            <div class="flex items-start gap-3">
+              <div class="w-9 h-9 rounded-lg bg-amber-500/10 text-amber-600 dark:text-amber-300 flex items-center justify-center flex-shrink-0">
+                <i data-lucide="piggy-bank" class="w-4 h-4"></i>
+              </div>
+              <div class="flex-1 min-w-0">
+                <div class="font-semibold text-ink group-hover:text-brand transition-colors leading-snug">Cash ISA vs Stocks &amp; Shares ISA 2026/27</div>
+                <div class="text-sm text-ink-soft mt-0.5">Where to put your take-home so HMRC can't tax the interest. Splits the £20k allowance.</div>
+                <div class="text-xs text-ink-muted mt-1">7 min read</div>
+              </div>
+              <i data-lucide="arrow-right" class="w-4 h-4 text-ink-muted group-hover:text-brand group-hover:translate-x-0.5 transition-all flex-shrink-0 mt-1"></i>
+            </div>
+          </a>
+          <div class="border-t border-border"></div>
+          <a href="/blog/" class="block group">
             <div class="flex items-start gap-3">
               <div class="w-9 h-9 rounded-lg bg-accent/10 text-accent flex items-center justify-center flex-shrink-0">
                 <i data-lucide="folder-open" class="w-4 h-4"></i>
@@ -461,6 +687,18 @@ function salaryApp() {
     inp: { ...UK_AVERAGES, studentPlans: [] },
     UK_AVERAGES,
     isExample: true,
+    // Slider range tracks the current value so the thumb never visually lies.
+    // Below £10k or above £250k we expand the range proportionally; otherwise we
+    // keep the typical viewport so resolution stays high in the band most users
+    // sit in.
+    get sliderMin() { return Math.min(10000, +this.inp.grossSalary || 0); },
+    get sliderMax() {
+      const v = +this.inp.grossSalary || 0;
+      if (v <= 250000) return 250000;
+      // Round up to next 50k so the thumb lands on a round number
+      return Math.ceil(v * 1.2 / 50000) * 50000;
+    },
+    get sliderStep() { return this.sliderMax > 500000 ? 5000 : 500; },
     result: { totalGross: 0, takeHome: 0, monthly: { net: 0, gross: 0, tax: 0, ni: 0, studentLoan: 0, pension: 0 }, weekly: { net: 0, gross: 0, tax: 0, ni: 0, studentLoan: 0, pension: 0 }, incomeTax: { tax: 0, breakdown: [] }, ni: { ni: 0, breakdown: [] }, studentLoans: { total: 0, breakdown: [] }, pension: { employee: 0, employer: 0 }, personalAllowance: 0, effectiveTaxRate: 0 },
     whatIf: 0, whatIfResult: {},
     chart: null,
@@ -564,9 +802,19 @@ function salaryApp() {
       this.trustHTML = A.renderTrustStrip();
     },
 
+    /**
+     * Re-run the engine on `grossSalary * (1 + whatIf/100)`. Debounced with
+     * rAF so a fast drag of the slider coalesces into one engine call per
+     * frame instead of one per keypress (~70 events).
+     */
     calcWhatIf() {
-      const adj = { ...this.inp, grossSalary: this.inp.grossSalary * (1 + this.whatIf / 100) };
-      this.whatIfResult = window.NPSalary.calculate(adj);
+      if (this._whatIfPending) return;
+      this._whatIfPending = true;
+      requestAnimationFrame(() => {
+        const adj = { ...this.inp, grossSalary: this.inp.grossSalary * (1 + this.whatIf / 100) };
+        this.whatIfResult = window.NPSalary.calculate(adj);
+        this._whatIfPending = false;
+      });
     },
 
     bandClass(rate) {
@@ -574,6 +822,88 @@ function salaryApp() {
       if (rate <= 0.21) return 'np-band-basic';
       if (rate <= 0.42) return 'np-band-higher';
       return 'np-band-additional';
+    },
+
+    /* ===== Marginal-rate helpers (UI-only — math lives in salary.js) ===== */
+    marginalBandClass(rate) {
+      if (rate < 0.01) return 'np-band-pa';
+      if (rate < 0.30) return 'np-band-basic';
+      if (rate < 0.45) return 'np-band-higher';
+      if (rate >= 0.55) return 'np-band-trap';       // the 60% trap
+      return 'np-band-additional';
+    },
+    marginalRateColor(rate) {
+      if (rate < 0.30) return 'text-emerald-700 dark:text-emerald-300';
+      if (rate < 0.45) return 'text-amber-700 dark:text-amber-300';
+      if (rate >= 0.55) return 'text-rose-700 dark:text-rose-300';
+      return 'text-rose-700 dark:text-rose-300';
+    },
+    /** Plain-English breakdown of the rate components ("40% tax + 2% NI = 42%"). */
+    marginalBreakdown(rate) {
+      const r = this.result;
+      if (!r || rate === 0) return 'You\'re below the personal allowance — no tax or NI on your next pound.';
+      // Pull from the engine's marginalCurve since it knows the components
+      const curve = window.NPSalary.marginalCurve(this.inp.region, this.inp.studentPlans || []);
+      const segIdx = curve.findIndex(s => r.totalGross >= s.from && r.totalGross < s.to);
+      const seg = curve[segIdx] || curve[curve.length - 1];
+      if (!seg) return '';
+      const c = seg.components || {};
+      const parts = [];
+      if (c.incomeTax > 0) parts.push(Math.round(c.incomeTax * 100) + '% income tax');
+      if (c.paTaper > 0)   parts.push(Math.round(c.paTaper * 100) + '% from the personal-allowance taper');
+      if (c.ni > 0)        parts.push(Math.round(c.ni * 100) + '% NI');
+      if (c.studentLoan > 0) parts.push(Math.round(c.studentLoan * 100) + '% student loan');
+      return 'Every extra £1 loses ' + parts.join(' + ') + '.';
+    },
+    /**
+     * The trail segments + the marker position as a %. The render range
+     * stretches dynamically so the user's marker always sits comfortably
+     * inside the trail (never at the very edge), and so high earners see
+     * the whole 60%-trap region.
+     */
+    get marginalTrail() {
+      const curve = window.NPSalary.marginalCurve(this.inp.region, this.inp.studentPlans || []);
+      const user = (+this.inp.grossSalary || 0);
+      // Show 0 → 150k by default, expand to 1.5x user salary if they're higher
+      const maxIncome = Math.max(150000, Math.ceil(user * 1.5 / 10000) * 10000);
+      const segments = curve.map(seg => {
+        const top = Math.min(seg.to, maxIncome);
+        const width = Math.max(0, top - seg.from);
+        return { ...seg, widthPct: (width / maxIncome) * 100 };
+      }).filter(s => s.widthPct > 0);
+      // Find which segment the user is currently in
+      const userIn = curve.find(s => user >= s.from && user < s.to) || null;
+      return {
+        segments,
+        markerPct: Math.min(99, Math.max(0, (user / maxIncome) * 100)),
+        maxIncome,
+        userIn
+      };
+    },
+
+    /** Tax-code status line for display under the tax-code input. */
+    get taxCodeStatus() {
+      const i = this.result?.taxCodeInfo;
+      if (!i) return null;
+      if (!i.valid) return { tone: 'error', text: 'Unrecognised tax code — using default £12,570 allowance.' };
+      if (i.specialCode === 'NT') return { tone: 'info', text: 'No tax (NT code) — useful for double-checking the gross figure.' };
+      if (i.specialCode === '0T') return { tone: 'info', text: 'No personal allowance (0T code) — all income taxed at band rates.' };
+      if (i.specialCode === 'BR') return { tone: 'info', text: 'All income taxed at 20% (BR — typically a second job).' };
+      if (i.specialCode === 'D0') return { tone: 'info', text: 'All income taxed at 40% (D0).' };
+      if (i.specialCode === 'D1') return { tone: 'info', text: 'All income taxed at 45% (D1).' };
+      if (i.kCodeAddition) return { tone: 'info', text: 'K-code adds £' + i.kCodeAddition.toLocaleString() + ' to taxable income.' };
+      return { tone: 'ok', text: 'Standard £' + (this.result.personalAllowance || 0).toLocaleString() + ' personal allowance.' };
+    },
+
+    /** Marginal rate applied to a bonus (so we can show "Your £X bonus is taxed at Y%"). */
+    get bonusMarginalRate() {
+      const base = (+this.inp.grossSalary || 0);
+      const bonus = (+this.inp.bonus || 0);
+      if (bonus <= 0) return null;
+      // The bonus stacks on top of the base salary — its marginal rate is whichever band
+      // the (base + half the bonus) lands in. Half-bonus avoids overstating when the bonus
+      // crosses a band edge.
+      return window.NPSalary.marginalRateAt(base + bonus / 2, this.inp.region, this.inp.studentPlans || []);
     },
 
     async drawChart() {
