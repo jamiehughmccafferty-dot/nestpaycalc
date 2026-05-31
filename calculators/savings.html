@@ -87,10 +87,10 @@
 <div id="np-header"></div>
 
 <main id="main" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12" x-data="savingsApp()" x-init="init()">
-  <nav class="text-sm text-slate-500 dark:text-slate-400 mb-4"><a href="../index.html" class="hover:text-brand">Home</a> / <span>Savings Calculator</span></nav>
+  <nav class="np-breadcrumb" aria-label="Breadcrumb"><a href="../index.html">Home</a> / <span aria-current="page">Savings Calculator</span></nav>
   <header class="mb-8">
     <h1 class="text-3xl sm:text-4xl font-extrabold">UK Savings &amp; ISA Calculator</h1>
-    <p class="mt-2 text-slate-600 dark:text-slate-300 max-w-3xl">See how your savings grow with compound interest. Track your £20,000 ISA allowance and compare easy-access vs fixed-rate accounts.</p>
+    <p class="mt-2 text-ink-soft max-w-3xl">See how your savings grow with compound interest. Track your £20,000 ISA allowance and compare easy-access vs fixed-rate accounts.</p>
   </header>
 
   <div class="grid lg:grid-cols-5 gap-6">
@@ -115,12 +115,12 @@
           </div>
           <div>
             <label class="np-label" for="initial">Starting amount</label>
-            <div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500">£</span>
+            <div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-ink-muted">£</span>
               <input id="initial" type="number" min="0" step="100" class="np-input pl-7" x-model.number="inp.initial" @input="calc()"></div>
           </div>
           <div>
             <label class="np-label" for="monthly">Monthly contribution</label>
-            <div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500">£</span>
+            <div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-ink-muted">£</span>
               <input id="monthly" type="number" min="0" step="10" class="np-input pl-7" x-model.number="inp.monthly" @input="calc()"></div>
             <input type="range" min="0" max="2000" step="10" class="np-slider mt-2" x-model.number="inp.monthly" @input="calc()">
             <p class="np-help" x-show="isISA()">Annual: <strong x-text="NPF.gbp(inp.monthly*12)"></strong> · ISA allowance: £20,000 · <span :class="annualISAUsed > 100 ? 'text-rose-600 font-semibold' : ''" x-text="NPF.pct(annualISAUsed,1) + ' used'"></span></p>
@@ -129,7 +129,7 @@
             <div>
               <label class="np-label" for="rate">Interest rate (AER)</label>
               <div class="relative"><input id="rate" type="number" min="0" max="20" step="0.05" class="np-input pr-8" x-model.number="inp.annualRatePct" @input="calc()">
-              <span class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500">%</span></div>
+              <span class="absolute right-3 top-1/2 -translate-y-1/2 text-ink-muted">%</span></div>
             </div>
             <div>
               <label class="np-label" for="years">Years</label>
@@ -148,7 +148,7 @@
             <div>
               <label class="np-label" for="infl">Inflation</label>
               <div class="relative"><input id="infl" type="number" min="0" max="20" step="0.1" class="np-input pr-8" x-model.number="inp.inflation" @input="calc()">
-              <span class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500">%</span></div>
+              <span class="absolute right-3 top-1/2 -translate-y-1/2 text-ink-muted">%</span></div>
             </div>
           </div>
         </div>
@@ -180,19 +180,19 @@
         <h2 class="font-semibold text-lg mb-4">Projected balance</h2>
         <div class="grid grid-cols-3 gap-3 text-center">
           <div class="p-4 rounded-lg bg-blue-50 dark:bg-blue-900/30">
-            <div class="text-xs text-slate-600 dark:text-slate-300">Final balance</div>
+            <div class="text-xs text-ink-soft">Final balance</div>
             <div class="text-2xl font-extrabold text-brand dark:text-blue-300" x-text="NPF.gbp(result.finalBalance)"></div>
           </div>
           <div class="p-4 rounded-lg bg-blue-50 dark:bg-blue-900/30">
-            <div class="text-xs text-slate-600 dark:text-slate-300">You contributed</div>
+            <div class="text-xs text-ink-soft">You contributed</div>
             <div class="text-2xl font-extrabold" x-text="NPF.gbp(result.totalContributions)"></div>
           </div>
           <div class="p-4 rounded-lg bg-blue-50 dark:bg-blue-900/30">
-            <div class="text-xs text-slate-600 dark:text-slate-300">Interest earned</div>
+            <div class="text-xs text-ink-soft">Interest earned</div>
             <div class="text-2xl font-extrabold text-emerald-700 dark:text-emerald-300" x-text="NPF.gbp(result.totalInterest)"></div>
           </div>
         </div>
-        <p class="text-xs text-slate-500 dark:text-slate-400 mt-3">After <span x-text="inp.inflation"></span>% inflation, that's worth <strong x-text="NPF.gbp(realValue)"></strong> in today's money.</p>
+        <p class="text-xs text-ink-muted mt-3">After <span x-text="inp.inflation"></span>% inflation, that's worth <strong x-text="NPF.gbp(realValue)"></strong> in today's money.</p>
         <div class="mt-3 text-sm" x-show="inp.accountType === 'lisa'">
           <div class="np-band np-band-basic">Government LISA bonus (25%): up to <strong class="ml-1" x-text="NPF.gbp(Math.min(inp.monthly*12, 4000) * 0.25 * inp.years)"></strong> over <span x-text="inp.years"></span> years.</div>
         </div>

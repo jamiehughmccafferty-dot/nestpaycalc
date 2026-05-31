@@ -73,13 +73,13 @@
             </div>`
           : `<a href="${item.href}" class="px-3 py-2 text-sm font-medium text-ink-soft hover:text-brand transition-colors">${item.label}</a>`
         ).join('')}
-        <button id="np-darkmode" class="ml-2 p-2 rounded-lg text-ink-soft hover:text-ink hover:bg-surface-3 transition-colors" aria-label="Toggle dark mode">
-          <i data-lucide="moon" class="w-5 h-5 dark:hidden"></i>
-          <i data-lucide="sun" class="w-5 h-5 hidden dark:block"></i>
+        <button id="np-darkmode" type="button" class="ml-2 p-2 rounded-lg text-ink-soft hover:text-ink hover:bg-surface-3 transition-colors" aria-label="Switch to dark mode" aria-pressed="false">
+          <i data-lucide="moon" class="w-5 h-5 dark:hidden" aria-hidden="true"></i>
+          <i data-lucide="sun" class="w-5 h-5 hidden dark:block" aria-hidden="true"></i>
         </button>
       </nav>
-      <button id="np-mobile-toggle" class="lg:hidden p-2 rounded-lg text-ink-soft hover:text-ink hover:bg-surface-3 transition-colors" aria-label="Open menu" aria-expanded="false">
-        <i data-lucide="menu" class="w-6 h-6"></i>
+      <button id="np-mobile-toggle" type="button" class="lg:hidden p-2 rounded-lg text-ink-soft hover:text-ink hover:bg-surface-3 transition-colors" aria-label="Open menu" aria-expanded="false" aria-controls="np-mobile-menu">
+        <i data-lucide="menu" class="w-6 h-6" aria-hidden="true"></i>
       </button>
     </div>
     <div id="np-mobile-menu" class="lg:hidden hidden pb-4 space-y-1">
@@ -167,9 +167,21 @@
     const theme = stored || (prefersDark ? 'dark' : 'light');
     document.documentElement.classList.toggle('dark', theme === 'dark');
 
+    // Keep the desktop toggle's aria state in sync with the actual theme,
+    // so screen readers announce "Switch to light mode" once it's dark.
+    function syncAria() {
+      const btn = document.getElementById('np-darkmode');
+      if (!btn) return;
+      const isDark = document.documentElement.classList.contains('dark');
+      btn.setAttribute('aria-pressed', String(isDark));
+      btn.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+    }
+    syncAria();
+
     function toggle() {
       const isDark = document.documentElement.classList.toggle('dark');
       localStorage.setItem('np-theme', isDark ? 'dark' : 'light');
+      syncAria();
       // Broadcast so chart-bearing pages can re-theme without us hunting them down.
       window.dispatchEvent(new CustomEvent('np:themechange', { detail: { isDark } }));
     }
@@ -182,7 +194,8 @@
     const menu = document.getElementById('np-mobile-menu');
     btn?.addEventListener('click', () => {
       const open = menu.classList.toggle('hidden') === false;
-      btn.setAttribute('aria-expanded', open);
+      btn.setAttribute('aria-expanded', String(open));
+      btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
     });
   }
 

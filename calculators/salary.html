@@ -111,14 +111,14 @@
 
 <main id="main" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12" x-data="salaryApp()" x-init="init()">
 
-  <nav class="text-sm text-slate-500 dark:text-slate-400 mb-4" aria-label="Breadcrumb">
-    <a href="../index.html" class="hover:text-brand">Home</a> /
-    <span class="text-slate-700 dark:text-slate-200">Salary Calculator</span>
+  <nav class="np-breadcrumb" aria-label="Breadcrumb">
+    <a href="../index.html">Home</a> /
+    <span aria-current="page">Salary Calculator</span>
   </nav>
 
   <header class="mb-8">
-    <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white">UK Salary &amp; Take-Home Pay Calculator</h1>
-    <p class="mt-2 text-slate-600 dark:text-slate-300 max-w-3xl">Work out exactly what you'll take home each month after income tax, National Insurance, pension and student loan deductions. Built for the <strong>2026/27</strong> UK tax year.</p>
+    <h1 class="text-3xl sm:text-4xl font-extrabold text-ink">UK Salary &amp; Take-Home Pay Calculator</h1>
+    <p class="mt-2 text-ink-soft max-w-3xl">Work out exactly what you'll take home each month after income tax, National Insurance, pension and student loan deductions. Built for the <strong>2026/27</strong> UK tax year.</p>
   </header>
 
   <div class="grid lg:grid-cols-5 gap-6">
@@ -142,7 +142,7 @@
               <span class="np-tooltip"><span class="np-tooltip-icon">?</span><span class="np-tooltip-text">Your full salary before any deductions, as shown on your contract or payslip.</span></span>
             </label>
             <div class="relative">
-              <span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500">£</span>
+              <span class="absolute left-3 top-1/2 -translate-y-1/2 text-ink-muted">£</span>
               <input id="gross" type="number" min="0" step="100" class="np-input pl-7" x-model.number="inp.grossSalary" @input="calc()">
             </div>
             <input type="range" min="10000" max="250000" step="500" class="np-slider mt-3" x-model.number="inp.grossSalary" @input="calc()">
@@ -152,14 +152,14 @@
             <div>
               <label class="np-label" for="bonus">Annual bonus</label>
               <div class="relative">
-                <span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500">£</span>
+                <span class="absolute left-3 top-1/2 -translate-y-1/2 text-ink-muted">£</span>
                 <input id="bonus" type="number" min="0" step="100" class="np-input pl-7" x-model.number="inp.bonus" @input="calc()">
               </div>
             </div>
             <div>
               <label class="np-label" for="overtime">Overtime / extra</label>
               <div class="relative">
-                <span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500">£</span>
+                <span class="absolute left-3 top-1/2 -translate-y-1/2 text-ink-muted">£</span>
                 <input id="overtime" type="number" min="0" step="100" class="np-input pl-7" x-model.number="inp.overtime" @input="calc()">
               </div>
             </div>
@@ -171,7 +171,7 @@
               <span class="np-tooltip"><span class="np-tooltip-icon">?</span><span class="np-tooltip-text">Taxable value of company car, private medical insurance or other benefits (from your P11D).</span></span>
             </label>
             <div class="relative">
-              <span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500">£</span>
+              <span class="absolute left-3 top-1/2 -translate-y-1/2 text-ink-muted">£</span>
               <input id="bik" type="number" min="0" step="100" class="np-input pl-7" x-model.number="inp.bik" @input="calc()">
             </div>
           </div>
@@ -209,14 +209,14 @@
               <label class="np-label" for="pen">Your contribution</label>
               <div class="relative">
                 <input id="pen" type="number" min="0" max="100" step="0.5" class="np-input pr-8" x-model.number="inp.pensionPercent" @input="calc()">
-                <span class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500">%</span>
+                <span class="absolute right-3 top-1/2 -translate-y-1/2 text-ink-muted">%</span>
               </div>
             </div>
             <div>
               <label class="np-label" for="empen">Employer match</label>
               <div class="relative">
                 <input id="empen" type="number" min="0" max="100" step="0.5" class="np-input pr-8" x-model.number="inp.employerPensionPercent" @input="calc()">
-                <span class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500">%</span>
+                <span class="absolute right-3 top-1/2 -translate-y-1/2 text-ink-muted">%</span>
               </div>
             </div>
           </div>
@@ -236,7 +236,7 @@
 
       <div class="np-card p-5 sm:p-6">
         <h2 class="font-semibold text-lg mb-4">Student loans</h2>
-        <p class="text-xs text-slate-500 dark:text-slate-400 mb-3">Tick all that apply. <a class="underline" href="https://www.gov.uk/repaying-your-student-loan/which-repayment-plan-you-are-on" target="_blank" rel="noopener">Check your plan on gov.uk →</a></p>
+        <p class="text-xs text-ink-muted mb-3">Tick all that apply. <a class="underline" href="https://www.gov.uk/repaying-your-student-loan/which-repayment-plan-you-are-on" target="_blank" rel="noopener">Check your plan on gov.uk →</a></p>
         <div class="grid grid-cols-2 gap-2 text-sm">
           <label class="flex items-center gap-2 py-1"><input type="checkbox" value="plan1" x-model="inp.studentPlans" @change="calc()"> Plan 1</label>
           <label class="flex items-center gap-2 py-1"><input type="checkbox" value="plan2" x-model="inp.studentPlans" @change="calc()"> Plan 2</label>
@@ -272,21 +272,25 @@
     <section class="lg:col-span-3 space-y-5">
 
       <div class="np-card p-5 sm:p-6">
+        <div x-show="isEmpty" x-cloak class="np-empty-banner" role="status">
+          <svg class="np-empty-banner-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 9v4M12 17h.01"/><path d="M4.93 4.93l14.14 14.14M19.07 4.93L4.93 19.07"/><circle cx="12" cy="12" r="10"/></svg>
+          <span><strong>Enter your salary above</strong> to see your take-home pay.</span>
+        </div>
         <div class="flex items-center justify-between mb-4">
           <h2 class="font-semibold text-lg">Your take-home pay</h2>
           <span class="text-xs px-2 py-1 rounded bg-accent-soft text-emerald-800 font-semibold">2026/27</span>
         </div>
         <div class="grid grid-cols-3 gap-3 text-center">
           <div class="p-4 rounded-lg bg-blue-50 dark:bg-blue-900/30">
-            <div class="text-xs text-slate-600 dark:text-slate-300">Yearly</div>
+            <div class="text-xs text-ink-soft">Yearly</div>
             <div class="text-2xl sm:text-3xl font-extrabold text-brand dark:text-blue-300 tabular" x-num.gbp="result.takeHome"></div>
           </div>
           <div class="p-4 rounded-lg bg-blue-50 dark:bg-blue-900/30">
-            <div class="text-xs text-slate-600 dark:text-slate-300">Monthly</div>
+            <div class="text-xs text-ink-soft">Monthly</div>
             <div class="text-2xl sm:text-3xl font-extrabold text-brand dark:text-blue-300 tabular" x-num.gbp="result.monthly.net"></div>
           </div>
           <div class="p-4 rounded-lg bg-blue-50 dark:bg-blue-900/30">
-            <div class="text-xs text-slate-600 dark:text-slate-300">Weekly</div>
+            <div class="text-xs text-ink-soft">Weekly</div>
             <div class="text-2xl sm:text-3xl font-extrabold text-brand dark:text-blue-300" x-text="NPF.gbp(result.weekly.net)"></div>
           </div>
         </div>
@@ -297,8 +301,8 @@
           <div class="flex justify-between text-rose-700 dark:text-rose-300"><span>National Insurance</span><strong x-text="'-' + NPF.gbp(result.ni.ni)"></strong></div>
           <div class="flex justify-between text-rose-700 dark:text-rose-300" x-show="result.studentLoans.total > 0"><span>Student loan</span><strong x-text="'-' + NPF.gbp(result.studentLoans.total)"></strong></div>
           <div class="flex justify-between text-amber-700 dark:text-amber-300" x-show="result.pension.employee > 0"><span>Pension (you)</span><strong x-text="'-' + NPF.gbp(result.pension.employee)"></strong></div>
-          <div class="border-t border-slate-200 dark:border-slate-700 pt-2 flex justify-between font-semibold"><span>Take home</span><strong class="text-emerald-700 dark:text-emerald-300" x-text="NPF.gbp(result.takeHome)"></strong></div>
-          <div class="text-xs text-slate-500 dark:text-slate-400 pt-2">Effective tax + NI rate: <strong x-text="NPF.pct(result.effectiveTaxRate * 100, 1)"></strong> · Personal allowance used: <strong x-text="NPF.gbp(result.personalAllowance)"></strong></div>
+          <div class="border-t border-border pt-2 flex justify-between font-semibold"><span>Take home</span><strong class="text-emerald-700 dark:text-emerald-300" x-text="NPF.gbp(result.takeHome)"></strong></div>
+          <div class="text-xs text-ink-muted pt-2">Effective tax + NI rate: <strong x-text="NPF.pct(result.effectiveTaxRate * 100, 1)"></strong> · Personal allowance used: <strong x-text="NPF.gbp(result.personalAllowance)"></strong></div>
         </div>
 
         <!-- ZONE 1: Personalised post-result prompt (peak intent) -->
@@ -345,29 +349,29 @@
             <tr><td>National Insurance</td><td x-text="NPF.gbp(result.ni.ni)"></td><td x-text="NPF.gbp(result.monthly.ni)"></td><td x-text="NPF.gbp(result.weekly.ni)"></td></tr>
             <tr x-show="result.studentLoans.total > 0"><td>Student loan</td><td x-text="NPF.gbp(result.studentLoans.total)"></td><td x-text="NPF.gbp(result.monthly.studentLoan)"></td><td x-text="NPF.gbp(result.weekly.studentLoan)"></td></tr>
             <tr x-show="result.pension.employee > 0"><td>Your pension</td><td x-text="NPF.gbp(result.pension.employee)"></td><td x-text="NPF.gbp(result.monthly.pension)"></td><td x-text="NPF.gbp(result.weekly.pension)"></td></tr>
-            <tr class="font-bold bg-slate-50 dark:bg-slate-800"><td>Take-home</td><td x-text="NPF.gbp(result.takeHome)"></td><td x-text="NPF.gbp(result.monthly.net)"></td><td x-text="NPF.gbp(result.weekly.net)"></td></tr>
+            <tr class="font-bold bg-surface-3"><td>Take-home</td><td x-text="NPF.gbp(result.takeHome)"></td><td x-text="NPF.gbp(result.monthly.net)"></td><td x-text="NPF.gbp(result.weekly.net)"></td></tr>
           </tbody>
         </table>
-        <p class="text-xs text-slate-500 dark:text-slate-400 mt-3" x-show="result.pension.employer > 0">Plus your employer pays in <strong x-text="NPF.gbp(result.pension.employer)"></strong> to your pension – not part of your take-home but boosts your retirement pot.</p>
+        <p class="text-xs text-ink-muted mt-3" x-show="result.pension.employer > 0">Plus your employer pays in <strong x-text="NPF.gbp(result.pension.employer)"></strong> to your pension – not part of your take-home but boosts your retirement pot.</p>
       </div>
 
       <!-- What if -->
       <div class="np-card p-5 sm:p-6">
         <h3 class="font-semibold mb-3">"What if?" — pay rise sensitivity</h3>
-        <p class="text-sm text-slate-600 dark:text-slate-400 mb-3">See how a salary change affects your monthly take-home.</p>
+        <p class="text-sm text-ink-soft mb-3">See how a salary change affects your monthly take-home.</p>
         <input type="range" min="-20" max="50" step="1" class="np-slider" x-model.number="whatIf" @input="calcWhatIf()">
-        <div class="flex justify-between text-xs text-slate-500 mt-1"><span>-20%</span><span x-text="(whatIf >= 0 ? '+' : '') + whatIf + '%'"></span><span>+50%</span></div>
+        <div class="flex justify-between text-xs text-ink-muted mt-1"><span>-20%</span><span x-text="(whatIf >= 0 ? '+' : '') + whatIf + '%'"></span><span>+50%</span></div>
         <div class="grid grid-cols-3 gap-3 mt-4 text-center">
-          <div class="p-3 rounded-lg bg-slate-50 dark:bg-slate-800">
-            <div class="text-xs text-slate-500">New gross</div>
+          <div class="p-3 rounded-lg bg-surface-3">
+            <div class="text-xs text-ink-muted">New gross</div>
             <div class="font-bold" x-text="NPF.gbp(whatIfResult.totalGross)"></div>
           </div>
-          <div class="p-3 rounded-lg bg-slate-50 dark:bg-slate-800">
-            <div class="text-xs text-slate-500">New monthly net</div>
+          <div class="p-3 rounded-lg bg-surface-3">
+            <div class="text-xs text-ink-muted">New monthly net</div>
             <div class="font-bold text-brand dark:text-blue-300" x-text="NPF.gbp(whatIfResult.monthly.net)"></div>
           </div>
-          <div class="p-3 rounded-lg bg-slate-50 dark:bg-slate-800">
-            <div class="text-xs text-slate-500">Difference / mo</div>
+          <div class="p-3 rounded-lg bg-surface-3">
+            <div class="text-xs text-ink-muted">Difference / mo</div>
             <div class="font-bold" :class="(whatIfResult.monthly.net - result.monthly.net) >= 0 ? 'text-emerald-700' : 'text-rose-700'" x-text="(whatIfResult.monthly.net - result.monthly.net >= 0 ? '+' : '') + NPF.gbp(whatIfResult.monthly.net - result.monthly.net)"></div>
           </div>
         </div>
@@ -461,6 +465,7 @@ function salaryApp() {
     inp: { ...UK_AVERAGES, studentPlans: [] },
     UK_AVERAGES,
     isExample: true,
+    get isEmpty() { return (+this.inp.grossSalary || 0) <= 0; },
     result: { totalGross: 0, takeHome: 0, monthly: { net: 0, gross: 0, tax: 0, ni: 0, studentLoan: 0, pension: 0 }, weekly: { net: 0, gross: 0, tax: 0, ni: 0, studentLoan: 0, pension: 0 }, incomeTax: { tax: 0, breakdown: [] }, ni: { ni: 0, breakdown: [] }, studentLoans: { total: 0, breakdown: [] }, pension: { employee: 0, employer: 0 }, personalAllowance: 0, effectiveTaxRate: 0 },
     whatIf: 0, whatIfResult: {},
     chart: null,

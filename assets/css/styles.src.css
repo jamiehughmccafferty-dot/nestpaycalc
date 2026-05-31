@@ -123,6 +123,32 @@
   }
   .np-skip-link:focus-visible { top: 8px; }
 
+  /* ===== Breadcrumb — token-based, WCAG-AA contrast in both modes,
+     tap targets bumped on mobile for the underline links. ===== */
+  .np-breadcrumb {
+    font-size: .875rem;        /* 14px */
+    line-height: 1.5;
+    color: rgb(var(--ink-soft));
+    margin-bottom: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .25rem .35rem;
+  }
+  .np-breadcrumb a {
+    display: inline-block;
+    padding: 4px 2px;          /* widens tap target to ~24px tall */
+    color: rgb(var(--ink-soft));
+    border-radius: 4px;
+    transition: color 160ms var(--ease-out);
+  }
+  .np-breadcrumb a:hover,
+  .np-breadcrumb a:focus-visible { color: rgb(var(--brand)); }
+  .np-breadcrumb span[aria-current="page"] {
+    color: rgb(var(--ink));
+    font-weight: 500;
+  }
+
   /* ===== Card — layered depth, hairline border, subtle inner gradient ===== */
   .np-card {
     position: relative;
@@ -403,6 +429,19 @@
   .np-example-banner-icon { width: 18px; height: 18px; flex-shrink: 0; color: rgb(var(--brand)); }
   .np-example-banner-text { flex: 1; line-height: 1.4; }
   .np-example-banner-text strong { color: rgb(var(--ink)); font-weight: 600; }
+
+  /* ===== Empty-state banner — shown when a required field is blank/zero,
+     so users don't see a silent £0 result and assume the calc is broken. ===== */
+  .np-empty-banner {
+    display: flex; align-items: center; gap: .65rem;
+    padding: .8rem 1rem; border-radius: 12px;
+    background: rgb(var(--warning) / 0.08);
+    border: 1px dashed rgb(var(--warning) / 0.45);
+    font-size: .9rem; color: rgb(var(--ink-soft));
+    margin-bottom: 1rem;
+  }
+  .np-empty-banner-icon { width: 20px; height: 20px; flex-shrink: 0; color: rgb(var(--warning)); }
+  .np-empty-banner strong { color: rgb(var(--ink)); font-weight: 600; }
 
   /* ============================================================
    * AFFILIATE / SPONSORED COMPONENTS

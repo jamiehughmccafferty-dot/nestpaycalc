@@ -87,10 +87,10 @@
 <div id="np-header"></div>
 
 <main id="main" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12" x-data="mortgageApp()" x-init="init()">
-  <nav class="text-sm text-slate-500 dark:text-slate-400 mb-4"><a href="../index.html" class="hover:text-brand">Home</a> / <span>Mortgage Calculator</span></nav>
+  <nav class="np-breadcrumb" aria-label="Breadcrumb"><a href="../index.html">Home</a> / <span aria-current="page">Mortgage Calculator</span></nav>
   <header class="mb-8">
     <h1 class="text-3xl sm:text-4xl font-extrabold">UK Mortgage &amp; Stamp Duty Calculator</h1>
-    <p class="mt-2 text-slate-600 dark:text-slate-300 max-w-3xl">Estimate your monthly repayments, total interest, stamp duty (SDLT, LBTT or LTT) and the impact of overpayments.</p>
+    <p class="mt-2 text-ink-soft max-w-3xl">Estimate your monthly repayments, total interest, stamp duty (SDLT, LBTT or LTT) and the impact of overpayments.</p>
   </header>
 
   <div class="grid lg:grid-cols-5 gap-6">
@@ -104,13 +104,13 @@
         <div class="space-y-4">
           <div>
             <label class="np-label" for="price">Property price</label>
-            <div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500">£</span>
+            <div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-ink-muted">£</span>
               <input id="price" type="number" min="0" step="1000" class="np-input pl-7" x-model.number="inp.price" @input="calc()"></div>
             <input type="range" min="50000" max="2000000" step="5000" class="np-slider mt-3" x-model.number="inp.price" @input="calc()">
           </div>
           <div>
             <label class="np-label" for="deposit">Deposit</label>
-            <div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500">£</span>
+            <div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-ink-muted">£</span>
               <input id="deposit" type="number" min="0" step="1000" class="np-input pl-7" x-model.number="inp.deposit" @input="calc()"></div>
             <p class="np-help">LTV: <strong x-text="NPF.pct(ltv,1)"></strong> · Loan: <strong x-text="NPF.gbp(loan)"></strong></p>
           </div>
@@ -118,7 +118,7 @@
             <div>
               <label class="np-label" for="rate">Interest rate</label>
               <div class="relative"><input id="rate" type="number" min="0" max="20" step="0.05" class="np-input pr-8" x-model.number="inp.rate" @input="calc()">
-              <span class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500">%</span></div>
+              <span class="absolute right-3 top-1/2 -translate-y-1/2 text-ink-muted">%</span></div>
             </div>
             <div>
               <label class="np-label" for="term">Term (years)</label>
@@ -134,7 +134,7 @@
           </div>
           <div>
             <label class="np-label" for="over">Monthly overpayment</label>
-            <div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500">£</span>
+            <div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-ink-muted">£</span>
               <input id="over" type="number" min="0" step="25" class="np-input pl-7" x-model.number="inp.overpayment" @input="calc()"></div>
             <p class="np-help">Most lenders allow up to 10% overpayment per year without penalty.</p>
           </div>
@@ -181,18 +181,22 @@
 
     <section class="lg:col-span-3 space-y-5">
       <div class="np-card p-5 sm:p-6">
+        <div x-show="isEmpty" x-cloak class="np-empty-banner" role="status">
+          <svg class="np-empty-banner-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 9v4M12 17h.01"/><circle cx="12" cy="12" r="10"/></svg>
+          <span><strong>Enter the property price above</strong> to see your repayments.</span>
+        </div>
         <h2 class="font-semibold text-lg mb-4">Your mortgage</h2>
         <div class="grid grid-cols-3 gap-3 text-center">
           <div class="p-4 rounded-lg bg-blue-50 dark:bg-blue-900/30">
-            <div class="text-xs text-slate-600 dark:text-slate-300">Monthly</div>
+            <div class="text-xs text-ink-soft">Monthly</div>
             <div class="text-2xl font-extrabold text-brand dark:text-blue-300" x-text="NPF.gbp(result.monthly)"></div>
           </div>
           <div class="p-4 rounded-lg bg-blue-50 dark:bg-blue-900/30">
-            <div class="text-xs text-slate-600 dark:text-slate-300">Total interest</div>
+            <div class="text-xs text-ink-soft">Total interest</div>
             <div class="text-2xl font-extrabold text-brand dark:text-blue-300" x-text="NPF.gbp(result.totalInterest)"></div>
           </div>
           <div class="p-4 rounded-lg bg-blue-50 dark:bg-blue-900/30">
-            <div class="text-xs text-slate-600 dark:text-slate-300">Total repaid</div>
+            <div class="text-xs text-ink-soft">Total repaid</div>
             <div class="text-2xl font-extrabold text-brand dark:text-blue-300" x-text="NPF.gbp(result.totalRepaid)"></div>
           </div>
         </div>
@@ -202,7 +206,7 @@
           <div class="flex justify-between p-2"><span>Stamp duty</span><strong x-text="NPF.gbp(result.stampDuty)"></strong></div>
           <div class="flex justify-between p-2"><span>Term</span><strong><span x-text="Math.floor(result.monthsToPayoff/12)"></span>y <span x-text="result.monthsToPayoff%12"></span>m</strong></div>
         </div>
-        <p class="text-xs mt-3 text-slate-500 dark:text-slate-400" x-show="inp.overpayment > 0">With overpayments you'd save <strong x-text="NPF.gbp(result.savedInterest)"></strong> in interest and clear the loan <strong x-text="result.monthsSaved + ' months'"></strong> early.</p>
+        <p class="text-xs mt-3 text-ink-muted" x-show="inp.overpayment > 0">With overpayments you'd save <strong x-text="NPF.gbp(result.savedInterest)"></strong> in interest and clear the loan <strong x-text="result.monthsSaved + ' months'"></strong> early.</p>
 
         <!-- ZONE 1: Personalised post-result prompt -->
         <div class="mt-4" x-html="resultPromptHTML"></div>
@@ -233,7 +237,7 @@
 
       <div id="np-disclaimer"></div>
 
-      <div class="np-card p-5 sm:p-6 text-sm text-slate-700 dark:text-slate-300">
+      <div class="np-card p-5 sm:p-6 text-sm text-ink-soft">
         <h3 class="font-semibold text-base mb-2">Stamp duty 2026/27 reference</h3>
         <p class="mb-2"><strong>England / NI (SDLT):</strong> 0% to £125k, 2% £125k–£250k, 5% £250k–£925k, 10% £925k–£1.5m, 12% above. First-time buyer relief up to £500k.</p>
         <p class="mb-2"><strong>Scotland (LBTT):</strong> 0% to £145k, 2%–12% banded above. FTB threshold £175k. ADS surcharge 8%.</p>
@@ -299,6 +303,7 @@ function mortgageApp() {
     inp: { ...UK_AVERAGES },
     UK_AVERAGES,
     isExample: true,
+    get isEmpty() { return (+this.inp.price || 0) <= 0; },
     result: { monthly: 0, totalInterest: 0, totalRepaid: 0, monthsToPayoff: 0, stampDuty: 0, savedInterest: 0, monthsSaved: 0 },
     yearly: [], chart: null,
     resultPromptHTML: '', comparisonHTML: '', stickyOfferHTML: '', trustHTML: '',

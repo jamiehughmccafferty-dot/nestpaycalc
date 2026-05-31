@@ -87,10 +87,10 @@
 <div id="np-header"></div>
 
 <main id="main" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12" x-data="pensionApp()" x-init="init()">
-  <nav class="text-sm text-slate-500 mb-4"><a href="../index.html" class="hover:text-brand">Home</a> / <span>Pension</span></nav>
+  <nav class="np-breadcrumb" aria-label="Breadcrumb"><a href="../index.html">Home</a> / <span aria-current="page">Pension</span></nav>
   <header class="mb-8">
     <h1 class="text-3xl sm:text-4xl font-extrabold">UK Pension &amp; Retirement Calculator</h1>
-    <p class="mt-2 text-slate-600 dark:text-slate-300 max-w-3xl">Forecast your retirement pot, see how the State Pension and your private pension combine, and compare drawdown vs annuity options.</p>
+    <p class="mt-2 text-ink-soft max-w-3xl">Forecast your retirement pot, see how the State Pension and your private pension combine, and compare drawdown vs annuity options.</p>
   </header>
 
   <div class="grid lg:grid-cols-5 gap-6">
@@ -114,12 +114,12 @@
           </div>
           <div>
             <label class="np-label" for="salary">Current annual salary</label>
-            <div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500">£</span>
+            <div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-ink-muted">£</span>
               <input id="salary" type="number" min="0" step="500" class="np-input pl-7" x-model.number="inp.salary" @input="updateContribs()"></div>
           </div>
           <div>
             <label class="np-label" for="pot">Current pension pot</label>
-            <div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500">£</span>
+            <div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-ink-muted">£</span>
               <input id="pot" type="number" min="0" step="500" class="np-input pl-7" x-model.number="inp.currentPot" @input="calc()"></div>
           </div>
         </div>
@@ -131,22 +131,22 @@
           <div class="grid grid-cols-2 gap-3">
             <div>
               <label class="np-label">You (% of salary)</label>
-              <div class="relative"><input type="number" min="0" max="100" step="0.5" class="np-input pr-8" x-model.number="inp.employeePct" @input="updateContribs()"><span class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500">%</span></div>
+              <div class="relative"><input type="number" min="0" max="100" step="0.5" class="np-input pr-8" x-model.number="inp.employeePct" @input="updateContribs()"><span class="absolute right-3 top-1/2 -translate-y-1/2 text-ink-muted">%</span></div>
             </div>
             <div>
               <label class="np-label">Employer (% of salary)</label>
-              <div class="relative"><input type="number" min="0" max="100" step="0.5" class="np-input pr-8" x-model.number="inp.employerPct" @input="updateContribs()"><span class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500">%</span></div>
+              <div class="relative"><input type="number" min="0" max="100" step="0.5" class="np-input pr-8" x-model.number="inp.employerPct" @input="updateContribs()"><span class="absolute right-3 top-1/2 -translate-y-1/2 text-ink-muted">%</span></div>
             </div>
           </div>
-          <p class="text-xs text-slate-500 dark:text-slate-400">Total monthly contribution: <strong x-text="NPF.gbp(monthlyTotal)"></strong></p>
+          <p class="text-xs text-ink-muted">Total monthly contribution: <strong x-text="NPF.gbp(monthlyTotal)"></strong></p>
           <div class="grid grid-cols-2 gap-3">
             <div>
               <label class="np-label">Investment growth</label>
-              <div class="relative"><input type="number" min="0" max="20" step="0.1" class="np-input pr-8" x-model.number="inp.growthPct" @input="calc()"><span class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500">%</span></div>
+              <div class="relative"><input type="number" min="0" max="20" step="0.1" class="np-input pr-8" x-model.number="inp.growthPct" @input="calc()"><span class="absolute right-3 top-1/2 -translate-y-1/2 text-ink-muted">%</span></div>
             </div>
             <div>
               <label class="np-label">Salary growth</label>
-              <div class="relative"><input type="number" min="0" max="20" step="0.1" class="np-input pr-8" x-model.number="inp.salaryGrowthPct" @input="calc()"><span class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500">%</span></div>
+              <div class="relative"><input type="number" min="0" max="20" step="0.1" class="np-input pr-8" x-model.number="inp.salaryGrowthPct" @input="calc()"><span class="absolute right-3 top-1/2 -translate-y-1/2 text-ink-muted">%</span></div>
             </div>
           </div>
           <label class="flex items-center gap-2 text-sm"><input type="checkbox" x-model="inp.includeStatePension" @change="calc()"> Include full State Pension (<span x-text="NPF.gbp(UK_RATES.statePension.annualFull)"></span>/year)</label>
@@ -177,14 +177,18 @@
 
     <section class="lg:col-span-3 space-y-5">
       <div class="np-card p-5 sm:p-6">
+        <div x-show="isEmpty" x-cloak class="np-empty-banner" role="status">
+          <svg class="np-empty-banner-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 9v4M12 17h.01"/><circle cx="12" cy="12" r="10"/></svg>
+          <span><strong>Enter your salary or current pot above</strong> to see your retirement forecast.</span>
+        </div>
         <h2 class="font-semibold text-lg mb-4">Your retirement forecast</h2>
         <div class="grid grid-cols-2 gap-3 text-center">
           <div class="p-4 rounded-lg bg-blue-50 dark:bg-blue-900/30">
-            <div class="text-xs text-slate-600 dark:text-slate-300">Pot at age <span x-text="inp.retireAge"></span></div>
+            <div class="text-xs text-ink-soft">Pot at age <span x-text="inp.retireAge"></span></div>
             <div class="text-2xl font-extrabold text-brand dark:text-blue-300" x-text="NPF.gbp(result.finalPot)"></div>
           </div>
           <div class="p-4 rounded-lg bg-blue-50 dark:bg-blue-900/30">
-            <div class="text-xs text-slate-600 dark:text-slate-300">Total monthly income</div>
+            <div class="text-xs text-ink-soft">Total monthly income</div>
             <div class="text-2xl font-extrabold text-emerald-700 dark:text-emerald-300" x-text="NPF.gbp(income.totalMonthly)"></div>
           </div>
         </div>
@@ -192,7 +196,7 @@
           <div class="flex justify-between"><span>Drawdown @ 4% rule (annual)</span><strong x-text="NPF.gbp(income.drawdownAnnual)"></strong></div>
           <div class="flex justify-between" x-show="inp.includeStatePension"><span>State Pension (annual)</span><strong x-text="NPF.gbp(income.statePensionAnnual)"></strong></div>
           <div class="flex justify-between"><span>Annuity (level, ~5.5%)</span><strong x-text="NPF.gbp(annuity.annual)"></strong></div>
-          <div class="flex justify-between border-t border-slate-200 dark:border-slate-700 pt-2"><span>Total annual income (drawdown + State)</span><strong class="text-emerald-700 dark:text-emerald-300" x-text="NPF.gbp(income.totalAnnual)"></strong></div>
+          <div class="flex justify-between border-t border-border pt-2"><span>Total annual income (drawdown + State)</span><strong class="text-emerald-700 dark:text-emerald-300" x-text="NPF.gbp(income.totalAnnual)"></strong></div>
         </div>
 
         <!-- ZONE 1: Personalised post-result prompt -->
@@ -297,6 +301,7 @@ function pensionApp() {
     inp: { ...UK_AVERAGES },
     UK_AVERAGES,
     isExample: true,
+    get isEmpty() { return (+this.inp.salary || 0) <= 0 && (+this.inp.currentPot || 0) <= 0; },
     result: { finalPot: 0, yearlyRows: [] },
     income: { drawdownAnnual:0, drawdownMonthly:0, statePensionAnnual:0, statePensionMonthly:0, totalAnnual:0, totalMonthly:0 },
     annuity: { annual: 0, monthly: 0 },

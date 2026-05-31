@@ -87,10 +87,10 @@
 <div id="np-header"></div>
 
 <main id="main" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12" x-data="debtApp()" x-init="init()">
-  <nav class="text-sm text-slate-500 mb-4"><a href="../index.html" class="hover:text-brand">Home</a> / <span>Debt Payoff</span></nav>
+  <nav class="np-breadcrumb" aria-label="Breadcrumb"><a href="../index.html">Home</a> / <span aria-current="page">Debt Payoff</span></nav>
   <header class="mb-8">
     <h1 class="text-3xl sm:text-4xl font-extrabold">UK Debt Payoff Calculator</h1>
-    <p class="mt-2 text-slate-600 dark:text-slate-300 max-w-3xl">Add your credit cards, loans and overdrafts. Compare the snowball (smallest balance first) vs avalanche (highest interest first) strategy.</p>
+    <p class="mt-2 text-ink-soft max-w-3xl">Add your credit cards, loans and overdrafts. Compare the snowball (smallest balance first) vs avalanche (highest interest first) strategy.</p>
   </header>
 
   <div class="grid lg:grid-cols-5 gap-6">
@@ -103,24 +103,24 @@
         <h2 class="font-semibold text-lg mb-4">Your debts</h2>
         <div class="space-y-3">
           <template x-for="(d, i) in inp.debts" :key="i">
-            <div class="border border-slate-200 dark:border-slate-700 rounded-lg p-3 space-y-2">
+            <div class="border border-border rounded-lg p-3 space-y-2">
               <div class="flex items-center justify-between">
                 <input type="text" class="np-input text-sm flex-1 mr-2" placeholder="Name (e.g. Credit Card)" x-model="d.name" @input="calc()">
                 <button class="text-rose-600 text-sm hover:underline" @click="removeDebt(i)" type="button">Remove</button>
               </div>
               <div class="grid grid-cols-3 gap-2 text-sm">
                 <div>
-                  <label class="text-xs text-slate-500">Balance</label>
-                  <div class="relative"><span class="absolute left-2 top-1/2 -translate-y-1/2 text-slate-500 text-xs">£</span>
+                  <label class="text-xs text-ink-muted">Balance</label>
+                  <div class="relative"><span class="absolute left-2 top-1/2 -translate-y-1/2 text-ink-muted text-xs">£</span>
                   <input type="number" min="0" step="10" class="np-input pl-5 text-sm" x-model.number="d.balance" @input="calc()"></div>
                 </div>
                 <div>
-                  <label class="text-xs text-slate-500">APR</label>
-                  <div class="relative"><input type="number" min="0" max="100" step="0.1" class="np-input pr-5 text-sm" x-model.number="d.aprPct" @input="calc()"><span class="absolute right-2 top-1/2 -translate-y-1/2 text-slate-500 text-xs">%</span></div>
+                  <label class="text-xs text-ink-muted">APR</label>
+                  <div class="relative"><input type="number" min="0" max="100" step="0.1" class="np-input pr-5 text-sm" x-model.number="d.aprPct" @input="calc()"><span class="absolute right-2 top-1/2 -translate-y-1/2 text-ink-muted text-xs">%</span></div>
                 </div>
                 <div>
-                  <label class="text-xs text-slate-500">Min/mo</label>
-                  <div class="relative"><span class="absolute left-2 top-1/2 -translate-y-1/2 text-slate-500 text-xs">£</span>
+                  <label class="text-xs text-ink-muted">Min/mo</label>
+                  <div class="relative"><span class="absolute left-2 top-1/2 -translate-y-1/2 text-ink-muted text-xs">£</span>
                   <input type="number" min="0" step="5" class="np-input pl-5 text-sm" x-model.number="d.minPayment" @input="calc()"></div>
                 </div>
               </div>
@@ -132,8 +132,8 @@
 
       <div class="np-card p-5 sm:p-6">
         <h2 class="font-semibold text-lg mb-2">Extra monthly payment</h2>
-        <p class="text-sm text-slate-500 dark:text-slate-400 mb-3">On top of all minimum payments — directs to your strategy's top target.</p>
-        <div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500">£</span>
+        <p class="text-sm text-ink-muted mb-3">On top of all minimum payments — directs to your strategy's top target.</p>
+        <div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-ink-muted">£</span>
         <input type="number" min="0" step="10" class="np-input pl-7" x-model.number="inp.extra" @input="calc()"></div>
         <input type="range" min="0" max="1000" step="25" class="np-slider mt-2" x-model.number="inp.extra" @input="calc()">
       </div>
@@ -163,13 +163,13 @@
         <div class="grid grid-cols-2 gap-3">
           <div class="p-4 rounded-lg bg-blue-50 dark:bg-blue-900/30">
             <div class="text-sm font-semibold text-brand dark:text-blue-300">❄️ Snowball</div>
-            <div class="text-xs text-slate-500 dark:text-slate-400 mb-2">Smallest balance first — quick wins</div>
+            <div class="text-xs text-ink-muted mb-2">Smallest balance first — quick wins</div>
             <div class="text-sm">Debt-free in <strong x-text="formatMonths(result.snowball.monthsToFree)"></strong></div>
             <div class="text-sm">Total interest: <strong x-text="NPF.gbp(result.snowball.totalInterest)"></strong></div>
           </div>
           <div class="p-4 rounded-lg bg-emerald-50 dark:bg-emerald-900/30">
             <div class="text-sm font-semibold text-emerald-700 dark:text-emerald-300">🏔️ Avalanche</div>
-            <div class="text-xs text-slate-500 dark:text-slate-400 mb-2">Highest APR first — saves the most</div>
+            <div class="text-xs text-ink-muted mb-2">Highest APR first — saves the most</div>
             <div class="text-sm">Debt-free in <strong x-text="formatMonths(result.avalanche.monthsToFree)"></strong></div>
             <div class="text-sm">Total interest: <strong x-text="NPF.gbp(result.avalanche.totalInterest)"></strong></div>
           </div>
@@ -188,7 +188,7 @@
       <!-- Free help — non-affiliate, ethical priority placement -->
       <div class="np-card p-5 sm:p-6 border-l-4 border-emerald-500">
         <h3 class="font-bold text-base">Struggling? Free, confidential UK debt advice</h3>
-        <p class="text-sm text-slate-600 dark:text-slate-400 mt-1">Charities like <a class="underline font-medium" href="https://www.stepchange.org/" target="_blank" rel="noopener nofollow">StepChange</a> and <a class="underline font-medium" href="https://www.nationaldebtline.org/" target="_blank" rel="noopener nofollow">National Debtline</a> offer free, impartial advice. <strong>You should never pay for debt advice.</strong></p>
+        <p class="text-sm text-ink-soft mt-1">Charities like <a class="underline font-medium" href="https://www.stepchange.org/" target="_blank" rel="noopener nofollow">StepChange</a> and <a class="underline font-medium" href="https://www.nationaldebtline.org/" target="_blank" rel="noopener nofollow">National Debtline</a> offer free, impartial advice. <strong>You should never pay for debt advice.</strong></p>
       </div>
 
       <!-- ZONE 2: Comparison table — only for users not in crisis -->
@@ -199,7 +199,7 @@
 
       <div id="np-disclaimer"></div>
 
-      <div class="np-card p-5 sm:p-6 text-sm text-slate-700 dark:text-slate-300">
+      <div class="np-card p-5 sm:p-6 text-sm text-ink-soft">
         <p><strong>Typical UK APRs (2025):</strong> credit cards 24–35%, store cards up to 40%, personal loans 6–25%, authorised overdrafts ~40% EAR.</p>
         <p class="mt-2">Many UK lenders offer 0% balance transfer cards — used carefully these can speed up payoff dramatically. Beware fees and end-of-promo rates.</p>
       </div>

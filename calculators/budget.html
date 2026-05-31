@@ -87,10 +87,10 @@
 <div id="np-header"></div>
 
 <main id="main" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12" x-data="budgetApp()" x-init="init()">
-  <nav class="text-sm text-slate-500 mb-4"><a href="../index.html" class="hover:text-brand">Home</a> / <span>Budget Planner</span></nav>
+  <nav class="np-breadcrumb" aria-label="Breadcrumb"><a href="../index.html">Home</a> / <span aria-current="page">Budget Planner</span></nav>
   <header class="mb-8">
     <h1 class="text-3xl sm:text-4xl font-extrabold">UK Budget Planner</h1>
-    <p class="mt-2 text-slate-600 dark:text-slate-300 max-w-3xl">A monthly budget built around UK realities — council tax, energy, transport — with the 50/30/20 rule for comparison.</p>
+    <p class="mt-2 text-ink-soft max-w-3xl">A monthly budget built around UK realities — council tax, energy, transport — with the 50/30/20 rule for comparison.</p>
   </header>
 
   <div class="grid lg:grid-cols-5 gap-6">
@@ -105,7 +105,7 @@
           <template x-for="(it, i) in income" :key="'i'+i">
             <div class="flex items-center gap-2">
               <input type="text" class="np-input flex-1" x-model="it.name">
-              <div class="relative w-40"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500">£</span>
+              <div class="relative w-40"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-ink-muted">£</span>
               <input type="number" min="0" step="10" class="np-input pl-7" x-model.number="it.amount"></div>
               <button class="text-rose-600 text-sm" @click="income.splice(i,1)" type="button">×</button>
             </div>
@@ -118,13 +118,13 @@
         <div class="np-card p-5 sm:p-6">
           <div class="flex items-center justify-between mb-4">
             <h2 class="font-semibold text-lg flex items-center gap-2"><span x-text="group.icon"></span><span x-text="group.label"></span></h2>
-            <span class="text-sm text-slate-500" x-text="NPF.gbp(groupTotal(group))"></span>
+            <span class="text-sm text-ink-muted" x-text="NPF.gbp(groupTotal(group))"></span>
           </div>
           <div class="space-y-2">
             <template x-for="(item, i) in group.items" :key="i">
               <div class="flex items-center gap-2">
                 <input type="text" class="np-input flex-1" x-model="item.name">
-                <div class="relative w-40"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500">£</span>
+                <div class="relative w-40"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-ink-muted">£</span>
                 <input type="number" min="0" step="5" class="np-input pl-7" x-model.number="item.amount"></div>
                 <button class="text-rose-600 text-sm" @click="group.items.splice(i,1)" type="button">×</button>
               </div>
@@ -141,15 +141,15 @@
         <div class="space-y-2 text-sm">
           <div class="flex justify-between"><span>Income</span><strong x-text="NPF.gbp(totalIncome)"></strong></div>
           <div class="flex justify-between text-rose-700 dark:text-rose-300"><span>Total spending</span><strong x-text="'-' + NPF.gbp(totalSpending)"></strong></div>
-          <div class="border-t border-slate-200 dark:border-slate-700 pt-2 flex justify-between font-bold"><span>Left over</span><strong :class="leftOver >= 0 ? 'text-emerald-700 dark:text-emerald-300' : 'text-rose-700'" x-text="NPF.gbp(leftOver)"></strong></div>
+          <div class="border-t border-border pt-2 flex justify-between font-bold"><span>Left over</span><strong :class="leftOver >= 0 ? 'text-emerald-700 dark:text-emerald-300' : 'text-rose-700'" x-text="NPF.gbp(leftOver)"></strong></div>
         </div>
         <div class="mt-5">
           <h3 class="font-semibold text-sm mb-2">50/30/20 rule</h3>
-          <p class="text-xs text-slate-500 mb-3">Needs 50% · Wants 30% · Savings 20%</p>
+          <p class="text-xs text-ink-muted mb-3">Needs 50% · Wants 30% · Savings 20%</p>
           <template x-for="r in rule503020" :key="r.label">
             <div class="mb-2">
-              <div class="flex justify-between text-xs"><span x-text="r.label"></span><span><strong x-text="NPF.pct(r.actualPct,0)"></strong> <span class="text-slate-400">(target <span x-text="r.targetPct + '%'"></span>)</span></span></div>
-              <div class="w-full bg-slate-100 dark:bg-slate-800 rounded-full h-2 mt-1 overflow-hidden">
+              <div class="flex justify-between text-xs"><span x-text="r.label"></span><span><strong x-text="NPF.pct(r.actualPct,0)"></strong> <span class="text-ink-muted">(target <span x-text="r.targetPct + '%'"></span>)</span></span></div>
+              <div class="w-full bg-surface-3 rounded-full h-2 mt-1 overflow-hidden">
                 <div class="h-full" :class="r.actualPct > r.targetPct ? 'bg-rose-500' : 'bg-emerald-500'" :style="`width:${Math.min(100, r.actualPct)}%`"></div>
               </div>
             </div>
