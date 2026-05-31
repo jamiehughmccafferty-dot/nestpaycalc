@@ -4,6 +4,32 @@ Single source of truth for every commercial slot on the site, what drives it, an
 
 ---
 
+## 0 · Affiliate networks signed up to
+
+Running log of networks the site is registered with. Update each row as approvals and rejections come in.
+
+| Network | Status | Signed up | Verification | Notes |
+|---|---|---|---|---|
+| **FlexOffers** | Pending approval | _add date_ | ✅ meta `fo-verify` on homepage | Big US-headquartered network — strong for UK pension / SIPP / cashback advertisers. Manual approval, usually 1–3 days. |
+| _Awin_ | _not yet_ | — | — | Strong UK fintech roster (Barclaycard, Skipton, Habito etc.). Worth applying once FlexOffers is live. |
+| _Impact_ | _not yet_ | — | — | Premium platforms (Wise, Trading 212 often here). |
+| _Tradedoubler_ | _not yet_ | — | — | UK-focused, decent for ISA / banking advertisers. |
+| _Direct programs_ | _not yet_ | — | — | Some big UK fintechs (Moneybox, Plum, Chase) run direct affiliate programs — best rates if approved. |
+
+### Where ownership verification tags live
+
+Any meta tag a network gives you to prove site ownership goes in **`index.html`**, inside the block marked:
+
+```html
+<!-- ===== Affiliate / search-engine ownership verifications ===== -->
+…
+<!-- ===== end verifications ===== -->
+```
+
+Each one gets a `<!-- NetworkName — applied YYYY-MM-DD -->` comment above it so you can audit later.
+
+---
+
 ## 1 · The central registry
 
 **`assets/js/affiliates.js`** — every affiliate offer on the entire site is defined in the `OFFERS` object at the top of this file. Edit one entry there, every placement that references it updates automatically.
