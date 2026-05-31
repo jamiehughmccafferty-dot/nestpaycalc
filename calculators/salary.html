@@ -272,10 +272,6 @@
     <section class="lg:col-span-3 space-y-5">
 
       <div class="np-card p-5 sm:p-6">
-        <div x-show="isEmpty" x-cloak class="np-empty-banner" role="status">
-          <svg class="np-empty-banner-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 9v4M12 17h.01"/><path d="M4.93 4.93l14.14 14.14M19.07 4.93L4.93 19.07"/><circle cx="12" cy="12" r="10"/></svg>
-          <span><strong>Enter your salary above</strong> to see your take-home pay.</span>
-        </div>
         <div class="flex items-center justify-between mb-4">
           <h2 class="font-semibold text-lg">Your take-home pay</h2>
           <span class="text-xs px-2 py-1 rounded bg-accent-soft text-emerald-800 font-semibold">2026/27</span>
@@ -465,7 +461,6 @@ function salaryApp() {
     inp: { ...UK_AVERAGES, studentPlans: [] },
     UK_AVERAGES,
     isExample: true,
-    get isEmpty() { return (+this.inp.grossSalary || 0) <= 0; },
     result: { totalGross: 0, takeHome: 0, monthly: { net: 0, gross: 0, tax: 0, ni: 0, studentLoan: 0, pension: 0 }, weekly: { net: 0, gross: 0, tax: 0, ni: 0, studentLoan: 0, pension: 0 }, incomeTax: { tax: 0, breakdown: [] }, ni: { ni: 0, breakdown: [] }, studentLoans: { total: 0, breakdown: [] }, pension: { employee: 0, employer: 0 }, personalAllowance: 0, effectiveTaxRate: 0 },
     whatIf: 0, whatIfResult: {},
     chart: null,

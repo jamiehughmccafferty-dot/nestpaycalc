@@ -430,19 +430,6 @@
   .np-example-banner-text { flex: 1; line-height: 1.4; }
   .np-example-banner-text strong { color: rgb(var(--ink)); font-weight: 600; }
 
-  /* ===== Empty-state banner — shown when a required field is blank/zero,
-     so users don't see a silent £0 result and assume the calc is broken. ===== */
-  .np-empty-banner {
-    display: flex; align-items: center; gap: .65rem;
-    padding: .8rem 1rem; border-radius: 12px;
-    background: rgb(var(--warning) / 0.08);
-    border: 1px dashed rgb(var(--warning) / 0.45);
-    font-size: .9rem; color: rgb(var(--ink-soft));
-    margin-bottom: 1rem;
-  }
-  .np-empty-banner-icon { width: 20px; height: 20px; flex-shrink: 0; color: rgb(var(--warning)); }
-  .np-empty-banner strong { color: rgb(var(--ink)); font-weight: 600; }
-
   /* ============================================================
    * AFFILIATE / SPONSORED COMPONENTS
    * ============================================================ */

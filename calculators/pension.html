@@ -177,10 +177,6 @@
 
     <section class="lg:col-span-3 space-y-5">
       <div class="np-card p-5 sm:p-6">
-        <div x-show="isEmpty" x-cloak class="np-empty-banner" role="status">
-          <svg class="np-empty-banner-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 9v4M12 17h.01"/><circle cx="12" cy="12" r="10"/></svg>
-          <span><strong>Enter your salary or current pot above</strong> to see your retirement forecast.</span>
-        </div>
         <h2 class="font-semibold text-lg mb-4">Your retirement forecast</h2>
         <div class="grid grid-cols-2 gap-3 text-center">
           <div class="p-4 rounded-lg bg-blue-50 dark:bg-blue-900/30">
@@ -301,7 +297,6 @@ function pensionApp() {
     inp: { ...UK_AVERAGES },
     UK_AVERAGES,
     isExample: true,
-    get isEmpty() { return (+this.inp.salary || 0) <= 0 && (+this.inp.currentPot || 0) <= 0; },
     result: { finalPot: 0, yearlyRows: [] },
     income: { drawdownAnnual:0, drawdownMonthly:0, statePensionAnnual:0, statePensionMonthly:0, totalAnnual:0, totalMonthly:0 },
     annuity: { annual: 0, monthly: 0 },
