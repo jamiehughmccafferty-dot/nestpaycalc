@@ -135,6 +135,13 @@ const FILES = [
     ogTitle: 'Cash ISA vs Stocks & Shares ISA in 2026/27 — which one?',
     ogDescription: 'A clear comparison for UK savers — returns, risk, time horizons, splitting your £20,000 allowance, with a live side-by-side projection.',
     ogType: 'article'
+  },
+  {
+    file: 'blog/when-is-salary-sacrifice-worth-it.html',
+    ogUrl: `${SITE}/blog/when-is-salary-sacrifice-worth-it`,
+    ogTitle: 'When is salary sacrifice worth it? UK guide 2026/27',
+    ogDescription: 'How UK salary sacrifice cuts income tax AND NI, with worked examples for basic, higher, additional rate and the £100k taper. Plus a live savings calculator and the catches to know.',
+    ogType: 'article'
   }
 ];
 
