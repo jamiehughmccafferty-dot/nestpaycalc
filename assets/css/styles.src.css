@@ -750,6 +750,131 @@
   .prose-np table tbody td { padding: .65rem .9rem; }
 
   /* ============================================================
+   * FEATURED ARTICLE CARD (blog hub) — reusable shell
+   *
+   * Usage:
+   *   <a class="np-feature-card">
+   *     <div class="np-feature-card-inner">
+   *       <div class="np-feature-graphic">     ← right panel
+   *         <div class="np-feature-graphic-bg"></div>
+   *         <div class="np-feature-blob np-feature-blob-1"></div>
+   *         <div class="np-feature-blob np-feature-blob-2"></div>
+   *         <div class="np-feature-grid-overlay"></div>
+   *         <div class="np-feature-divider"></div>
+   *         <div class="relative h-full ...">  ← your topic-specific widget
+   *           …
+   *         </div>
+   *       </div>
+   *       <div class="np-feature-text">…</div>  ← left text column
+   *     </div>
+   *   </a>
+   *
+   * Each new pillar article gets its own topic-specific widget on the right
+   * (a bands bar, a growth chart, a comparison block, etc.) while reusing
+   * the same outer shell, borders, hover state and accent gradient stripe.
+   * ============================================================ */
+  .np-feature-card {
+    display: block; isolation: isolate;
+  }
+  .np-feature-card-inner {
+    position: relative; overflow: hidden;
+    border-radius: 18px;
+    border: 1px solid rgb(var(--border));
+    background: rgb(var(--surface));
+    box-shadow:
+      0 1px 0 0 rgb(255 255 255 / 0.65) inset,
+      0 1px 2px rgb(15 23 42 / 0.04),
+      0 12px 32px -10px rgb(15 23 42 / 0.08);
+    transition: box-shadow .25s var(--ease-out), transform .25s var(--ease-out);
+  }
+  .dark .np-feature-card-inner {
+    box-shadow:
+      0 1px 0 0 rgb(255 255 255 / 0.04) inset,
+      0 1px 2px rgb(0 0 0 / 0.3),
+      0 12px 32px -10px rgb(0 0 0 / 0.5);
+  }
+  .np-feature-card:hover .np-feature-card-inner {
+    box-shadow:
+      0 1px 0 0 rgb(255 255 255 / 0.65) inset,
+      0 16px 40px -10px rgb(15 23 42 / 0.14),
+      0 4px 12px -4px rgb(15 23 42 / 0.06);
+    transform: translateY(-2px);
+  }
+  /* Accent gradient stripe at the top */
+  .np-feature-card-inner::before {
+    content: ''; position: absolute; inset: 0 0 auto 0; height: 2px;
+    background: linear-gradient(90deg, rgb(var(--brand)), rgb(var(--accent)));
+    z-index: 1;
+  }
+
+  /* Right-side data graphic — hidden on mobile so the headline gets full width */
+  .np-feature-graphic {
+    position: absolute; top: 0; right: 0; bottom: 0;
+    width: 45%;
+    display: none;
+  }
+  @media (min-width: 768px) { .np-feature-graphic { display: block; } }
+  @media (min-width: 1024px) { .np-feature-graphic { width: 42%; } }
+
+  .np-feature-graphic-bg {
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgb(var(--surface-3)) 0%, rgb(var(--surface)) 100%);
+  }
+  .dark .np-feature-graphic-bg {
+    background: linear-gradient(135deg, rgb(var(--surface-2)) 0%, rgb(var(--surface)) 100%);
+  }
+
+  /* Two blurred colour blobs — brand top-right, accent bottom-left.
+     Subtle on light, slightly stronger on dark. */
+  .np-feature-blob {
+    position: absolute; border-radius: 50%; filter: blur(60px);
+    pointer-events: none;
+  }
+  .np-feature-blob-1 {
+    top: -80px; right: -80px; width: 280px; height: 280px;
+    background: rgb(var(--brand) / 0.10);
+  }
+  .np-feature-blob-2 {
+    bottom: -120px; left: -32px; width: 220px; height: 220px;
+    background: rgb(var(--accent) / 0.10);
+  }
+  .dark .np-feature-blob-1 { background: rgb(var(--brand) / 0.18); }
+  .dark .np-feature-blob-2 { background: rgb(var(--accent) / 0.16); }
+
+  /* Subtle dotted-grid texture */
+  .np-feature-grid-overlay {
+    position: absolute; inset: 0;
+    background-image: radial-gradient(circle, rgb(var(--ink-muted) / 0.18) 1px, transparent 1px);
+    background-size: 16px 16px;
+    opacity: 0.4;
+    pointer-events: none;
+  }
+  .dark .np-feature-grid-overlay {
+    background-image: radial-gradient(circle, rgb(255 255 255 / 0.10) 1px, transparent 1px);
+    opacity: 0.5;
+  }
+
+  /* Hairline between text and graphic panel */
+  .np-feature-divider {
+    position: absolute; top: 2rem; bottom: 2rem; left: 0;
+    width: 1px;
+    background: rgb(var(--border));
+    pointer-events: none;
+  }
+
+  .np-feature-text {
+    position: relative;
+    padding: 1.75rem;
+  }
+  @media (min-width: 640px) { .np-feature-text { padding: 2.25rem; } }
+  @media (min-width: 768px) {
+    .np-feature-text { padding: 3rem 48% 3rem 2.25rem; }
+  }
+  @media (min-width: 1024px) {
+    .np-feature-text { padding: 3rem 46% 3rem 2.5rem; }
+  }
+
+  /* ============================================================
    * READING PROGRESS BAR + STICKY TOC (used on article pages)
    * ============================================================ */
   .np-reading-progress {
