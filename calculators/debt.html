@@ -11,7 +11,7 @@
 <!-- ===== Social + favicon + manifest (managed by scripts/inject-meta.js) ===== -->
 <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
 <link rel="manifest" href="../site.webmanifest">
-<meta property="og:title" content="UK Debt Payoff Calculator — Snowball vs Avalanche">
+<meta property="og:title" content="UK Debt Payoff Calculator - Snowball vs Avalanche">
 <meta property="og:description" content="Compare snowball vs avalanche strategies on UK credit cards, loans and overdrafts. See months to debt-free and interest saved.">
 <meta property="og:url" content="https://nestpaycalc.com/calculators/debt">
 <meta property="og:type" content="website">
@@ -20,7 +20,7 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="UK Debt Payoff Calculator — Snowball vs Avalanche">
+<meta name="twitter:title" content="UK Debt Payoff Calculator - Snowball vs Avalanche">
 <meta name="twitter:description" content="Compare snowball vs avalanche strategies on UK credit cards, loans and overdrafts. See months to debt-free and interest saved.">
 <meta name="twitter:image" content="https://nestpaycalc.com/assets/og/site.png">
 <!-- ===== end social block ===== -->
@@ -132,7 +132,7 @@
 
       <div class="np-card p-5 sm:p-6">
         <h2 class="font-semibold text-lg mb-2">Extra monthly payment</h2>
-        <p class="text-sm text-ink-muted mb-3">On top of all minimum payments — directs to your strategy's top target.</p>
+        <p class="text-sm text-ink-muted mb-3">On top of all minimum payments - directs to your strategy's top target.</p>
         <div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-ink-muted">£</span>
         <input type="number" min="0" step="10" class="np-input pl-7" x-model.number="inp.extra" @input="calc()"></div>
         <input type="range" min="0" max="1000" step="25" class="np-slider mt-2" x-model.number="inp.extra" @input="calc()">
@@ -163,13 +163,13 @@
         <div class="grid grid-cols-2 gap-3">
           <div class="p-4 rounded-lg bg-blue-50 dark:bg-blue-900/30">
             <div class="text-sm font-semibold text-brand dark:text-blue-300">❄️ Snowball</div>
-            <div class="text-xs text-ink-muted mb-2">Smallest balance first — quick wins</div>
+            <div class="text-xs text-ink-muted mb-2">Smallest balance first - quick wins</div>
             <div class="text-sm">Debt-free in <strong x-text="formatMonths(result.snowball.monthsToFree)"></strong></div>
             <div class="text-sm">Total interest: <strong x-text="NPF.gbp(result.snowball.totalInterest)"></strong></div>
           </div>
           <div class="p-4 rounded-lg bg-emerald-50 dark:bg-emerald-900/30">
             <div class="text-sm font-semibold text-emerald-700 dark:text-emerald-300">🏔️ Avalanche</div>
-            <div class="text-xs text-ink-muted mb-2">Highest APR first — saves the most</div>
+            <div class="text-xs text-ink-muted mb-2">Highest APR first - saves the most</div>
             <div class="text-sm">Debt-free in <strong x-text="formatMonths(result.avalanche.monthsToFree)"></strong></div>
             <div class="text-sm">Total interest: <strong x-text="NPF.gbp(result.avalanche.totalInterest)"></strong></div>
           </div>
@@ -185,13 +185,13 @@
       <!-- ZONE 1: Personalised post-result prompt -->
       <div x-html="resultPromptHTML"></div>
 
-      <!-- Free help — non-affiliate, ethical priority placement -->
+      <!-- Free help - non-affiliate, ethical priority placement -->
       <div class="np-card p-5 sm:p-6 border-l-4 border-emerald-500">
         <h3 class="font-bold text-base">Struggling? Free, confidential UK debt advice</h3>
         <p class="text-sm text-ink-soft mt-1">Charities like <a class="underline font-medium" href="https://www.stepchange.org/" target="_blank" rel="noopener nofollow">StepChange</a> and <a class="underline font-medium" href="https://www.nationaldebtline.org/" target="_blank" rel="noopener nofollow">National Debtline</a> offer free, impartial advice. <strong>You should never pay for debt advice.</strong></p>
       </div>
 
-      <!-- ZONE 2: Comparison table — only for users not in crisis -->
+      <!-- ZONE 2: Comparison table - only for users not in crisis -->
       <div x-html="comparisonHTML"></div>
 
       <!-- ZONE 3: Trust strip -->
@@ -201,7 +201,7 @@
 
       <div class="np-card p-5 sm:p-6 text-sm text-ink-soft">
         <p><strong>Typical UK APRs (2025):</strong> credit cards 24–35%, store cards up to 40%, personal loans 6–25%, authorised overdrafts ~40% EAR.</p>
-        <p class="mt-2">Many UK lenders offer 0% balance transfer cards — used carefully these can speed up payoff dramatically. Beware fees and end-of-promo rates.</p>
+        <p class="mt-2">Many UK lenders offer 0% balance transfer cards - used carefully these can speed up payoff dramatically. Beware fees and end-of-promo rates.</p>
       </div>
     </section>
   </div>
@@ -219,7 +219,7 @@
 <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 <script>
 function debtApp() {
-  // UK averages: typical UK household debt mix — TheMoneyCharity stats:
+  // UK averages: typical UK household debt mix - TheMoneyCharity stats:
   // average credit card balance ~£2.5k at typical APR 24.9%, plus a small
   // store/second card and a personal loan around the median £8k.
   const UK_AVERAGES = {
@@ -241,7 +241,7 @@ function debtApp() {
     resultPromptHTML: '', comparisonHTML: '', trustHTML: '',
 
     init() {
-      // Restore from share/save URL — debts encoded as base64-JSON in `d`
+      // Restore from share/save URL - debts encoded as base64-JSON in `d`
       const s = window.NPShare.readState(['d', 'x']);
       const hasParams = Object.keys(s).length > 0;
       if (s.d) {
@@ -310,12 +310,12 @@ function debtApp() {
       const interestSaved = Math.max(0, this.result.snowball.totalInterest - this.result.avalanche.totalInterest);
       const inCrisis = totalDebt > 0 && this.inp.extra === 0 && this.inp.debts.some(d => d.balance > d.minPayment * 50);
 
-      // If user appears to be in crisis (very high debt-to-min ratio, no extra payments) — lead with charity, NO affiliate
+      // If user appears to be in crisis (very high debt-to-min ratio, no extra payments) - lead with charity, NO affiliate
       if (inCrisis) {
         this.resultPromptHTML = A.renderResultPrompt({
           icon: '🤝',
           title: 'It looks like a free, no-obligation debt plan could help you most right now.',
-          sub: 'StepChange is a registered UK charity — they do not charge ever',
+          sub: 'StepChange is a registered UK charity - they do not charge ever',
           cta: 'Get free help',
           href: 'https://www.stepchange.org/'
         });

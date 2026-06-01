@@ -43,7 +43,7 @@
   <g transform="translate(64, 260)">
     <text font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="600" fill="rgba(255,255,255,0.72)" letter-spacing="2">FREE UK FINANCIAL CALCULATORS</text>
     <text y="80" font-family="Inter, system-ui, sans-serif" font-size="76" font-weight="800" fill="#ffffff" letter-spacing="-2">Accurate &amp; easy to use</text>
-    <text y="130" font-family="Inter, system-ui, sans-serif" font-size="76" font-weight="800" fill="url(#hl)" letter-spacing="-2">— right down to the penny.</text>
+    <text y="130" font-family="Inter, system-ui, sans-serif" font-size="76" font-weight="800" fill="url(#hl)" letter-spacing="-2">- right down to the penny.</text>
   </g>
 
   <!-- Stats row -->

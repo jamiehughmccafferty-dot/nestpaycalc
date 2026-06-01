@@ -1,5 +1,5 @@
 /**
- * scripts/inject-jsonld.js — one-shot, idempotent.
+ * scripts/inject-jsonld.js - one-shot, idempotent.
  *
  * Adds rich JSON-LD schemas:
  *   • Organization (homepage)
@@ -34,9 +34,9 @@ function organization() {
     legalName: 'Croft & Hugh Digital LTD',
     url: `${SITE}/`,
     logo: `${SITE}/assets/favicon.svg`,
-    description: 'Free UK financial calculators — salary, mortgage, savings, pension, debt and budget.',
+    description: 'Free UK financial calculators - salary, mortgage, savings, pension, debt and budget.',
     email: 'Hello@crofthughdigital.co.uk',
-    // Companies House number — required for Companies Act 2006 s.82 disclosure
+    // Companies House number - required for Companies Act 2006 s.82 disclosure
     identifier: {
       '@type': 'PropertyValue',
       propertyID: 'CompaniesHouseNumber',
@@ -124,17 +124,17 @@ function injectLd(absPath, key, json) {
 // ─── Run ──────────────────────────────────────────────────────────────────
 const root = path.resolve(__dirname, '..');
 
-// Homepage — Organization + WebSite
+// Homepage - Organization + WebSite
 injectLd(path.join(root, 'index.html'), 'org', organization());
 injectLd(path.join(root, 'index.html'), 'website', website());
-console.log('✓ index.html — Organization + WebSite');
+console.log('✓ index.html - Organization + WebSite');
 
-// Each calc — BreadcrumbList + WebApplication
+// Each calc - BreadcrumbList + WebApplication
 for (const calc of CALCS) {
   const abs = path.join(root, calc.file);
   injectLd(abs, 'breadcrumb', breadcrumb(calc));
   injectLd(abs, 'webapp', webApp(calc));
-  console.log('✓', calc.file, '— Breadcrumb + WebApplication');
+  console.log('✓', calc.file, '- Breadcrumb + WebApplication');
 }
 
 console.log('\nDone.');

@@ -237,12 +237,12 @@
         <h3 class="font-semibold text-base mb-2">Stamp duty 2026/27 reference</h3>
         <p class="mb-2"><strong>England / NI (SDLT):</strong> 0% to £125k, 2% £125k–£250k, 5% £250k–£925k, 10% £925k–£1.5m, 12% above. First-time buyer relief up to £500k.</p>
         <p class="mb-2"><strong>Scotland (LBTT):</strong> 0% to £145k, 2%–12% banded above. FTB threshold £175k. ADS surcharge 8%.</p>
-        <p><strong>Wales (LTT):</strong> 0% to £225k, 6%–12% above. No FTB relief — already higher threshold.</p>
+        <p><strong>Wales (LTT):</strong> 0% to £225k, 6%–12% above. No FTB relief - already higher threshold.</p>
         <p class="mt-2 text-xs">See <a class="underline" href="https://www.gov.uk/stamp-duty-land-tax" target="_blank" rel="noopener">gov.uk</a>, <a class="underline" href="https://revenue.scot/" target="_blank" rel="noopener">Revenue Scotland</a>, <a class="underline" href="https://gov.wales/land-transaction-tax-guide" target="_blank" rel="noopener">WRA</a>.</p>
         <p class="mt-3 text-sm">Not sure if you're getting the best rate? A <span x-html="NPAffiliates.inlineLink('mortgage', 'whole-of-market mortgage broker')"></span> can compare deals you can't get direct, including buy-to-let and remortgage offers.</p>
       </div>
 
-      <!-- Related guides — drives readers from calc to long-form content -->
+      <!-- Related guides - drives readers from calc to long-form content -->
       <div class="np-card p-5 sm:p-6">
         <div class="flex items-center gap-2 text-xs font-semibold text-ink-muted uppercase tracking-wider mb-4">
           <i data-lucide="book-open" class="w-3.5 h-3.5"></i> Read more
@@ -254,7 +254,7 @@
                 <i data-lucide="home" class="w-4 h-4"></i>
               </div>
               <div class="flex-1 min-w-0">
-                <div class="font-semibold text-ink group-hover:text-brand transition-colors leading-snug">UK stamp duty in 2026/27 — full guide</div>
+                <div class="font-semibold text-ink group-hover:text-brand transition-colors leading-snug">UK stamp duty in 2026/27 - full guide</div>
                 <div class="text-sm text-ink-soft mt-0.5">SDLT, LBTT, LTT, first-time buyer relief and the 5% second-home surcharge.</div>
                 <div class="text-xs text-ink-muted mt-1">11 min read</div>
               </div>
@@ -292,7 +292,7 @@
 <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 <script>
 function mortgageApp() {
-  // Canonical UK averages — UK average property £290k (ONS HPI), 10% deposit,
+  // Canonical UK averages - UK average property £290k (ONS HPI), 10% deposit,
   // typical 5y fix rate, 25y term, England/repayment.
   const UK_AVERAGES = { price: 290000, deposit: 29000, rate: 4.75, term: 25, type: 'repayment', overpayment: 0, region: 'england', ftb: false, additional: false };
   return {
@@ -366,14 +366,14 @@ function mortgageApp() {
         prompt = {
           icon: '🏠',
           title: `You'll pay ${window.NPF.gbp(r.stampDuty)} in stamp duty plus ${window.NPF.gbp(r.totalInterest)} interest. A broker could save thousands.`,
-          sub: 'Free whole-of-market mortgage advice — no fee from L&C',
+          sub: 'Free whole-of-market mortgage advice - no fee from L&C',
           cta: 'Find a broker',
           href: '../deals.html#mortgage'
         };
       } else if (isFTB) {
         prompt = {
           icon: '🔑',
-          title: `First-time buyer? Lenders compete for FTB deals — your monthly ${window.NPF.gbp(r.monthly)} could be lower.`,
+          title: `First-time buyer? Lenders compete for FTB deals - your monthly ${window.NPF.gbp(r.monthly)} could be lower.`,
           sub: 'Free, FCA-regulated whole-of-market broker',
           cta: 'Compare brokers',
           href: '../deals.html#mortgage'
@@ -399,7 +399,7 @@ function mortgageApp() {
 
       this.comparisonHTML = A.renderComparisonTable({
         category: 'mortgage',
-        title: 'Top UK mortgage brokers — free advice, whole-of-market',
+        title: 'Top UK mortgage brokers - free advice, whole-of-market',
         subtitle: 'FCA-regulated · access deals not available direct',
         limit: 2
       });

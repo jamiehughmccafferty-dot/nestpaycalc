@@ -1,13 +1,13 @@
 /* ============================================================
- * NestPayCalc — Motion module
+ * NestPayCalc - Motion module
  *
- *   1. Scroll reveal     — IntersectionObserver fade-ups on .np-reveal
- *   2. Chart.js theme    — Inter font, refined tooltip, neutral gridlines
+ *   1. Scroll reveal     - IntersectionObserver fade-ups on .np-reveal
+ *   2. Chart.js theme    - Inter font, refined tooltip, neutral gridlines
  *                          (token-neutral so it works in both light + dark)
- *   3. Stable focus mgmt — focus a calculator's main heading on view
+ *   3. Stable focus mgmt - focus a calculator's main heading on view
  *                          transition into a calc page (a11y win)
  *
- * Honours prefers-reduced-motion: reduce — all reveals become instant.
+ * Honours prefers-reduced-motion: reduce - all reveals become instant.
  * ============================================================ */
 (function () {
 
@@ -48,7 +48,7 @@
     C.defaults.color       = 'rgb(127 140 160 / 0.95)';
     C.defaults.borderColor = 'rgb(127 140 160 / 0.18)';
 
-    // Tooltip — matches our modal style
+    // Tooltip - matches our modal style
     const t = C.defaults.plugins.tooltip;
     t.backgroundColor = 'rgb(15 23 42 / 0.95)';
     t.titleColor      = '#fff';
@@ -73,7 +73,7 @@
       C.defaults.plugins.legend.labels.usePointStyle = true;
     }
 
-    // Scales — neutral gridlines that work in both modes
+    // Scales - neutral gridlines that work in both modes
     if (C.defaults.scale) {
       C.defaults.scale.grid.color     = 'rgb(127 140 160 / 0.12)';
       C.defaults.scale.grid.tickColor = 'transparent';
@@ -93,7 +93,7 @@
     C.defaults.elements.bar.borderRadius = 6;
     C.defaults.elements.bar.borderSkipped = false;
 
-    // Animation — refined easing & duration
+    // Animation - refined easing & duration
     C.defaults.animation.duration = prefersReduced ? 0 : 600;
     C.defaults.animation.easing   = 'easeOutQuart';
 
@@ -137,7 +137,7 @@
   /* ---------- 4. Prefetch-on-hover ----------
      Quietly prefetches any same-origin link the user hovers over, so the
      next navigation is already in cache. Tiny bandwidth hit, big perceived
-     speed win — works perfectly with cross-document view transitions. */
+     speed win - works perfectly with cross-document view transitions. */
   function setupPrefetch() {
     if (prefersReduced) return;
     const conn = navigator.connection;
@@ -340,7 +340,7 @@
     init();
   }
 
-  /* Re-run reveal after the user navigates via view transitions —
+  /* Re-run reveal after the user navigates via view transitions -
      pageshow fires on bfcache restore + cross-document VT navigation. */
   window.addEventListener('pageshow', () => {
     setupReveal();

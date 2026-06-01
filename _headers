@@ -1,4 +1,4 @@
-# Cloudflare Pages — global response headers
+# Cloudflare Pages - global response headers
 # Docs: https://developers.cloudflare.com/pages/configuration/headers/
 
 # ─── Security headers (every response) ───────────────────────────────
@@ -20,7 +20,7 @@
 /assets/og/*
   Cache-Control: public, max-age=604800
 
-# ─── HTML pages — short cache + revalidate ───────────────────────────
+# ─── HTML pages - short cache + revalidate ───────────────────────────
 # This lets you push content fixes (rate updates, tax-year bumps) and have
 # them propagate within an hour without aggressive purging.
 /*.html

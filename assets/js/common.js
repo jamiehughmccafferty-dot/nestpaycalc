@@ -111,7 +111,7 @@
           </svg>
           NestPayCalc
         </div>
-        <p class="text-sm text-ink-muted leading-relaxed">Free UK financial calculators — accurate, easy, and built for real-world UK rules.</p>
+        <p class="text-sm text-ink-muted leading-relaxed">Free UK financial calculators - accurate, easy, and built for real-world UK rules.</p>
       </div>
       <div>
         <h3 class="font-semibold text-ink mb-3 text-xs uppercase tracking-wider text-ink-muted">Calculators</h3>
@@ -157,7 +157,7 @@
   function injectDisclaimerBar() {
     return `
 <div class="np-disclaimer mt-6">
-  <strong>For illustrative purposes only.</strong> Not financial advice — figures are based on current UK rates which may change. For regulated advice please consult an FCA-authorised adviser. Affiliate links may earn us a commission.
+  <strong>For illustrative purposes only.</strong> Not financial advice - figures are based on current UK rates which may change. For regulated advice please consult an FCA-authorised adviser. Affiliate links may earn us a commission.
 </div>`;
   }
 
@@ -227,7 +227,7 @@
     update();
   }
 
-  // Lucide icons — modern, consistent stroke icons used across all buttons.
+  // Lucide icons - modern, consistent stroke icons used across all buttons.
   // We load it once site-wide via common.js and expose a refresh helper so any
   // dynamic content (modals, etc.) can re-render its icons after injection.
   const lucideReady = new Promise((resolve) => {
@@ -240,7 +240,7 @@
     document.head.appendChild(s);
   });
 
-  // Motion module — scroll reveal + Chart.js theme.
+  // Motion module - scroll reveal + Chart.js theme.
   // Loaded eagerly because Chart.js may be already on the page when this runs.
   (function loadMotion() {
     if (document.querySelector('script[data-np-motion]')) return;

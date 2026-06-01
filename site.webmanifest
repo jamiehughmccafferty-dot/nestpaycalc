@@ -1,7 +1,7 @@
 {
-  "name": "NestPayCalc — Free UK Financial Calculators",
+  "name": "NestPayCalc - Free UK Financial Calculators",
   "short_name": "NestPayCalc",
-  "description": "Free, accurate UK financial calculators — salary, mortgage, savings, pension, debt and budget.",
+  "description": "Free, accurate UK financial calculators - salary, mortgage, savings, pension, debt and budget.",
   "start_url": "/",
   "scope": "/",
   "display": "minimal-ui",

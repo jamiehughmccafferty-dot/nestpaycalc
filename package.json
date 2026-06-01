@@ -2,7 +2,7 @@
   "name": "nestpaycalc",
   "version": "1.0.0",
   "private": true,
-  "description": "Free UK financial calculators — static site",
+  "description": "Free UK financial calculators - static site",
   "scripts": {
     "build:css": "tailwindcss -i ./assets/css/styles.src.css -o ./assets/css/styles.css --minify",
     "build:og": "node scripts/build-og.js",

@@ -1,13 +1,13 @@
-# Cloudflare Pages — redirects
+# Cloudflare Pages - redirects
 # Format: source destination [statusCode]
 # Docs: https://developers.cloudflare.com/pages/configuration/redirects/
 #
 # ⚠️  DEFENSIVE BACKUP for Cloudflare Pages only.
-# Production runs on Vercel — see vercel.json ("cleanUrls": true, "trailingSlash": false)
+# Production runs on Vercel - see vercel.json ("cleanUrls": true, "trailingSlash": false)
 # which auto-handles the .html → clean-URL redirects below. Vercel IGNORES this file.
 # Keep both in sync in case we ever flip hosts.
 
-# ─── Clean URLs — let people drop the .html ─────────────────────────
+# ─── Clean URLs - let people drop the .html ─────────────────────────
 /calculators/salary    /calculators/salary.html    301
 /calculators/mortgage  /calculators/mortgage.html  301
 /calculators/savings   /calculators/savings.html   301

@@ -79,18 +79,18 @@ window.NPSalary = (function () {
    * Parse a UK PAYE tax code and return how it affects the tax calc.
    *
    * Returns { valid, normalised, adjusted, codePA, kCodeAddition, specialCode }
-   *   valid          — whether the code was parseable
-   *   normalised     — canonical form (uppercase, no whitespace/punctuation)
-   *   adjusted       — gross-for-tax after K-code addition
-   *   codePA         — personal allowance the code grants
-   *   kCodeAddition  — extra taxable income added by a K code (0 otherwise)
-   *   specialCode    — 'BR' | 'D0' | 'D1' | 'NT' | '0T' | null
+   *   valid          - whether the code was parseable
+   *   normalised     - canonical form (uppercase, no whitespace/punctuation)
+   *   adjusted       - gross-for-tax after K-code addition
+   *   codePA         - personal allowance the code grants
+   *   kCodeAddition  - extra taxable income added by a K code (0 otherwise)
+   *   specialCode    - 'BR' | 'D0' | 'D1' | 'NT' | '0T' | null
    *
    * Supported forms:
    *   - Standard numeric: 1257L, 1257M, 1257N, 1257T, 1257Y, 1257X (suffix optional)
    *   - K-codes:          K500 (adds £5,000 to taxable income)
    *   - Special codes:    BR, D0, D1, NT, 0T (case/whitespace-insensitive)
-   *   - Emergency suffix: 1257L W1, 1257L M1, 1257L X — treated as the base code
+   *   - Emergency suffix: 1257L W1, 1257L M1, 1257L X - treated as the base code
    */
   function adjustForTaxCode(grossForTax, taxCode, defaultPA) {
     if (!taxCode) return { valid: true, normalised: '1257L', adjusted: grossForTax, codePA: defaultPA, kCodeAddition: 0, specialCode: null };
@@ -100,7 +100,7 @@ window.NPSalary = (function () {
     // compute on an annual basis.
     const tc = String(taxCode).replace(/[\s\-]/g, '').toUpperCase().replace(/(W1|M1|X)$/, '');
 
-    // Special codes — everything taxed at one rate, or no tax at all.
+    // Special codes - everything taxed at one rate, or no tax at all.
     if (tc === 'NT') {
       return { valid: true, normalised: 'NT', adjusted: 0, codePA: 0, kCodeAddition: 0, specialCode: 'NT' };
     }
@@ -116,7 +116,7 @@ window.NPSalary = (function () {
     // Standard numeric code with optional letter suffix
     const m = tc.match(/^(K?)(\d+)([LMNPTYX]?)$/);
     if (!m) {
-      // Unparseable — fall back to the default PA but flag invalid for UI
+      // Unparseable - fall back to the default PA but flag invalid for UI
       return { valid: false, normalised: tc, adjusted: grossForTax, codePA: defaultPA, kCodeAddition: 0, specialCode: null };
     }
     const isK = m[1] === 'K';
@@ -148,7 +148,7 @@ window.NPSalary = (function () {
     breakpoints.add(r.personalAllowance);
     r.bands.forEach(b => { if (isFinite(b.upTo)) breakpoints.add(b.upTo); });
     breakpoints.add(r.paTaperStart);                                  // £100,000
-    breakpoints.add(r.paTaperStart + r.personalAllowance * 2);        // £125,140 — PA fully tapered
+    breakpoints.add(r.paTaperStart + r.personalAllowance * 2);        // £125,140 - PA fully tapered
     breakpoints.add(ni.primaryThreshold);
     breakpoints.add(ni.upperEarningsLimit);
     (studentPlans || []).forEach(key => { if (sl[key]) breakpoints.add(sl[key].threshold); });
@@ -343,7 +343,7 @@ window.NPSalary = (function () {
                      - (pensionType === 'salary-sacrifice' ? employeePension : 0)
                      - (pensionType === 'net-pay' ? employeePension : 0);
 
-    // Marginal rate the user pays on their next pound — drives the band
+    // Marginal rate the user pays on their next pound - drives the band
     // chart and the bonus-tax annotation. Computed against `grossForTax`
     // since that's the income the engine actually deducted tax from.
     const marginalRate = marginalRateAt(grossForTax, region, studentPlans);

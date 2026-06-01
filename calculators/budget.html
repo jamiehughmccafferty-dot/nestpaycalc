@@ -11,8 +11,8 @@
 <!-- ===== Social + favicon + manifest (managed by scripts/inject-meta.js) ===== -->
 <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
 <link rel="manifest" href="../site.webmanifest">
-<meta property="og:title" content="UK Budget Planner — 50/30/20 with Council Tax & energy">
-<meta property="og:description" content="Build a UK monthly budget with the 50/30/20 rule across realistic categories — rent, Council Tax, energy, transport, broadband and more.">
+<meta property="og:title" content="UK Budget Planner - 50/30/20 with Council Tax & energy">
+<meta property="og:description" content="Build a UK monthly budget with the 50/30/20 rule across realistic categories - rent, Council Tax, energy, transport, broadband and more.">
 <meta property="og:url" content="https://nestpaycalc.com/calculators/budget">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="en_GB">
@@ -20,8 +20,8 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="UK Budget Planner — 50/30/20 with Council Tax & energy">
-<meta name="twitter:description" content="Build a UK monthly budget with the 50/30/20 rule across realistic categories — rent, Council Tax, energy, transport, broadband and more.">
+<meta name="twitter:title" content="UK Budget Planner - 50/30/20 with Council Tax & energy">
+<meta name="twitter:description" content="Build a UK monthly budget with the 50/30/20 rule across realistic categories - rent, Council Tax, energy, transport, broadband and more.">
 <meta name="twitter:image" content="https://nestpaycalc.com/assets/og/site.png">
 <!-- ===== end social block ===== -->
 
@@ -90,7 +90,7 @@
   <nav class="np-breadcrumb" aria-label="Breadcrumb"><a href="../index.html">Home</a> / <span aria-current="page">Budget Planner</span></nav>
   <header class="mb-8">
     <h1 class="text-3xl sm:text-4xl font-extrabold">UK Budget Planner</h1>
-    <p class="mt-2 text-ink-soft max-w-3xl">A monthly budget built around UK realities — council tax, energy, transport — with the 50/30/20 rule for comparison.</p>
+    <p class="mt-2 text-ink-soft max-w-3xl">A monthly budget built around UK realities - council tax, energy, transport - with the 50/30/20 rule for comparison.</p>
   </header>
 
   <div class="grid lg:grid-cols-5 gap-6">
@@ -194,7 +194,7 @@
       <!-- ZONE 3: Trust strip -->
       <div x-html="trustHTML"></div>
 
-      <!-- Related guides — pushes budget users to the round-trip salary calc
+      <!-- Related guides - pushes budget users to the round-trip salary calc
            (top of the income side) and to the right next step based on the
            50/30/20 result (ISA on surplus, debt calc on shortfall). -->
       <div class="np-card p-5 sm:p-6">
@@ -260,7 +260,7 @@
 <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 <script>
 function budgetApp() {
-  // UK averages — typical monthly outgoings for an ~£2.4k/month take-home household.
+  // UK averages - typical monthly outgoings for an ~£2.4k/month take-home household.
   // Sources: ONS Family Spending Survey, Ofcom (broadband), GOV.UK (council tax band D).
   const UK_AVERAGES = {
     income: [{ name: 'Take-home pay', amount: 2400 }],
@@ -302,7 +302,7 @@ function budgetApp() {
     resultPromptHTML: '', comparisonHTML: '', trustHTML: '',
 
     init() {
-      // Restore from share/save URL — income+groups encoded as base64-JSON in `b`
+      // Restore from share/save URL - income+groups encoded as base64-JSON in `b`
       const s = window.NPShare.readState(['b']);
       const hasParams = Object.keys(s).length > 0;
       if (s.b) {
@@ -316,7 +316,7 @@ function budgetApp() {
       this.calc();
       // Deep watch on income+groups recomputes totals + re-renders affiliates
       // every time a line item changes (replaces the old global document
-      // input listener — keeps the reactivity scoped to this Alpine component).
+      // input listener - keeps the reactivity scoped to this Alpine component).
       this.$watch('income', () => { this.isExample = false; this.calc(); });
       this.$watch('groups', () => { this.isExample = false; this.calc(); });
     },
@@ -380,7 +380,7 @@ function budgetApp() {
       if (left > 200) {
         prompt = {
           icon: '✅',
-          title: `${window.NPF.gbp(left)} surplus per month — ${window.NPF.gbp(left * 12)} a year. Make it work.`,
+          title: `${window.NPF.gbp(left)} surplus per month - ${window.NPF.gbp(left * 12)} a year. Make it work.`,
           sub: 'Top easy-access Cash ISAs pay 4.85% tax-free',
           cta: 'Compare ISAs',
           href: '../deals.html#isa'
@@ -394,7 +394,7 @@ function budgetApp() {
       } else if (left < -50) {
         prompt = {
           icon: '🤝',
-          title: `Spending ${window.NPF.gbp(-left)} more than income — free debt advice can help.`,
+          title: `Spending ${window.NPF.gbp(-left)} more than income - free debt advice can help.`,
           sub: 'StepChange offers no-fee, FCA-regulated guidance',
           cta: 'Get free help',
           href: 'https://www.stepchange.org/'
@@ -433,7 +433,7 @@ function budgetApp() {
       this.income = [{ name: 'Take-home pay', amount: 0 }];
       this.groups.forEach(g => g.items.forEach(i => i.amount = 0));
       this.calc();
-      // not example mode — user is starting fresh, not browsing a sample
+      // not example mode - user is starting fresh, not browsing a sample
       this.$nextTick(() => { this.isExample = false; });
     }
   };

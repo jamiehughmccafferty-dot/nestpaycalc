@@ -24,7 +24,7 @@ module.exports = {
       mono:    ['JetBrains Mono', 'SF Mono', 'ui-monospace', 'Menlo', 'monospace']
     },
 
-    /* Fluid type scale — sizes flex with the viewport, no media queries.
+    /* Fluid type scale - sizes flex with the viewport, no media queries.
        Anchor points: 320px (min) and 1280px (max viewport). */
     fontSize: {
       'xs':       ['clamp(0.7rem,  0.66rem + 0.20vw, 0.78rem)', { lineHeight: '1.5', letterSpacing: '0' }],
@@ -76,7 +76,7 @@ module.exports = {
         danger:  'rgb(var(--danger) / <alpha-value>)'
       },
 
-      /* Layered shadow system — proper depth, not just blur */
+      /* Layered shadow system - proper depth, not just blur */
       boxShadow: {
         'xs':      '0 1px 2px 0 rgb(15 23 42 / 0.04)',
         'sm':      '0 1px 2px 0 rgb(15 23 42 / 0.05), 0 1px 1px -1px rgb(15 23 42 / 0.04)',

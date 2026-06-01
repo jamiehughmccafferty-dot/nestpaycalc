@@ -1,5 +1,5 @@
 /**
- * scripts/inject-meta.js — one-shot, idempotent.
+ * scripts/inject-meta.js - one-shot, idempotent.
  *
  * Injects per-page social + favicon + manifest meta:
  *   • favicon (SVG) + site.webmanifest
@@ -24,59 +24,59 @@ const FILES = [
   {
     file: 'index.html',
     ogUrl: `${SITE}/`,
-    ogTitle: 'NestPayCalc — Free UK Financial Calculators (2026/27)',
+    ogTitle: 'NestPayCalc - Free UK Financial Calculators (2026/27)',
     ogDescription: 'Free, accurate UK calculators for take-home pay, mortgage & SDLT, savings & ISA, pension, debt and budget. Built on current HMRC rules. No sign-up.'
   },
   {
     file: 'about.html',
     ogUrl: `${SITE}/about`,
-    ogTitle: 'About NestPayCalc — Editorial standards & affiliate disclosure',
+    ogTitle: 'About NestPayCalc - Editorial standards & affiliate disclosure',
     ogDescription: 'NestPayCalc is operated by Croft & Hugh Digital LTD. Our editorial standards, affiliate disclosure and privacy policy explained plainly.'
   },
   {
     file: 'contact.html',
     ogUrl: `${SITE}/contact`,
     ogTitle: 'Contact NestPayCalc',
-    ogDescription: 'Email Hello@crofthughdigital.co.uk or send us a message — rate corrections, bugs, calculator requests and partnership enquiries welcome.'
+    ogDescription: 'Email Hello@crofthughdigital.co.uk or send us a message - rate corrections, bugs, calculator requests and partnership enquiries welcome.'
   },
   {
     file: 'faq.html',
     ogUrl: `${SITE}/faq`,
-    ogTitle: 'UK personal finance FAQ — NestPayCalc',
+    ogTitle: 'UK personal finance FAQ - NestPayCalc',
     ogDescription: 'Quick answers to common UK money questions: tax codes, ISA allowances, National Insurance, student loans, stamp duty and pension contributions.'
   },
   {
     file: 'glossary.html',
     ogUrl: `${SITE}/glossary`,
-    ogTitle: 'UK personal finance glossary — plain-English jargon-buster',
-    ogDescription: 'AER, APR, BIK, ISA, LBTT, LTT, PAYE, SDLT, SIPP and more — every UK personal-finance term explained simply.'
+    ogTitle: 'UK personal finance glossary - plain-English jargon-buster',
+    ogDescription: 'AER, APR, BIK, ISA, LBTT, LTT, PAYE, SDLT, SIPP and more - every UK personal-finance term explained simply.'
   },
   {
     file: 'deals.html',
     ogUrl: `${SITE}/deals`,
-    ogTitle: 'Best UK financial deals — Cash ISAs, mortgages, SIPPs & more',
+    ogTitle: 'Best UK financial deals - Cash ISAs, mortgages, SIPPs & more',
     ogDescription: 'Hand-picked UK deals across savings, mortgages, pensions and credit cards. Affiliate links with full disclosure. Not regulated financial advice.'
   },
   {
     file: 'saved.html',
     ogUrl: `${SITE}/saved`,
-    ogTitle: 'Saved Calculations — NestPayCalc',
+    ogTitle: 'Saved Calculations - NestPayCalc',
     ogDescription: 'Your saved UK financial calculations, stored locally in your browser. Private, no account, no sync.'
   },
   {
     file: '404.html',
     ogUrl: `${SITE}/404`,
-    ogTitle: 'Page not found — NestPayCalc',
+    ogTitle: 'Page not found - NestPayCalc',
     ogDescription: 'That page slipped through the net. Try one of our UK financial calculators instead.'
   },
   {
     file: 'blog/index.html',
     ogUrl: `${SITE}/blog/`,
-    ogTitle: 'UK personal finance blog & guides — NestPayCalc',
-    ogDescription: 'Plain-English UK money guides — income tax, ISAs, pensions, mortgages, debt and budgeting. Every figure cross-referenced against HMRC.'
+    ogTitle: 'UK personal finance blog & guides - NestPayCalc',
+    ogDescription: 'Plain-English UK money guides - income tax, ISAs, pensions, mortgages, debt and budgeting. Every figure cross-referenced against HMRC.'
   },
 
-  // ─── Calculator pages — keyword-rich for SERP CTR ─────────────────────
+  // ─── Calculator pages - keyword-rich for SERP CTR ─────────────────────
   {
     file: 'calculators/salary.html',
     ogUrl: `${SITE}/calculators/salary`,
@@ -104,36 +104,36 @@ const FILES = [
   {
     file: 'calculators/debt.html',
     ogUrl: `${SITE}/calculators/debt`,
-    ogTitle: 'UK Debt Payoff Calculator — Snowball vs Avalanche',
+    ogTitle: 'UK Debt Payoff Calculator - Snowball vs Avalanche',
     ogDescription: 'Compare snowball vs avalanche strategies on UK credit cards, loans and overdrafts. See months to debt-free and interest saved.'
   },
   {
     file: 'calculators/budget.html',
     ogUrl: `${SITE}/calculators/budget`,
-    ogTitle: 'UK Budget Planner — 50/30/20 with Council Tax & energy',
-    ogDescription: 'Build a UK monthly budget with the 50/30/20 rule across realistic categories — rent, Council Tax, energy, transport, broadband and more.'
+    ogTitle: 'UK Budget Planner - 50/30/20 with Council Tax & energy',
+    ogDescription: 'Build a UK monthly budget with the 50/30/20 rule across realistic categories - rent, Council Tax, energy, transport, broadband and more.'
   },
 
   // ─── Blog articles ────────────────────────────────────────────────────
   {
     file: 'blog/how-uk-income-tax-works.html',
     ogUrl: `${SITE}/blog/how-uk-income-tax-works`,
-    ogTitle: 'How UK income tax works in 2026/27 — plain-English guide',
-    ogDescription: 'Bands, the personal allowance, the £100k tax trap, Scotland\'s six bands, NI, tax codes — with worked examples. Updated for 2026/27.',
+    ogTitle: 'How UK income tax works in 2026/27 - plain-English guide',
+    ogDescription: 'Bands, the personal allowance, the £100k tax trap, Scotland\'s six bands, NI, tax codes - with worked examples. Updated for 2026/27.',
     ogType: 'article'
   },
   {
     file: 'blog/uk-stamp-duty-explained.html',
     ogUrl: `${SITE}/blog/uk-stamp-duty-explained`,
-    ogTitle: 'UK stamp duty 2026/27 — SDLT, LBTT & LTT explained',
-    ogDescription: 'Plain-English guide to UK stamp duty for 2026/27 — bands for England/NI (SDLT), Scotland (LBTT) and Wales (LTT), first-time buyer relief, second-home surcharge, with a live calculator.',
+    ogTitle: 'UK stamp duty 2026/27 - SDLT, LBTT & LTT explained',
+    ogDescription: 'Plain-English guide to UK stamp duty for 2026/27 - bands for England/NI (SDLT), Scotland (LBTT) and Wales (LTT), first-time buyer relief, second-home surcharge, with a live calculator.',
     ogType: 'article'
   },
   {
     file: 'blog/cash-isa-vs-stocks-and-shares-isa.html',
     ogUrl: `${SITE}/blog/cash-isa-vs-stocks-and-shares-isa`,
-    ogTitle: 'Cash ISA vs Stocks & Shares ISA in 2026/27 — which one?',
-    ogDescription: 'A clear comparison for UK savers — returns, risk, time horizons, splitting your £20,000 allowance, with a live side-by-side projection.',
+    ogTitle: 'Cash ISA vs Stocks & Shares ISA in 2026/27 - which one?',
+    ogDescription: 'A clear comparison for UK savers - returns, risk, time horizons, splitting your £20,000 allowance, with a live side-by-side projection.',
     ogType: 'article'
   },
   {

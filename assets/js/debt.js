@@ -4,7 +4,7 @@ window.NPDebt = (function () {
 
   function simulate(debts, extraMonthly, strategy = 'avalanche') {
     const list = clone(debts).filter(d => d.balance > 0);
-    // Capture original minimum payments. These don't shrink as balances do —
+    // Capture original minimum payments. These don't shrink as balances do -
     // when a debt is paid off, its freed minimum cascades into the priority
     // debt's payment. That cascade is the whole point of snowball/avalanche.
     const originalMins = list.map(d => +d.minPayment || 0);

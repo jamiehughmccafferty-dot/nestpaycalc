@@ -7,7 +7,7 @@
 window.NPStorage = (function () {
   const KEY = 'np-saved-v1';
   const VERSION = 1;
-  // Approximate localStorage quota — typical browsers give ~5MB per origin.
+  // Approximate localStorage quota - typical browsers give ~5MB per origin.
   // We warn at 80% to give the user time to clean up before hitting a write fail.
   const QUOTA_BYTES = 5 * 1024 * 1024;
   const WARN_BYTES  = 4 * 1024 * 1024;

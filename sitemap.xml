@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
-  <!-- Homepage — top priority -->
+  <!-- Homepage - top priority -->
   <url>
     <loc>https://nestpaycalc.com/</loc>
     <lastmod>2026-06-01</lastmod>
@@ -9,7 +9,7 @@
     <priority>1.0</priority>
   </url>
 
-  <!-- Calculators — highest commercial value, highest priority below the homepage -->
+  <!-- Calculators - highest commercial value, highest priority below the homepage -->
   <url>
     <loc>https://nestpaycalc.com/calculators/salary.html</loc>
     <lastmod>2026-04-15</lastmod>

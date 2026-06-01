@@ -13,7 +13,7 @@
  *     - Class 1 employee NI rates (8% / 2%)
  *     - ISA / LISA / pension annual allowances
  *     - SDLT, LBTT, LTT bands
- *   ANNUALLY UPRATED — verify against gov.uk before publishing:
+ *   ANNUALLY UPRATED - verify against gov.uk before publishing:
  *     - State Pension (triple-lock)
  *     - Plan 1 and Plan 4 student loan thresholds (RPI-linked)
  *
@@ -42,7 +42,7 @@ window.UK_RATES = {
   },
 
   /* -------- Income tax: Scotland --------
-     TODO 2026/27 — verify against the Scottish Government's
+     TODO 2026/27 - verify against the Scottish Government's
      2026/27 Budget. Bands are set annually and may differ.
      Below are 2025/26 figures kept as a conservative placeholder. */
   scotland: {
@@ -72,9 +72,9 @@ window.UK_RATES = {
 
   /* -------- Student loans --------
      Plan 1 and Plan 4 are uprated annually with RPI.
-     Plan 2, Plan 5, Postgrad were frozen — confirm freeze
+     Plan 2, Plan 5, Postgrad were frozen - confirm freeze
      hasn't ended for 2026/27.
-     TODO 2026/27 — verify all thresholds on gov.uk. Below are
+     TODO 2026/27 - verify all thresholds on gov.uk. Below are
      2025/26 figures retained as conservative placeholders. */
   studentLoans: {
     plan1:    { threshold: 26065, rate: 0.09 },  // TODO verify 2026/27 (RPI uprated)
@@ -87,7 +87,7 @@ window.UK_RATES = {
   /* -------- State Pension (full new flat-rate) --------
      Triple-lock uprating each April based on highest of
      CPI (Sept), avg earnings growth (May–Jul), or 2.5%.
-     TODO 2026/27 — replace with confirmed figure once published.
+     TODO 2026/27 - replace with confirmed figure once published.
      Below are 2025/26 figures as a conservative placeholder. */
   statePension: {
     weeklyFull: 230.25,
@@ -95,7 +95,7 @@ window.UK_RATES = {
   },
 
   /* -------- ISA allowances --------
-     £20,000 / £4,000 LISA — unchanged for 2026/27. */
+     £20,000 / £4,000 LISA - unchanged for 2026/27. */
   isa: {
     annual: 20000,
     lifetimeIsaAnnual: 4000,
@@ -103,15 +103,15 @@ window.UK_RATES = {
   },
 
   /* -------- Pension annual allowance --------
-     £60,000 standard — unchanged for 2026/27. */
+     £60,000 standard - unchanged for 2026/27. */
   pensionAllowance: {
     standard: 60000,
     minimumTapered: 10000
   },
 
   /* ============================================================
-   * SDLT — Stamp Duty Land Tax (England & NI)
-   * Rates from 1 April 2025 — unchanged for 2026/27.
+   * SDLT - Stamp Duty Land Tax (England & NI)
+   * Rates from 1 April 2025 - unchanged for 2026/27.
    * ============================================================ */
   sdlt: {
     standard: [
@@ -131,7 +131,7 @@ window.UK_RATES = {
     additionalSurcharge: 0.05    // additional / second homes (from Oct 2024)
   },
 
-  /* LBTT — Scotland (unchanged for 2026/27) */
+  /* LBTT - Scotland (unchanged for 2026/27) */
   lbtt: {
     standard: [
       { upTo: 145000,  rate: 0 },
@@ -144,7 +144,7 @@ window.UK_RATES = {
     additionalSurcharge: 0.08    // ADS
   },
 
-  /* LTT — Wales (unchanged for 2026/27) */
+  /* LTT - Wales (unchanged for 2026/27) */
   ltt: {
     standard: [
       { upTo: 225000,  rate: 0 },

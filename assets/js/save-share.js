@@ -81,7 +81,7 @@
     const meta = s.meta || '';
     const rows = (s.rows || []).slice(0, 3);
 
-    /* All inline styles — html2canvas renders these reliably across browsers */
+    /* All inline styles - html2canvas renders these reliably across browsers */
     const wrap   = `width:1200px;height:630px;background:linear-gradient(135deg,#003087 0%,#001f5e 100%);color:#fff;padding:56px 64px;box-sizing:border-box;font-family:'Inter',system-ui,-apple-system,sans-serif;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;`;
     const blob1  = `position:absolute;top:-220px;right:-220px;width:560px;height:560px;border-radius:50%;background:radial-gradient(closest-side,rgba(0,135,90,.45),rgba(0,135,90,0));pointer-events:none;`;
     const blob2  = `position:absolute;bottom:-180px;left:-120px;width:420px;height:420px;border-radius:50%;background:radial-gradient(closest-side,rgba(255,255,255,.06),rgba(255,255,255,0));pointer-events:none;`;
@@ -175,7 +175,7 @@
     <div class="np-modal-header">
       <div>
         <div id="np-modal-title" class="np-modal-title" x-text="$store.npss.mode === 'save' ? 'Save this calculation' : 'Share your results'"></div>
-        <div class="np-modal-sub" x-text="$store.npss.mode === 'save' ? 'Stored locally on this device — no account needed.' : 'Send a link or download a branded image.'"></div>
+        <div class="np-modal-sub" x-text="$store.npss.mode === 'save' ? 'Stored locally on this device - no account needed.' : 'Send a link or download a branded image.'"></div>
       </div>
       <button class="np-modal-close" @click="$store.npss.close()" aria-label="Close">
         <i data-lucide="x" class="w-5 h-5"></i>
@@ -207,7 +207,7 @@
         </label>
         <p class="text-xs text-rose-600" x-show="$store.npss.saveError" x-text="$store.npss.saveError"></p>
         <p class="text-xs text-slate-500 dark:text-slate-400">
-          Saved on this device only — clearing your browser data will remove it.
+          Saved on this device only - clearing your browser data will remove it.
         </p>
         <div class="flex gap-2 mt-2">
           <button type="button" class="np-btn np-btn-ghost flex-1" @click="$store.npss.close()">Cancel</button>
@@ -286,7 +286,7 @@
 
   injectModal();
 
-  /* ----- Focus trap helpers — keep keyboard focus inside the modal ----- */
+  /* ----- Focus trap helpers - keep keyboard focus inside the modal ----- */
   const FOCUSABLE = 'button:not([disabled]),[href],input:not([disabled]),select:not([disabled]),textarea:not([disabled]),[tabindex]:not([tabindex="-1"])';
   let _lastOpener = null;
   let _trapHandler = null;
@@ -353,7 +353,7 @@
         this.open = false;
         this.payload = null;
         removeTrap();
-        // Restore focus to whatever opened us — important for keyboard users.
+        // Restore focus to whatever opened us - important for keyboard users.
         if (_lastOpener && typeof _lastOpener.focus === 'function') {
           _lastOpener.focus();
         }
@@ -400,7 +400,7 @@
           shareParams: this.payload.shareParams,
           summary: this.payload.summary
         });
-        if (!entry) { this.saveError = 'Could not save — your browser storage may be full'; return; }
+        if (!entry) { this.saveError = 'Could not save - your browser storage may be full'; return; }
         const root = (window.NP && window.NP.ROOT) || '';
         this.close();
         toast(`Saved as "${entry.name}"`, { label: 'View saved', href: root + 'saved.html' });
@@ -459,7 +459,7 @@
           toast('Image downloaded');
         } catch (err) {
           console.error('[NPSaveShare] image gen failed:', err);
-          toast('Could not generate image — try again');
+          toast('Could not generate image - try again');
         } finally {
           wrap.remove();
           this.imageBusy = false;

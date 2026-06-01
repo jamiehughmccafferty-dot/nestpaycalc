@@ -3,7 +3,7 @@
  *
  * One place to manage every affiliate offer used across the
  * site. Each calculator pulls offers by category and renders
- * them with the helper functions — keeps disclosures consistent
+ * them with the helper functions - keeps disclosures consistent
  * and lets you swap providers without hunting through HTML.
  *
  * To add a new affiliate:
@@ -15,11 +15,11 @@
  * ============================================================ */
 (function () {
   /* ============================================================
-   * OFFER REGISTRY — currently PLACEHOLDER DATA only.
+   * OFFER REGISTRY - currently PLACEHOLDER DATA only.
    *
    * Every entry below is a generic, non-branded slot reserved for a
    * real affiliate partner. Rates are market-illustrative (top of the
-   * current UK market for the product category) — NOT specific to any
+   * current UK market for the product category) - NOT specific to any
    * provider, so there's no ASA / brand-impersonation risk.
    *
    * ── How to swap in a real partner ──────────────────────────────
@@ -29,10 +29,10 @@
    *     short:      "BR"          (2–4 char abbreviation for the logo block)
    *     logoColor:  "#xxxxxx"     (their brand colour, or keep brand)
    *     rate:       "x.xx%"       (verified from their landing page)
-   *     features:   [ "…", "…" ]  (3 highlights — check spec)
+   *     features:   [ "…", "…" ]  (3 highlights - check spec)
    *     url:        "https://partner.com/?...&utm_source=nestpaycalc"
    *
-   *   Leave `product` and `meta` mostly untouched — they describe the
+   *   Leave `product` and `meta` mostly untouched - they describe the
    *   product type, not the partner.
    *
    *   Once swapped, remove `placeholder: true` so QA / future audits
@@ -159,7 +159,7 @@
       placeholder: true
     },
 
-    /* ---------- Free debt advice (charity, not affiliate — keep visible) ---------- */
+    /* ---------- Free debt advice (charity, not affiliate - keep visible) ---------- */
     'stepchange': {
       provider: 'StepChange',
       short: 'SC',
@@ -196,7 +196,7 @@
       </a>`;
   }
 
-  /* ----- 2. Comparison table — the workhorse below results ----- */
+  /* ----- 2. Comparison table - the workhorse below results ----- */
   function renderComparisonTable({ category, title = 'Top picks', subtitle = '', limit = 3 }) {
     const ids = (CATEGORIES[category] || []).slice(0, limit);
     if (!ids.length) return '';
@@ -237,7 +237,7 @@
       </section>`;
   }
 
-  /* ----- 3. Inline text link — drop into prose ----- */
+  /* ----- 3. Inline text link - drop into prose ----- */
   function inlineLink(category, anchorText) {
     const id = (CATEGORIES[category] || [])[0];
     const o = OFFERS[id]; if (!o) return escape(anchorText);
@@ -271,7 +271,7 @@
       </aside>`;
   }
 
-  /* ----- 6. Trust strip — provider logos + signals ----- */
+  /* ----- 6. Trust strip - provider logos + signals ----- */
   function renderTrustStrip() {
     return `
       <div class="np-trust-strip">

@@ -1,6 +1,6 @@
 # NestPayCalc
 
-Free UK financial calculators — salary / take-home pay, mortgage & SDLT,
+Free UK financial calculators - salary / take-home pay, mortgage & SDLT,
 savings & ISA, pension / retirement, debt payoff, budget planner.
 
 **Stack:** static HTML · precompiled Tailwind CSS · Alpine.js · Chart.js (lazy)
@@ -64,7 +64,7 @@ The included `vercel.json` does all the heavy lifting:
 ### Alternative: Cloudflare Pages
 
 The Cloudflare-format `_headers` and `_redirects` files are also in the repo
-(harmless when Vercel is used — Vercel ignores them). If you ever switch:
+(harmless when Vercel is used - Vercel ignores them). If you ever switch:
 Cloudflare → Pages → Connect to Git, build command `npm run build:css`,
 output directory `/`. Done.
 
@@ -78,7 +78,7 @@ The site references `https://nestpaycalc.com/assets/og/site.png` from every page
 1. Open `assets/og/og-generator.html` in Chrome at 100% zoom
 2. DevTools → Elements panel → right-click the `#card` element →
    "Capture node screenshot"
-3. Save as `assets/og/site.png` — done
+3. Save as `assets/og/site.png` - done
 
 **Automated (CI-friendly):**
 
@@ -117,7 +117,7 @@ nestpaycalc/
 │   │   ├── styles.src.css  ← edit this (Tailwind + design tokens + components)
 │   │   └── styles.css      ← generated, don't edit
 │   ├── js/
-│   │   ├── uk-rates.js     ⚠ UPDATE YEARLY — all tax thresholds live here
+│   │   ├── uk-rates.js     ⚠ UPDATE YEARLY - all tax thresholds live here
 │   │   ├── format.js       £/%/number formatters
 │   │   ├── common.js       Header/footer, dark mode, scroll header, prefetch
 │   │   ├── motion.js       Scroll reveal, Chart.js theme, lazy loaders
@@ -181,11 +181,11 @@ pill is current.
   View Transitions API + hover prefetch make it *feel* like an SPA without the
   framework cost.
 - **Calc results never animate in.** Scroll-reveal applies only to marketing
-  surfaces. Numbers appear instantly — non-negotiable for a financial tool.
+  surfaces. Numbers appear instantly - non-negotiable for a financial tool.
 - **localStorage, not cookies.** Saved calculations live on the user's device.
   No accounts. No tracking.
 - **Affiliate links** are tagged `rel="nofollow sponsored"` everywhere.
-  Disclosure runs in the footer on every page. Single offer per zone — no
+  Disclosure runs in the footer on every page. Single offer per zone - no
   choice paralysis. Debt calculator suppresses affiliate offers when it detects
   the user is in financial crisis (heuristic: high debt-to-min ratio + no
   extra payment).
@@ -198,7 +198,7 @@ pill is current.
 
 ## Disclaimers (every page)
 
-> For illustrative purposes only. Not financial advice — figures are based on
+> For illustrative purposes only. Not financial advice - figures are based on
 > current UK rates which may change. For regulated advice please consult an
 > FCA-authorised adviser. Affiliate links may earn us a commission.
 
@@ -207,4 +207,4 @@ appears.
 
 ---
 
-© NestPayCalc — UK calculators · Tax year 2026/27
+© NestPayCalc - UK calculators · Tax year 2026/27

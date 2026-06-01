@@ -3,10 +3,10 @@
 @tailwind utilities;
 
 /* ============================================================
- * NESTPAYCALC — DESIGN TOKENS
+ * NESTPAYCALC - DESIGN TOKENS
  * Tokens live as CSS vars so Tailwind utilities (text-ink, bg-surface,
  * border-border-strong, etc.) reflect light/dark mode automatically.
- * Colour values are RGB triplets — Tailwind composes `<alpha-value>`.
+ * Colour values are RGB triplets - Tailwind composes `<alpha-value>`.
  * ============================================================ */
 @layer base {
   :root {
@@ -18,7 +18,7 @@
     --accent-soft:  214 240 227;  /* #d6f0e3 */
     --accent-strong:0 100 67;     /* #006443 */
 
-    /* Surfaces — refined warm-neutral palette */
+    /* Surfaces - refined warm-neutral palette */
     --bg:             247 248 250;  /* #f7f8fa  page background */
     --surface:        255 255 255;  /* #ffffff  cards */
     --surface-2:      252 253 255;  /* card inner-gradient bottom */
@@ -26,7 +26,7 @@
     --border:         229 233 240;  /* #e5e9f0 */
     --border-strong:  214 220 232;
 
-    /* Ink — text colour ladder */
+    /* Ink - text colour ladder */
     --ink:        11 18 38;     /* #0b1226  headlines */
     --ink-soft:   71 85 105;    /* #475569  body / labels */
     --ink-muted:  148 163 184;  /* #94a3b8  hints, meta */
@@ -75,7 +75,7 @@
     @apply bg-bg text-ink font-sans antialiased;
     font-feature-settings: 'cv11', 'ss01', 'ss03';
   }
-  /* Numerals always tabular — currency, percentages, charts read better */
+  /* Numerals always tabular - currency, percentages, charts read better */
   .tabular,
   input[type='number'],
   .np-num,
@@ -86,7 +86,7 @@
   /* Hide x-cloaked elements until Alpine boots */
   [x-cloak] { display: none !important; }
 
-  /* Focus visible only — premium, no orange rings on click */
+  /* Focus visible only - premium, no orange rings on click */
   :focus { outline: none; }
   :focus-visible {
     outline: 2px solid rgb(var(--brand));
@@ -100,7 +100,7 @@
     color: rgb(var(--ink));
   }
 
-  /* Scrollbar — subtle in both modes */
+  /* Scrollbar - subtle in both modes */
   ::-webkit-scrollbar         { width: 12px; height: 12px; }
   ::-webkit-scrollbar-track   { background: transparent; }
   ::-webkit-scrollbar-thumb   { background: rgb(var(--border-strong)); border-radius: 6px; border: 3px solid rgb(var(--bg)); }
@@ -123,7 +123,7 @@
   }
   .np-skip-link:focus-visible { top: 8px; }
 
-  /* ===== Breadcrumb — token-based, WCAG-AA contrast in both modes,
+  /* ===== Breadcrumb - token-based, WCAG-AA contrast in both modes,
      tap targets bumped on mobile for the underline links. ===== */
   .np-breadcrumb {
     font-size: .875rem;        /* 14px */
@@ -149,7 +149,7 @@
     font-weight: 500;
   }
 
-  /* ===== Card — layered depth, hairline border, subtle inner gradient ===== */
+  /* ===== Card - layered depth, hairline border, subtle inner gradient ===== */
   .np-card {
     position: relative;
     background: linear-gradient(180deg, rgb(var(--surface)) 0%, rgb(var(--surface-2)) 100%);
@@ -271,14 +271,14 @@
     background: rgb(var(--surface));
   }
   .dark .np-input, .dark .np-select { background: rgb(var(--surface)); }
-  /* Strip native number spinners — looks cleaner */
+  /* Strip native number spinners - looks cleaner */
   .np-input::-webkit-outer-spin-button,
   .np-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
   .np-input[type='number'] { -moz-appearance: textfield; }
 
   /* Inline £ / % adornments are positioned outside the input via wrappers; nothing to do here */
 
-  /* ===== Range slider — refined thumb + live brand-fill track ===== */
+  /* ===== Range slider - refined thumb + live brand-fill track ===== */
   .np-slider {
     -webkit-appearance: none; appearance: none;
     width: 100%; height: 6px; border-radius: 3px;
@@ -368,7 +368,7 @@
   .dark .np-band-trap       { background: rgb(220 38 38 / 0.22); color: rgb(252 165 165); border-color: rgb(220 38 38 / 0.4); }
   .dark .np-band-ni         { background: rgb(56 189 248 / 0.22); color: rgb(125 211 252); }
 
-  /* ===== Marginal-rate trail — horizontal band timeline showing where the
+  /* ===== Marginal-rate trail - horizontal band timeline showing where the
      user sits across the UK marginal-rate curve. ===== */
   .np-mrate-trail {
     display: flex; width: 100%; height: 24px; border-radius: 8px;
@@ -477,7 +477,7 @@
     background: currentColor;
   }
 
-  /* Personalised post-result prompt — peak-intent placement */
+  /* Personalised post-result prompt - peak-intent placement */
   .np-result-prompt {
     display: flex; align-items: center; gap: 1rem;
     padding: 1rem 1.15rem; margin-top: 1rem;
@@ -513,7 +513,7 @@
     .np-result-prompt-cta { width: 100%; text-align: center; }
   }
 
-  /* Comparison table — editorial, never promotional */
+  /* Comparison table - editorial, never promotional */
   .np-compare {
     border: 1px solid rgb(var(--border));
     border-radius: 16px;
@@ -773,7 +773,7 @@
     overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
   }
 
-  /* Prose theming — overrides Tailwind Typography defaults to use our tokens.
+  /* Prose theming - overrides Tailwind Typography defaults to use our tokens.
      Add `prose prose-np` to any long-form content container. */
   .prose-np {
     --tw-prose-body:        rgb(var(--ink-soft));
@@ -808,7 +808,7 @@
   .prose-np table tbody td { padding: .65rem .9rem; }
 
   /* ============================================================
-   * FEATURED ARTICLE CARD (blog hub) — reusable shell
+   * FEATURED ARTICLE CARD (blog hub) - reusable shell
    *
    * Usage:
    *   <a class="np-feature-card">
@@ -865,7 +865,7 @@
     z-index: 1;
   }
 
-  /* Right-side data graphic — hidden on mobile so the headline gets full width */
+  /* Right-side data graphic - hidden on mobile so the headline gets full width */
   .np-feature-graphic {
     position: absolute; top: 0; right: 0; bottom: 0;
     width: 45%;
@@ -882,7 +882,7 @@
     background: linear-gradient(135deg, rgb(var(--surface-2)) 0%, rgb(var(--surface)) 100%);
   }
 
-  /* Two blurred colour blobs — brand top-right, accent bottom-left.
+  /* Two blurred colour blobs - brand top-right, accent bottom-left.
      Subtle on light, slightly stronger on dark. */
   .np-feature-blob {
     position: absolute; border-radius: 50%; filter: blur(60px);
@@ -975,7 +975,7 @@
     background: rgb(var(--brand) / 0.05);
   }
 
-  /* Skeleton shimmer — for any loading state. Drop on a div with width/height set. */
+  /* Skeleton shimmer - for any loading state. Drop on a div with width/height set. */
   .np-skeleton {
     position: relative; overflow: hidden;
     background: rgb(var(--border) / 0.4);
@@ -1046,7 +1046,7 @@
 }
 
 /* ============================================================
- * HERO BLOBS — soft colour washes behind the hero text
+ * HERO BLOBS - soft colour washes behind the hero text
  * ============================================================ */
 @layer utilities {
   .np-hero-blob {
@@ -1070,7 +1070,7 @@
 }
 
 /* ============================================================
- * MOTION — scroll reveal + view transitions
+ * MOTION - scroll reveal + view transitions
  * ============================================================ */
 @layer utilities {
   /* Scroll reveal: starts hidden, transitions in when .np-revealed added.
@@ -1089,7 +1089,7 @@
   }
 }
 
-/* Cross-document View Transitions API — refined cross-fade between pages */
+/* Cross-document View Transitions API - refined cross-fade between pages */
 @supports (view-transition-name: root) {
   ::view-transition-old(root) {
     animation: 160ms cubic-bezier(0.4, 0, 1, 1) both np-vt-out;

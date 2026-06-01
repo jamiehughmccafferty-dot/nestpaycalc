@@ -1,10 +1,10 @@
-# NestPayCalc — robots.txt
+# NestPayCalc - robots.txt
 # Free UK financial calculators. All public pages are indexable.
 
 User-agent: *
 Allow: /
 
-# Don't index the user's local "Saved" page or 404 — they're user-specific / negative SERP candidates.
+# Don't index the user's local "Saved" page or 404 - they're user-specific / negative SERP candidates.
 Disallow: /saved.html
 Disallow: /404.html
 

@@ -5,14 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="view-transition" content="same-origin">
 <title>Contact – NestPayCalc</title>
-<meta name="description" content="Contact NestPayCalc — send accuracy corrections, content suggestions or partnership enquiries. We aim to reply within 2 working days.">
+<meta name="description" content="Contact NestPayCalc - send accuracy corrections, content suggestions or partnership enquiries. We aim to reply within 2 working days.">
 <link rel="canonical" href="https://nestpaycalc.com/contact.html">
 <meta name="theme-color" content="#003087">
 <!-- ===== Social + favicon + manifest (managed by scripts/inject-meta.js) ===== -->
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <link rel="manifest" href="site.webmanifest">
 <meta property="og:title" content="Contact NestPayCalc">
-<meta property="og:description" content="Email Hello@crofthughdigital.co.uk or send us a message — rate corrections, bugs, calculator requests and partnership enquiries welcome.">
+<meta property="og:description" content="Email Hello@crofthughdigital.co.uk or send us a message - rate corrections, bugs, calculator requests and partnership enquiries welcome.">
 <meta property="og:url" content="https://nestpaycalc.com/contact">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="en_GB">
@@ -21,7 +21,7 @@
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Contact NestPayCalc">
-<meta name="twitter:description" content="Email Hello@crofthughdigital.co.uk or send us a message — rate corrections, bugs, calculator requests and partnership enquiries welcome.">
+<meta name="twitter:description" content="Email Hello@crofthughdigital.co.uk or send us a message - rate corrections, bugs, calculator requests and partnership enquiries welcome.">
 <meta name="twitter:image" content="https://nestpaycalc.com/assets/og/site.png">
 <!-- ===== end social block ===== -->
 
@@ -74,7 +74,7 @@
 function sendMail(f) {
   const to = 'Hello@crofthughdigital.co.uk';
   const subject = encodeURIComponent('[' + f.topic.value + '] from ' + f.name.value);
-  const body = encodeURIComponent(f.message.value + '\n\n— ' + f.name.value + ' (' + f.email.value + ')');
+  const body = encodeURIComponent(f.message.value + '\n\n- ' + f.name.value + ' (' + f.email.value + ')');
   window.location.href = 'mailto:' + to + '?subject=' + subject + '&body=' + body;
 }
 </script>
