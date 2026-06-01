@@ -271,14 +271,32 @@
       </aside>`;
   }
 
-  /* ----- 6. Trust strip - provider logos + signals ----- */
+  /* ----- 6. Trust strip - site-level signals on every calc.
+     Inline SVGs (Lucide paths) so they render immediately on x-html
+     injection without needing a refreshIcons() pass.
+     Copy is deliberately specific and verifiable - no generic
+     "UK-based" / blanket "FSCS-protected" claims that don't hold on
+     every page (mortgage brokers aren't FSCS-protected products). ----- */
   function renderTrustStrip() {
+    const ICON = 'width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"';
     return `
       <div class="np-trust-strip">
-        <span class="np-trust-strip-item">🛡️ FSCS protected partners</span>
-        <span class="np-trust-strip-item">⚖️ FCA regulated</span>
-        <span class="np-trust-strip-item">🇬🇧 UK based</span>
-        <span class="np-trust-strip-item">🔒 No data stored</span>
+        <span class="np-trust-strip-item">
+          <svg ${ICON}><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></svg>
+          All affiliate partners FCA-authorised
+        </span>
+        <span class="np-trust-strip-item">
+          <svg ${ICON}><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          Rates sourced from HMRC &amp; gov.uk
+        </span>
+        <span class="np-trust-strip-item">
+          <svg ${ICON}><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          Calculations run in your browser
+        </span>
+        <span class="np-trust-strip-item">
+          <svg ${ICON}><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/><path d="m9 16 2 2 4-4"/></svg>
+          Built for the 2026/27 UK tax year
+        </span>
       </div>`;
   }
 
