@@ -178,18 +178,18 @@
     <section class="lg:col-span-3 space-y-5">
       <div class="np-card p-5 sm:p-6">
         <h2 class="font-semibold text-lg mb-4">Projected balance</h2>
-        <div class="grid grid-cols-3 gap-3 text-center">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-center">
           <div class="p-4 rounded-lg bg-blue-50 dark:bg-blue-900/30">
             <div class="text-xs text-ink-soft">Final balance</div>
-            <div class="text-2xl font-extrabold text-brand dark:text-blue-300" x-text="NPF.gbp(result.finalBalance)"></div>
+            <div class="text-2xl font-extrabold text-brand dark:text-blue-300 tabular tracking-tight" x-text="NPF.gbp(result.finalBalance)"></div>
           </div>
           <div class="p-4 rounded-lg bg-blue-50 dark:bg-blue-900/30">
             <div class="text-xs text-ink-soft">You contributed</div>
-            <div class="text-2xl font-extrabold" x-text="NPF.gbp(result.totalContributions)"></div>
+            <div class="text-2xl font-extrabold tabular tracking-tight" x-text="NPF.gbp(result.totalContributions)"></div>
           </div>
           <div class="p-4 rounded-lg bg-blue-50 dark:bg-blue-900/30">
             <div class="text-xs text-ink-soft">Interest earned</div>
-            <div class="text-2xl font-extrabold text-emerald-700 dark:text-emerald-300" x-text="NPF.gbp(result.totalInterest)"></div>
+            <div class="text-2xl font-extrabold text-emerald-700 dark:text-emerald-300 tabular tracking-tight" x-text="NPF.gbp(result.totalInterest)"></div>
           </div>
         </div>
         <p class="text-xs text-ink-muted mt-3">After <span x-text="inp.inflation"></span>% inflation, that's worth <strong x-text="NPF.gbp(realValue)"></strong> in today's money.</p>

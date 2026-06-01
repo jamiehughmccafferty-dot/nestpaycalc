@@ -182,18 +182,18 @@
     <section class="lg:col-span-3 space-y-5">
       <div class="np-card p-5 sm:p-6">
         <h2 class="font-semibold text-lg mb-4">Your mortgage</h2>
-        <div class="grid grid-cols-3 gap-3 text-center">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-center">
           <div class="p-4 rounded-lg bg-blue-50 dark:bg-blue-900/30">
             <div class="text-xs text-ink-soft">Monthly</div>
-            <div class="text-2xl font-extrabold text-brand dark:text-blue-300" x-text="NPF.gbp(result.monthly)"></div>
+            <div class="text-2xl font-extrabold text-brand dark:text-blue-300 tabular tracking-tight" x-text="NPF.gbp(result.monthly)"></div>
           </div>
           <div class="p-4 rounded-lg bg-blue-50 dark:bg-blue-900/30">
             <div class="text-xs text-ink-soft">Total interest</div>
-            <div class="text-2xl font-extrabold text-brand dark:text-blue-300" x-text="NPF.gbp(result.totalInterest)"></div>
+            <div class="text-2xl font-extrabold text-brand dark:text-blue-300 tabular tracking-tight" x-text="NPF.gbp(result.totalInterest)"></div>
           </div>
           <div class="p-4 rounded-lg bg-blue-50 dark:bg-blue-900/30">
             <div class="text-xs text-ink-soft">Total repaid</div>
-            <div class="text-2xl font-extrabold text-brand dark:text-blue-300" x-text="NPF.gbp(result.totalRepaid)"></div>
+            <div class="text-2xl font-extrabold text-brand dark:text-blue-300 tabular tracking-tight" x-text="NPF.gbp(result.totalRepaid)"></div>
           </div>
         </div>
         <div class="mt-5 grid grid-cols-2 gap-3 text-sm">
