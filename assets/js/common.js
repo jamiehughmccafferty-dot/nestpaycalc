@@ -147,8 +147,8 @@
     <div class="mt-12 pt-8 border-t border-border text-xs text-ink-muted space-y-3 leading-relaxed">
       <p><strong class="text-ink-soft">Important:</strong> The information and calculators on NestPayCalc are for illustrative purposes only and do not constitute financial, tax or legal advice. Tax rates, allowances and thresholds are correct to the best of our knowledge for the 2026/27 UK tax year but may change. Always consult a qualified, FCA-regulated financial adviser, accountant or solicitor before making decisions.</p>
       <p><strong class="text-ink-soft">Affiliate disclosure:</strong> Some links on this site (including those marked "Best Deals" or "Compare deals") are affiliate links. If you click through and take out a product, NestPayCalc may receive a commission at no extra cost to you. This never affects which products we choose to feature. We do not provide regulated financial advice. For free, impartial guidance see <a href="https://www.moneyhelper.org.uk/" rel="nofollow noopener" target="_blank" class="underline hover:text-brand transition-colors">MoneyHelper</a>, the government-backed service.</p>
-      <p>&copy; ${yr} NestPayCalc · UK calculators · Tax year 2026/27</p>
-      <p>NestPayCalc is operated by <strong class="text-ink-soft">Croft &amp; Hugh Digital LTD</strong> · <a href="mailto:hello@crofthughdigital.co.uk" class="underline hover:text-brand transition-colors">hello@crofthughdigital.co.uk</a></p>
+      <p>NestPayCalc · UK financial calculators · Tax year 2026/27</p>
+      <p>&copy; ${yr} Croft &amp; Hugh Digital LTD · Registered in England &amp; Wales · Company No. 17207269 · Registered office: 71-75 Shelton Street, Covent Garden, London, WC2H 9JQ · Contact: <a href="mailto:Hello@crofthughdigital.co.uk" class="font-mono hover:text-brand transition-colors">Hello@crofthughdigital.co.uk</a></p>
     </div>
   </div>
 </footer>`;

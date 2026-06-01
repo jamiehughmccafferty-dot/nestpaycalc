@@ -37,7 +37,7 @@ const FILES = [
     file: 'contact.html',
     ogUrl: `${SITE}/contact`,
     ogTitle: 'Contact NestPayCalc',
-    ogDescription: 'Email hello@crofthughdigital.co.uk or send us a message — rate corrections, bugs, calculator requests and partnership enquiries welcome.'
+    ogDescription: 'Email Hello@crofthughdigital.co.uk or send us a message — rate corrections, bugs, calculator requests and partnership enquiries welcome.'
   },
   {
     file: 'faq.html',

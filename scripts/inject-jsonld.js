@@ -35,12 +35,26 @@ function organization() {
     url: `${SITE}/`,
     logo: `${SITE}/assets/favicon.svg`,
     description: 'Free UK financial calculators — salary, mortgage, savings, pension, debt and budget.',
-    email: 'hello@crofthughdigital.co.uk',
+    email: 'Hello@crofthughdigital.co.uk',
+    // Companies House number — required for Companies Act 2006 s.82 disclosure
+    identifier: {
+      '@type': 'PropertyValue',
+      propertyID: 'CompaniesHouseNumber',
+      value: '17207269'
+    },
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: '71-75 Shelton Street, Covent Garden',
+      addressLocality: 'London',
+      postalCode: 'WC2H 9JQ',
+      addressCountry: 'GB',
+      addressRegion: 'England'
+    },
     foundingLocation: { '@type': 'Country', name: 'United Kingdom' },
     contactPoint: {
       '@type': 'ContactPoint',
       contactType: 'customer support',
-      email: 'hello@crofthughdigital.co.uk',
+      email: 'Hello@crofthughdigital.co.uk',
       availableLanguage: ['English']
     },
     sameAs: []
