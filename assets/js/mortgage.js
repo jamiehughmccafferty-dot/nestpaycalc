@@ -37,8 +37,24 @@ window.NPMortgage = (function () {
   }
 
   function interestOnly(principal, annualRatePct, termYears) {
+    // For an IO mortgage the principal never reduces during the term - the
+    // balance line on the amortisation chart is flat at `principal`, and
+    // each month the borrower pays only the interest. Returning a schedule
+    // (vs the old shape that only returned totals) means the UI can render
+    // the chart + yearly table the same way it does for a repayment loan.
     const monthlyInterest = principal * (annualRatePct / 100) / 12;
-    return { monthlyPayment: monthlyInterest, totalInterest: monthlyInterest * termYears * 12, totalCost: principal + monthlyInterest * termYears * 12 };
+    const months = Math.max(0, Math.round(termYears * 12));
+    const schedule = [];
+    for (let m = 1; m <= months; m++) {
+      schedule.push({ month: m, interest: monthlyInterest, principal: 0, payment: monthlyInterest, balance: principal });
+    }
+    return {
+      monthlyPayment: monthlyInterest,
+      totalInterest: monthlyInterest * months,
+      totalCost: principal + monthlyInterest * months,
+      monthsToPayoff: months,
+      schedule
+    };
   }
 
   /* ----- Stamp duty ----- */
