@@ -7,6 +7,7 @@
     "build:css": "tailwindcss -i ./assets/css/styles.src.css -o ./assets/css/styles.css --minify",
     "build:og": "node scripts/build-og.js",
     "build": "npm run build:css && npm run build:og",
+    "bump": "node scripts/bump-assets.js",
     "watch:css": "tailwindcss -i ./assets/css/styles.src.css -o ./assets/css/styles.css --watch",
     "serve": "http-server -p 8000 -c-1 --cors",
     "dev": "npm run watch:css"
