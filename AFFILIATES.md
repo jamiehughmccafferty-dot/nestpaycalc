@@ -22,7 +22,7 @@ Per-merchant log of approved affiliate programmes. Update after every approval /
 
 | Merchant | Network | Status | Approved | OFFERS key | Deep link | Commission | Cookie | Notes |
 |---|---|---|---|---|---|---|---|---|
-| **Cashback Remortgage (UK)** | Awin (mid 126767) | ✅ Live | 2026-06-03 | `mortgage-remortgage-cashback` | `awin1.com/cread.php?s=4789229&v=126767&q=606006&r=2918949` | _TBC_ | _TBC_ | First live partner. Surfaces on `/deals#mortgage`, in the comparison table on `/calculators/mortgage`, and as the inline mortgage-broker link wherever `NPAffiliates.inlineLink('mortgage', …)` is called. |
+| **Cashback Remortgage (UK)** | Awin (mid 126767) | ✅ Live | 2026-06-03 | `mortgage-remortgage-cashback` | `awin1.com/awclick.php?gid=606072&mid=126767&awinaffid=2918949&linkid=4789504` | _TBC_ | _TBC_ | First live partner. Text-link creative (linkid 4789504). Surfaces on `/deals#mortgage`, the comparison table on `/calculators/mortgage`, and every `NPAffiliates.inlineLink('mortgage', …)` call. `clickref` left empty - if we ever want per-page attribution, populate it dynamically (e.g. `clickref=calc-mortgage`). |
 
 ### Where ownership verification tags live
 

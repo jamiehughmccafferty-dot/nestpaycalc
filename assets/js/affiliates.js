@@ -117,7 +117,11 @@
 
     /* ---------- Mortgages ---------- */
     // First live partner - approved via Awin 2026-06-03.
-    // Merchant ID 126767, affiliate ID 2918949.
+    // Merchant ID 126767, affiliate ID 2918949. Using the awclick.php
+    // text-link variant (linkid 4789504) since every surface using this
+    // entry renders text/button CTAs, not banner images. The cread.php
+    // banner variant would also work but adds a tracking-pixel image
+    // fetch we don't need.
     'mortgage-remortgage-cashback': {
       provider: 'Cashback Remortgage',
       short: 'MOR',
@@ -125,7 +129,7 @@
       product: 'Remortgage broker', meta: 'Cashback on completion · FCA regulated',
       rate: 'Cashback', rateLabel: 'paid on completion',
       features: ['Cashback paid when your remortgage completes', 'UK whole-of-market lender access', 'Free, no-obligation quote'],
-      url: 'https://www.awin1.com/cread.php?s=4789229&v=126767&q=606006&r=2918949'
+      url: 'https://www.awin1.com/awclick.php?gid=606072&mid=126767&awinaffid=2918949&linkid=4789504&clickref='
     },
     'mortgage-broker-1': {
       provider: 'Whole-of-market broker',
