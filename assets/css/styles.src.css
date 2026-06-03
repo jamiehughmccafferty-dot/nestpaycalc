@@ -543,6 +543,18 @@
     font-weight: 700; font-size: .7rem; color: #fff;
     text-transform: uppercase; letter-spacing: .02em;
   }
+  /* Image variant - merchant supplied logo */
+  .np-compare-logo-img {
+    background: #fff;
+    padding: 0;
+    overflow: hidden;
+    box-shadow: 0 0 0 1px rgb(var(--border-strong));
+  }
+  .np-compare-logo-img img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+  }
   .np-compare-name { font-weight: 600; font-size: .92rem; line-height: 1.2; color: rgb(var(--ink)); }
   .np-compare-meta { font-size: .72rem; color: rgb(var(--ink-muted)); margin-top: .15rem; }
   .np-compare-rate { font-size: 1.2rem; font-weight: 700; color: rgb(var(--brand)); font-variant-numeric: tabular-nums; }

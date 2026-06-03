@@ -122,13 +122,18 @@
     // entry renders text/button CTAs, not banner images. The cread.php
     // banner variant would also work but adds a tracking-pixel image
     // fetch we don't need.
+    //
+    // logoSrc points to the merchant's own brand logo saved locally.
+    // logoColor + short stay as fallbacks (used when logoSrc fails to
+    // load or for any surface that hasn't been updated to read logoSrc).
     'mortgage-remortgage-cashback': {
-      provider: 'Cashback Remortgage',
-      short: 'MOR',
-      logoColor: '#0e8a4a',
-      product: 'Remortgage broker', meta: 'Cashback on completion · FCA regulated',
+      provider: 'Cashback Remortgages',
+      short: 'CR',
+      logoColor: '#0a2855',
+      logoSrc: '/assets/affiliates/cashback-remortgages.jpg',
+      product: 'Remortgage broker', meta: 'No broker fees · Cashback on completion',
       rate: 'Cashback', rateLabel: 'paid on completion',
-      features: ['Cashback paid when your remortgage completes', 'UK whole-of-market lender access', 'Free, no-obligation quote'],
+      features: ['No broker fees, ever', 'Cashback paid when your remortgage completes', 'UK whole-of-market lender access'],
       url: 'https://www.awin1.com/awclick.php?gid=606072&mid=126767&awinaffid=2918949&linkid=4789504&clickref='
     },
     'mortgage-broker-1': {
@@ -217,10 +222,13 @@
     if (!ids.length) return '';
     const rows = ids.map(id => {
       const o = OFFERS[id]; if (!o) return '';
+      const logo = o.logoSrc
+        ? `<span class="np-compare-logo np-compare-logo-img"><img src="${escape(o.logoSrc)}" alt="${escape(o.provider)} logo" loading="lazy" decoding="async"></span>`
+        : `<span class="np-compare-logo" style="background:${o.logoColor}">${escape(o.short)}</span>`;
       return `
         <div class="np-compare-row">
           <div class="np-compare-provider">
-            <span class="np-compare-logo" style="background:${o.logoColor}">${escape(o.short)}</span>
+            ${logo}
             <div>
               <div class="np-compare-name">${escape(o.provider)}</div>
               <div class="np-compare-meta">${escape(o.product)} · ${escape(o.meta)}</div>
@@ -270,19 +278,30 @@
   function renderStickyOffer({ category, eyebrow, headline, body, cta = 'See deal' }) {
     const id = (CATEGORIES[category] || [])[0];
     const o = OFFERS[id]; if (!o) return '';
+    // When the offer has a brand logo, show it inline with the eyebrow so the
+    // sponsor is immediately identifiable. Falls back to plain eyebrow text
+    // for placeholder offers without a logoSrc.
+    const header = o.logoSrc
+      ? `<div class="flex items-center gap-2 mb-1">
+           <span class="np-compare-logo np-compare-logo-img" style="width:28px;height:28px;border-radius:8px;">
+             <img src="${escape(o.logoSrc)}" alt="${escape(o.provider)} logo" loading="lazy" decoding="async">
+           </span>
+           <div class="np-offer-card-eyebrow">${escape(eyebrow)}</div>
+         </div>`
+      : `<div class="np-offer-card-eyebrow">${escape(eyebrow)}</div>`;
     return `
       <aside class="np-sticky-offer">
-        <div class="np-offer-card-eyebrow">${escape(eyebrow)}</div>
+        ${header}
         <h3 class="font-bold text-base leading-snug">${escape(headline)}</h3>
-        <p class="text-sm text-slate-600 dark:text-slate-400 mt-2">${escape(body)}</p>
-        <div class="flex items-center justify-between mt-4 pt-4 border-t border-slate-100 dark:border-slate-700">
+        <p class="text-sm text-ink-soft mt-2">${escape(body)}</p>
+        <div class="flex items-center justify-between mt-4 pt-4 border-t border-border">
           <div>
-            <div class="text-xs text-slate-500">${escape(o.provider)}</div>
+            <div class="text-xs text-ink-muted">${escape(o.provider)}</div>
             <div class="text-lg font-bold text-brand dark:text-blue-300">${escape(o.rate)}</div>
           </div>
           <a href="${escape(o.url)}" rel="nofollow sponsored" class="np-btn np-btn-primary text-sm py-2 px-4">${escape(cta)} →</a>
         </div>
-        <div class="text-[0.65rem] text-slate-400 mt-3 text-center">Sponsored · ${escape(o.meta)}</div>
+        <div class="text-[0.65rem] text-ink-muted mt-3 text-center">Sponsored · ${escape(o.meta)}</div>
       </aside>`;
   }
 

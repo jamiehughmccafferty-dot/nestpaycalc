@@ -11,7 +11,7 @@ Running log of networks the site is registered with. Update each row as approval
 | Network | Status | Signed up | Verification | Notes |
 |---|---|---|---|---|
 | _FlexOffers_ | ❌ Rejected (2026-06-01) | 2026-05-31 | meta tag removed | US-centric super-aggregator; thin UK personal-finance roster. Rejection on a brand-new UK site is uninformative and they're not the right network for us anyway - Awin / Impact carry the FCA-authorised UK partners. Not worth re-applying. |
-| **Awin** | ✅ Approved (2026-06-03) | 2026-05-31 | Affiliate ID 2918949 | Strong UK fintech roster. First live merchant: Cashback Remortgage (UK), merchant ID 126767. See "Live programmes" section below. After approval Awin may request the **Mastertag JS snippet** for cross-merchant conversion tracking - not yet installed. |
+| **Awin** | ✅ Approved (2026-06-03) | 2026-05-31 | Affiliate ID 2918949 | Strong UK fintech roster. First live merchant: Cashback Remortgages (UK), merchant ID 126767. See "Live programmes" section below. After approval Awin may request the **Mastertag JS snippet** for cross-merchant conversion tracking - not yet installed. |
 | **Impact.com** | Pending approval | 2026-05-31 | ✅ meta `impact-site-verification` on homepage | Hosts Trading 212, Wise, Plum, eToro. Stricter review (3–7 days) but unlocks the most relevant UK retail-investing partners. |
 | _Tradedoubler_ | _not yet_ | - | - | UK-focused, decent for ISA / banking advertisers. |
 | _Direct programs_ | _not yet_ | - | - | Some big UK fintechs (Moneybox, Plum, Chase) run direct affiliate programs - best rates if approved. |
@@ -22,7 +22,7 @@ Per-merchant log of approved affiliate programmes. Update after every approval /
 
 | Merchant | Network | Status | Approved | OFFERS key | Deep link | Commission | Cookie | Notes |
 |---|---|---|---|---|---|---|---|---|
-| **Cashback Remortgage (UK)** | Awin (mid 126767) | ✅ Live | 2026-06-03 | `mortgage-remortgage-cashback` | `awin1.com/awclick.php?gid=606072&mid=126767&awinaffid=2918949&linkid=4789504` | _TBC_ | _TBC_ | First live partner. Text-link creative (linkid 4789504). Surfaces on `/deals#mortgage`, the comparison table on `/calculators/mortgage`, and every `NPAffiliates.inlineLink('mortgage', …)` call. `clickref` left empty - if we ever want per-page attribution, populate it dynamically (e.g. `clickref=calc-mortgage`). |
+| **Cashback Remortgages (UK)** | Awin (mid 126767) | ✅ Live | 2026-06-03 | `mortgage-remortgage-cashback` | `awin1.com/awclick.php?gid=606072&mid=126767&awinaffid=2918949&linkid=4789504` | _TBC_ | _TBC_ | First live partner. Text-link creative (linkid 4789504). Surfaces on `/deals#mortgage`, the comparison table on `/calculators/mortgage`, and every `NPAffiliates.inlineLink('mortgage', …)` call. `clickref` left empty - if we ever want per-page attribution, populate it dynamically (e.g. `clickref=calc-mortgage`). |
 
 ### Where ownership verification tags live
 
