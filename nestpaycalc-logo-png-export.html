@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>NestPayCalc — PNG export tool</title>
+<style>
+  body {
+    margin: 0; min-height: 100vh; display: grid; place-items: center;
+    background: #f7f8fa; font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+    color: #0b1226;
+  }
+  .card {
+    background: #fff; padding: 40px; border-radius: 18px;
+    box-shadow: 0 12px 32px -8px rgba(15,23,42,.1);
+    text-align: center; max-width: 520px;
+  }
+  h1 { margin: 0 0 8px; font-size: 22px; }
+  p { color: #475569; line-height: 1.55; }
+  canvas {
+    width: 256px; height: 256px;
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 0 4px 12px -4px rgba(15,23,42,.15);
+    margin: 24px 0;
+  }
+  .btn {
+    display: inline-block; padding: 12px 24px;
+    background: #003087; color: #fff; border: 0;
+    border-radius: 10px; font-weight: 600; font-size: 15px;
+    cursor: pointer; transition: background .15s;
+  }
+  .btn:hover { background: #001f5e; }
+  .sizes { display: flex; gap: 8px; justify-content: center; margin-top: 12px; flex-wrap: wrap; }
+  .sizes button {
+    background: #fff; color: #0b1226; border: 1px solid #e5e9f0;
+    padding: 8px 14px; border-radius: 8px; cursor: pointer; font-size: 13px;
+  }
+  .sizes button:hover { border-color: #003087; }
+  .meta { font-size: 12px; color: #94a3b8; margin-top: 16px; }
+</style>
+</head>
+<body>
+<div class="card">
+  <h1>NestPayCalc — PNG export</h1>
+  <p>The logo is rendered below. Click a size to download as a PNG (transparent background, ready for affiliate-network profile pictures).</p>
+  <canvas id="preview" width="1024" height="1024"></canvas>
+  <div>
+    <button class="btn" onclick="downloadAt(512)">Download 512×512 PNG</button>
+  </div>
+  <div class="sizes">
+    <button onclick="downloadAt(256)">256</button>
+    <button onclick="downloadAt(400)">400</button>
+    <button onclick="downloadAt(800)">800</button>
+    <button onclick="downloadAt(1024)">1024</button>
+  </div>
+  <div class="meta">Brand: #003087 (NestPayCalc blue) · accent #00875a (green)</div>
+</div>
+
+<script>
+// Inline favicon source — keeps this file self-contained on the Desktop
+const svgString = `
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <rect width="32" height="32" rx="7" fill="#003087"/>
+  <path d="M4 22c0-6 5.5-10 12-10s12 4 12 10v2H4v-2z" fill="#ffffff"/>
+  <path d="M4 22c0-6 5.5-10 12-10s12 4 12 10" stroke="#00875a" stroke-width="1.5" fill="none"/>
+  <text x="16" y="22" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="800" fill="#003087">£</text>
+</svg>`;
+
+const canvas = document.getElementById('preview');
+const ctx = canvas.getContext('2d');
+const blob = new Blob([svgString], { type: 'image/svg+xml;charset=utf-8' });
+const url  = URL.createObjectURL(blob);
+const img  = new Image();
+img.onload = () => {
+  ctx.imageSmoothingQuality = 'high';
+  ctx.drawImage(img, 0, 0, 1024, 1024);
+};
+img.src = url;
+
+function downloadAt(size) {
+  // Render to a fresh sized canvas for the export
+  const exportCanvas = document.createElement('canvas');
+  exportCanvas.width = size;
+  exportCanvas.height = size;
+  const ec = exportCanvas.getContext('2d');
+  ec.imageSmoothingQuality = 'high';
+  ec.drawImage(img, 0, 0, size, size);
+
+  const a = document.createElement('a');
+  a.download = `nestpaycalc-logo-${size}.png`;
+  a.href = exportCanvas.toDataURL('image/png');
+  a.click();
+}
+</script>
+</body>
+</html>
